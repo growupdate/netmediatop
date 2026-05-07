@@ -3,27 +3,12 @@ import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
-import remarkReadingTime from "remark-reading-time";
 
+// https://astro.build/config
 export default defineConfig({
   site: 'https://growupdate.github.io',
   base: '/netmediatop',
-});
-
-
-,
   integrations: [sitemap(), icon(), mdx()],
-  markdown: {
-    remarkPlugins: [
-      remarkReadingTime,
-      () => {
-        return function (tree, file) {
-          file.data.astro.frontmatter.minutesRead =
-            file.data.readingTime.minutes;
-        };
-      },
-    ],
-  },
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],
