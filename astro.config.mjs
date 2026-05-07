@@ -6,7 +6,12 @@ import icon from "astro-icon";
 import remarkReadingTime from "remark-reading-time";
 
 export default defineConfig({
-  site: "https://astrostarterpro.com/",
+  site: 'https://growupdate.github.io',
+  base: '/netmediatop',
+});
+
+
+,
   integrations: [sitemap(), icon(), mdx()],
   markdown: {
     remarkPlugins: [
