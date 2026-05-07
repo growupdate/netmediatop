@@ -4,11 +4,11 @@ import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://growupdate.github.io',
-  base: '/netmediatop',
+  site: 'https://netmediatop.com',
+  // base: '/netmediatop', <-- HAPUS baris ini atau beri tanda // di depannya
   integrations: [sitemap(), icon(), mdx()],
+  // ... kode lainnya
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],
