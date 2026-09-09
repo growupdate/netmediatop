@@ -15,10 +15,11 @@
     "check": "astro check",
     "typecheck": "tsc --noEmit",
     "build-preview": "npm run build && npm run preview",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.2",
+    "@astrojs/cloudflare": "^14.3.0",
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
