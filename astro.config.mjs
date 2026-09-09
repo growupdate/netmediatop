@@ -3,12 +3,10 @@ import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
-import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
   site: "https://netmediatop.com",
   output: "static",
-  adapter: cloudflare(),
   integrations: [sitemap(), icon(), mdx()],
   i18n: {
     defaultLocale: "en",
