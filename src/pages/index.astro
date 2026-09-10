@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 import Hero from "@/components/widgets/Hero.astro";
 import Features from "@/components/widgets/Features.astro";
 import devImg from "@/assets/images/dev_balanced.png";
-import openSourceImg from "@/assets/images/open-source.png";
+import openSourceImg from "@/assets/images/internet-marketing.jpeg";
 import Content2 from "@/components/widgets/Content2.astro";
 const metadata = {
   title: `${siteConfig.name} — next step for your project`,
@@ -15,13 +15,13 @@ const metadata = {
 
 <BaseLayout {metadata}>
   <Hero
-    title={`Bantu Bisnis Online Anda <br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Berkembang lebih Cepat dan Menguntungkan </span>`}
+    title={`Bisnis Anda Makin Sepi? <br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"><br>Ingin Online dan Berkembang </span>`}
     tagline="Netmediatop-Digital Marketing Pro"
     description={`${siteConfig.description}`}
     actions={[
       {
         text: "Kontak Kami",
-        href: "https://github.com/devgelo-labs/astro-starter-pro",
+        href: "https://wa.me/6282329188998",
         variant: "primary",
         icon: "lucide:github",
       },
@@ -30,58 +30,33 @@ const metadata = {
         href: "/services",
         variant: "secondary",
         icon: "lucide:arrow-right",
-        ariaLabel: "Learn more about our services",
+        ariaLabel: "Lebih Detail Layanan Kami",
       },
     ]}
   />
-  <Features
-    tagline="Features"
-    title="What's Included"
-    subtitle="A selection of tools and configurations to streamline your workflow."
-    features={[
-      {
-        title: "Optimized SEO",
-        description:
-          "Base configuration for Meta tags, Open Graph, and Sitemap generation.",
-        icon: "lucide:scan-search",
-        iconClass: "bg-blue-500/10 text-blue-400",
-      },
-      {
-        title: "High Performance",
-        description: "Lightweight structure for fast load times.",
-        icon: "lucide:zap",
-        iconClass: "bg-purple-500/10 text-purple-400",
-      },
-      {
-        title: "Tailwind v4",
-        description:
-          "Integrated configuration with the latest version of Tailwind CSS.",
-        icon: "lucide:palette",
-        iconClass: "bg-pink-500/10 text-pink-400",
-      },
-    ]}
-  />
+
   <Content2
     items={[
       {
-        title: "Responsive Design",
+        title: "Bisnis Tidak Ditemukan Online ",
         description:
-          "Base configuration for Meta tags, Open Graph, and Sitemap generation.",
+          "Produk Anda  bagus, tapi calon pelanggan tidak bisa menemukan Anda di Google. Anda perlu muncul saat mereka mencari.",
         icon: "lucide:scan-search",
         iconClass: "bg-blue-500/10 text-blue-400",
       },
       {
-        title: "High Performance",
-        description: "Lightweight structure for fast load times.",
+        title: " Sudah Online Tapi Zonk",
+        description:
+          " Punya website, sosmed tapi sepi pengunjung atau lihat lalu pergi tidak ada kontak.",
         icon: "lucide:zap",
-        iconClass: "bg-purple-500/10 text-purple-400",
+        iconClass: "bg-yellow-500/10 text-purple-400",
       },
       {
-        title: "Tailwind v4",
+        title: "Tidak Tahu Mulai Dari Mana? ",
         description:
-          "Integrated configuration with the latest version of Tailwind CSS.",
+          "Tidak ada waktu urus digital yang terpisah-pisah. Kami berikan satu sistem yang terarah, terukur, agar bisnis Anda tumbuh",
         icon: "lucide:palette",
-        iconClass: "bg-pink-500/10 text-pink-400",
+        iconClass: "bg-green-500/10 text-yellow-400",
       },
     ]}
     image={devImg}
@@ -89,45 +64,67 @@ const metadata = {
   >
     <Fragment>
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Development
+        Let’s Grow Your Business Through Digital Marketing
       </h3>
       We provide a solid foundation to start your projects with best practices.
     </Fragment>
   </Content2>
-  <Content2
-    items={[
+  <Features
+    tagline="netmediatop"
+    title=" bantu agar bisnis Anda mudah ditemukan pembeli"
+    subtitle="lewat sistem total digital marketing terukur dan terarah sesuai bisnis"
+    features={[
       {
-        title: "Open Source",
+        title: "Website Development",
         description:
-          "Developed under the MIT license, free for personal and commercial use.",
-        icon: "lucide:github",
-        iconClass: "bg-indigo-500/10 text-indigo-400",
+          "Website Membuat bisnis Anda terlihat profesional dan mengubah pengunjung menjadi calon pelanggan..",
+        icon: "lucide:scan-search",
+        iconClass: "bg-blue-500/10 text-blue-400",
       },
       {
-        title: "Community Driven",
+        title: "Seo High Performance",
         description:
-          "Built with the feedback and contributions of the developer community.",
-        icon: "lucide:users",
-        iconClass: "bg-orange-500/10 text-orange-400",
+          "Membantu bisnis Anda lebih mudah ditemukan saat calon pelanggan mencari produk atau jasa yang Anda tawarkan.",
+        icon: "lucide:zap",
+        iconClass: "bg-purple-500/10 text-purple-400",
       },
       {
-        title: "Regular Updates",
+        title: "Konten Berkualitas ",
         description:
-          "Continuously improved with the latest technologies and best practices.",
-        icon: "lucide:refresh-cw",
-        iconClass: "bg-teal-500/10 text-teal-400",
+          "Membangun kepercayaan, menjawab kebutuhan calon pelanggan, dan membantu website mendapatkan lebih banyak pengunjung dari pencarian.",
+        icon: "lucide:palette",
+        iconClass: "bg-pink-500/10 text-green-400",
+      },
+      {
+        title: "Sosial Media Marketing",
+        description:
+          "Meningkatkan jangkauan bisnis, membangun kepercayaan, dan menjaga hubungan dengan calon pelanggan.",
+        icon: "lucide:palette",
+        iconClass: "bg-pink-500/10 text-white-400",
+      },
+      {
+        title: "AI Marketing System",
+        description:
+          "Kami implementasikan AI khusus untuk bisnis Anda - untuk otomatisasi chat, analisa data pelanggan, dan pembuatan konten. Agar kerja lebih cepat, lebih hemat, dan 100% terukur.",
+        icon: "lucide:palette",
+        iconClass: "bg-pink-500/10 text-blue-400",
       },
     ]}
+  />
+
+  <Content2
+    items={[]}
     image={openSourceImg}
-    imageAlt="Community and Open Source"
+    imageAlt="jasa digital marketing"
     isReversed={true}
   >
     <Fragment>
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Open Source & Community
+        Bisnis Butuh Keputusan Tepat
       </h3>
-      Join the revolution of modern web development. This project is open for everyone
-      to use, learn from, and contribute to.
+      Saatnya transformasi digital yang menghasilkan. Dapatkan audit sistem gratis
+      dari Netmediatop, kami rancang fondasi website, SEO, dan konten terarah agar
+      bisnis tumbuh terukur dan dominan di pasar Anda sekarang juga.
     </Fragment>
   </Content2>
 </BaseLayout>
