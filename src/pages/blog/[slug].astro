@@ -30,7 +30,7 @@ const metadata = {
   title,
   description,
   ogImage: image,
-  type: "article",
+  type: "article" as const,
   category: post.data.category,
   tags: post.data.tags,
   pubDate,
