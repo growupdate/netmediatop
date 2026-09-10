@@ -1,8 +1,8 @@
 ---
 title: "artkel petamaku netmediatop"
 pubDate: "2026-09-08"
-description: "Panduan praktis langkah memulai perjalanan belajar pemrograman."
-author: "Nama Anda"
+description: "Panduan praktis langkah memulai perjalanan belajar pemrograman seri1."
+author: "tia"
 category: "Tech"
 tags: ["coding", "pemula"]
 image: "/blog/internet-marketing.jpeg"

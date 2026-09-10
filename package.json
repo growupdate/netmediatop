@@ -19,15 +19,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/cloudflare": "^14.3.1",
     "@astrojs/mdx": "^8.0.1",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "@iconify-json/lucide": "^1.2.99",
     "@iconify-json/tabler": "^1.2.32",
     "@tailwindcss/vite": "^4.2.2",
-    "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
     "astro": "^7.3.2",
     "astro-icon": "^1.1.5",
     "remark-reading-time": "^2.1.0",
@@ -49,9 +46,6 @@
     "prettier-plugin-astro": "^0.14.1",
     "typescript-eslint": "^8.57.2",
     "vitest": "^4.1.2"
-  },
-  "overrides": {
-    "vite": "^7"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,astro}": [

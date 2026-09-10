@@ -1,14 +1,15 @@
 ---
 title: "artkel keduaku netmediatop"
 pubDate: "2026-09-08"
-description: "Panduan praktis langkah memulai perjalanan belajar pemrograman."
-author: "Nama Anda"
+description: "Panduan praktis langkah memulai perjalanan belajar pemrograman seri 2."
+author: "tri"
 category: "Tech"
 tags: ["coding", "pemula"]
 image: "/blog/internet-marketing.jpeg"
 ---
 
 Di sini Anda bisa mulai menulis isi artikel blog baru Anda menggunakan format Markdown.
+belajar lengkap
 
 ### Langkah 1: Pilih Bahasa Pemrograman
 
