@@ -19,9 +19,6 @@ import Navbar from "@/components/layout/Navbar.astro";
 import Footer from "@/components/layout/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
-import SpeedInsights from "@vercel/speed-insights/astro";
-import Analytics from "@vercel/analytics/astro";
-
 import { siteConfig } from "@/config/site";
 
 const { title, description, ogImage, canonical, metadata } = Astro.props;
@@ -104,9 +101,9 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
       </main>
       <Footer />
     </div>
-    <SpeedInsights />
-    <Analytics />
     <script>
+      import { build } from "astro";
+
       // Keep a global reference to prevent duplicate observers during View Transitions
       let scrollObserver: IntersectionObserver | null = null;
 
