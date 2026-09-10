@@ -10,6 +10,12 @@ interface Props {
     ogImage?: string;
     canonical?: string;
     ignoreTitleTemplate?: boolean;
+    type?: "website" | "article";
+    category?: string;
+    tags?: string[];
+    pubDate?: Date;
+    modDate?: Date;
+    author?: string;
   };
 }
 
