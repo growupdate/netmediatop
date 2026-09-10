@@ -5,14 +5,17 @@ export const siteConfig = {
   description:
     "Bisnis Online Anda Jalan Ditempat? Solusi Tepat Digital Marketing profesional",
   url: "https://netmediatop.com",
-  lang: "en",
-  locale: "en_US",
-  author: "Devgelo",
-  twitter: "@Devgelo",
+  lang: "id",
+  locale: "id_ID",
+  author: "Tri Pudjo",
+  twitter: "@Tri Pudjo",
   ogImage: ogImage,
   socialLinks: {
+    facebook: "https://facebook.com",
+    instagram: "https://instagram.com",
+    youtube: "https://youtube.com",
     twitter: "https://twitter.com",
-    github: "https://github.com/devgelo-labs/astro-starter-pro",
+    github: "https://github.com/growupdate/netmediatop",
     discord: "https://discord.com",
   },
   navLinks: [

@@ -16,20 +16,25 @@ const { post } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(post);
 const { title, description, pubDate, author, image } = post.data;
 
-const formattedDate = pubDate.toLocaleDateString("en", {
+const formattedDate = pubDate.toLocaleDateString("id-ID", {
   year: "numeric",
   month: "long",
   day: "numeric",
 });
 
 const readingTime = remarkPluginFrontmatter?.minutesRead
-  ? `${Math.ceil(remarkPluginFrontmatter.minutesRead)} min reading time`
+  ? Math.ceil(remarkPluginFrontmatter.minutesRead) + " min baca"
   : "";
 
 const metadata = {
-  title: title,
-  description: description,
+  title,
+  description,
   ogImage: image,
+  type: "article",
+  category: post.data.category,
+  tags: post.data.tags,
+  pubDate,
+  author,
 };
 ---
 
@@ -43,14 +48,30 @@ const metadata = {
       pubDate,
       author,
       url: Astro.url.href,
+      wordCount: remarkPluginFrontmatter?.words || 0,
+      readingTime: remarkPluginFrontmatter?.minutesRead
+        ? Math.ceil(remarkPluginFrontmatter.minutesRead)
+        : undefined,
+      category: post.data.category,
+      tags: post.data.tags,
+    }}
+  />
+  <Schema
+    type="BreadcrumbList"
+    data={{
+      breadcrumbs: [
+        { name: "Home", url: "/" },
+        { name: "Blog", url: "/blog" },
+        { name: title, url: Astro.url.pathname },
+      ],
     }}
   />
   <section class="relative px-4 py-8 sm:px-6 lg:px-8 md:py-12">
     <div class="relative mx-auto max-w-3xl">
       <div class="reveal mb-10 text-center">
         <p class="text-sm font-semibold tracking-wide text-primary uppercase">
-          {formattedDate} • {author}
-          {readingTime && ` • ${readingTime}`}
+          {formattedDate} - {author}
+          {readingTime && " - " + readingTime}
         </p>
         <h1
           class="font-heading mt-2 text-3xl font-bold leading-tight tracking-tighter text-foreground sm:text-4xl md:text-5xl"
@@ -68,7 +89,7 @@ const metadata = {
       }
 
       <div
-        class="reveal prose prose-lg dark:prose-invert mx-auto prose-headings:text-foreground prose-a:text-primary hover:prose-a:underline prose-p:text-muted-foreground prose-strong:text-foreground prose-li:text-muted-foreground prose-code:text-primary"
+        class="reveal prose prose-lg dark:prose-invert mx-auto max-w-none prose-headings:text-foreground prose-a:text-primary hover:prose-a:underline prose-p:text-muted-foreground prose-strong:text-foreground prose-li:text-muted-foreground prose-code:text-primary"
       >
         <Content />
       </div>

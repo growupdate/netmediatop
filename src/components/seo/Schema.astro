@@ -2,20 +2,27 @@
 import { siteConfig } from "@/config/site";
 
 interface Props {
-  type: "WebSite" | "BlogPosting" | "BreadcrumbList";
+  type: "WebSite" | "BlogPosting" | "BreadcrumbList" | "FAQ";
   data: {
     title?: string;
     description?: string;
     image?: string;
     pubDate?: Date;
+    modDate?: Date;
     author?: string;
     url?: string;
+    wordCount?: number;
+    readingTime?: number;
+    category?: string;
+    tags?: string[];
+    breadcrumbs?: { name: string; url: string }[];
+    faqs?: { question: string; answer: string }[];
   };
 }
 
 const { type, data } = Astro.props;
 
-let schema = {};
+let schema: Record<string, unknown> = {};
 
 if (type === "WebSite") {
   schema = {
@@ -36,25 +43,55 @@ if (type === "WebSite") {
     "@type": "BlogPosting",
     headline: data.title,
     description: data.description,
-    image: data.image,
+    image: data.image
+      ? new URL(data.image, siteConfig.url).toString()
+      : new URL("/og-image.png", siteConfig.url).toString(),
     datePublished: data.pubDate,
+    dateModified: data.modDate || data.pubDate,
     author: {
       "@type": "Person",
-      name: data.author,
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": data.url,
+      name: data.author || siteConfig.author,
     },
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        // Placeholder, ideally should be a real logo URL
         url: new URL("/favicon.svg", siteConfig.url).toString(),
       },
     },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": data.url,
+    },
+    wordCount: data.wordCount,
+    timeRequired: data.readingTime ? `PT${data.readingTime}M` : undefined,
+    articleSection: data.category,
+    keywords: data.tags ? data.tags.join(", ") : undefined,
+  };
+} else if (type === "BreadcrumbList") {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: (data.breadcrumbs || []).map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: new URL(item.url, siteConfig.url).toString(),
+    })),
+  };
+} else if (type === "FAQ") {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: (data.faqs || []).map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   };
 }
 ---
