@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Schema from "@/components/seo/Schema.astro";
 import { getImage } from "astro:assets";
 import Content2 from "@/components/widgets/Content2.astro";
 import Values from "@/components/widgets/Values.astro";
@@ -51,6 +52,7 @@ const optimizedImage = await getImage({
 ---
 
 <BaseLayout {metadata}>
+  <Schema type="Person" data={{}} />
   <link slot="head" rel="preload" href={optimizedImage.src} as="image" />
   <Content2
     title="Our Vision"

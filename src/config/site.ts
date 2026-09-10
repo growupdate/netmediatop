@@ -2,20 +2,32 @@ import ogImage from "@/assets/og-image.png";
 
 export const siteConfig = {
   name: "Netmediatop",
-  description:
-    "Bisnis Online Anda Jalan Ditempat? Solusi Tepat Digital Marketing profesional",
+  description: "Jasa Digital Marketing Profesional - oleh Tri Pudjo",
   url: "https://netmediatop.com",
   lang: "id",
   locale: "id_ID",
   author: "Tri Pudjo",
-  twitter: "@Tri Pudjo",
+  authorTitle: "Digital Marketing & SEO Specialist",
+  authorBio:
+    "Digital Marketing Specialist dengan pengalaman di SEO, Social Media Marketing, dan Web Development. Membantu bisnis tumbuh secara online melalui strategi digital yang terukur.",
+  authorExpertise: [
+    "Digital Marketing",
+    "Search Engine Optimization",
+    "Social Media Marketing",
+    "Web Development",
+    "Content Marketing",
+    "Ads Management",
+    "Konten Marketing",
+  ],
+  twitter: "@TriPudjo",
   ogImage: ogImage,
   socialLinks: {
-    facebook: "https://facebook.com",
-    instagram: "https://instagram.com",
-    youtube: "https://youtube.com",
-    twitter: "https://twitter.com",
+    facebook: "https://facebook.com/netmediatop",
+    instagram: "https://instagram.com/netmediatop",
+    youtube: "https://youtube.com/@netmediatop",
+    twitter: "https://twitter.com/TriPudjo",
     github: "https://github.com/growupdate/netmediatop",
+    linkedin: "https://linkedin.com/in/tripudjo",
     discord: "https://discord.com",
   },
   navLinks: [

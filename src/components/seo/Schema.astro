@@ -2,7 +2,13 @@
 import { siteConfig } from "@/config/site";
 
 interface Props {
-  type: "WebSite" | "BlogPosting" | "BreadcrumbList" | "FAQ";
+  type:
+    | "WebSite"
+    | "BlogPosting"
+    | "BreadcrumbList"
+    | "FAQ"
+    | "Person"
+    | "Organization";
   data: {
     title?: string;
     description?: string;
@@ -24,6 +30,21 @@ const { type, data } = Astro.props;
 
 let schema: Record<string, unknown> = {};
 
+const authorSchema = {
+  "@type": "Person",
+  name: siteConfig.author,
+  url: siteConfig.url + "/about",
+  jobTitle: siteConfig.authorTitle,
+  description: siteConfig.authorBio,
+  knowsAbout: siteConfig.authorExpertise,
+  sameAs: [
+    siteConfig.socialLinks.twitter,
+    siteConfig.socialLinks.github,
+    siteConfig.socialLinks.linkedin,
+    siteConfig.socialLinks.youtube,
+  ],
+};
+
 if (type === "WebSite") {
   schema = {
     "@context": "https://schema.org",
@@ -31,11 +52,16 @@ if (type === "WebSite") {
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
-    author: {
-      "@type": "Person",
-      name: siteConfig.author,
+    author: authorSchema,
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: new URL("/favicon.svg", siteConfig.url).toString(),
+      },
     },
-    sameAs: [siteConfig.socialLinks.twitter, siteConfig.socialLinks.github],
   };
 } else if (type === "BlogPosting") {
   schema = {
@@ -49,12 +75,13 @@ if (type === "WebSite") {
     datePublished: data.pubDate,
     dateModified: data.modDate || data.pubDate,
     author: {
-      "@type": "Person",
+      ...authorSchema,
       name: data.author || siteConfig.author,
     },
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
+      url: siteConfig.url,
       logo: {
         "@type": "ImageObject",
         url: new URL("/favicon.svg", siteConfig.url).toString(),
@@ -68,6 +95,7 @@ if (type === "WebSite") {
     timeRequired: data.readingTime ? `PT${data.readingTime}M` : undefined,
     articleSection: data.category,
     keywords: data.tags ? data.tags.join(", ") : undefined,
+    inLanguage: "id-ID",
   };
 } else if (type === "BreadcrumbList") {
   schema = {
@@ -92,6 +120,30 @@ if (type === "WebSite") {
         text: faq.answer,
       },
     })),
+  };
+} else if (type === "Person") {
+  schema = {
+    "@context": "https://schema.org",
+    ...authorSchema,
+  };
+} else if (type === "Organization") {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    image: new URL("/og-image.png", siteConfig.url).toString(),
+    founder: authorSchema,
+    areaServed: "Indonesia",
+    knowsAbout: siteConfig.authorExpertise,
+    sameAs: [
+      siteConfig.socialLinks.facebook,
+      siteConfig.socialLinks.instagram,
+      siteConfig.socialLinks.youtube,
+      siteConfig.socialLinks.twitter,
+      siteConfig.socialLinks.linkedin,
+    ],
   };
 }
 ---
