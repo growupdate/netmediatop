@@ -39,6 +39,11 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
       ogImage={finalOgImage}
       canonical={finalCanonical}
       ignoreTitleTemplate={finalIgnoreTitleTemplate}
+      type={metadata?.type}
+      category={metadata?.category}
+      tags={metadata?.tags}
+      pubDate={metadata?.pubDate}
+      author={metadata?.author}
     />
     <ClientRouter />
     <Schema type="WebSite" data={{}} />
