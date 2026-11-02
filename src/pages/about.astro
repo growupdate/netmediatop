@@ -1,10 +1,9 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Schema from "@/components/seo/Schema.astro";
 import { getImage } from "astro:assets";
 import Content2 from "@/components/widgets/Content2.astro";
 import aboutImage from "@/assets/images/about-office.webp";
-import profileImage from "@/assets/images/4.png"; // Mengimpor foto profil Anda
+import profileImage from "@/assets/images/4.png";
 
 const metadata = {
   title: "Tentang Netmediatop - Profil, Keahlian & Filosofi Bisnis Pendiri",
@@ -24,39 +23,42 @@ const optimizedProfileImage = await getImage({
 
 const waLink =
   "https://wa.me/6282329188998?text=Halo%20Netmediatop,%20saya%20membaca%20halaman%20tentang%20kami%20dan%20ingin%20berdiskusi%20tentang%20strategi%20digital.";
+
+const schemaData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Netmediatop",
+  "url": "https://netmediatop.com/",
+  "logo": "https://netmediatop.com/favicon.svg",
+  "foundingDate": "2020-01-08",
+  "founder": {
+    "@type": "Person",
+    "name": "Tri Pudjo",
+    "jobTitle": "Founder Netmediatop.com & Marketing Digital Strategist",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kudus",
+      "addressRegion": "Jawa Tengah",
+      "addressCountry": "ID"
+    }
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kudus",
+    "addressRegion": "Jawa Tengah",
+    "addressCountry": "ID"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+62-823-2918-8998",
+    "contactType": "customer service"
+  }
+});
 ---
 
 <BaseLayout {metadata}>
-  <!-- Schema Org untuk E-E-A-T / Person & Organization Entity -->
-  <Schema
-    type="Organization"
-    data={{
-      url: "https://netmediatop.com/",
-      foundingDate: "2020-01-08",
-      founder: {
-        "@type": "Person",
-        name: "Tri Pudjo",
-        jobTitle: "Founder Netmediatop & Digital Marketing  Strategist",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Kudus",
-          addressRegion: "Jawa Tengah",
-          addressCountry: "ID",
-        },
-      },
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Kudus",
-        addressRegion: "Jawa Tengah",
-        addressCountry: "ID",
-      },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: "+62-823-2918-8998",
-        contactType: "customer service",
-      },
-    }}
-  />
+  <!-- Schema Org JSON-LD Script -->
+  <script type="application/ld+json" is:inline set:html={schemaData} />
 
   <link slot="head" rel="preload" href={optimizedAboutImage.src} as="image" />
 
@@ -139,7 +141,7 @@ const waLink =
           Short Story: Lahir dari Semangat Solusi Nyata (Sejak 2020)
         </h3>
         <p>
-          <strong>Netmediatop</strong> resmi didirikan pada tanggal **8 Januari 2020**
+          <strong>Netmediatop</strong> resmi didirikan pada tanggal <strong>8 Januari 2020</strong>
           di Kudus, Jawa Tengah. Berawal dari keprihatinan melihat banyak pelaku UMKM
           serta penyedia layanan lokal yang mengalami kesulitan memasarkan produknya
           di era digital akibat minimnya pemahaman teknis performa web dan mahalnya
