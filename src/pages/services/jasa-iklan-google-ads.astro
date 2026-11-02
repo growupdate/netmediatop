@@ -1,0 +1,270 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Content from "@/components/widgets/Content.astro";
+import { Image } from "astro:assets";
+
+// Import gambar dummy dari folder assets
+import imgMarketing from "@/assets/images/internet-marketing.jpeg";
+import imgDevBalanced from "@/assets/images/dev_balanced.png";
+
+const metadata = {
+  title: "Jasa Google Ads Presisi & High-Conversion - Netmediatop",
+  description:
+    "Layanan pengelolaan iklan Google Ads terarah (Search, Performance Max, Display) untuk menghasilkan leads & penjualan instan ke WhatsApp Anda.",
+};
+
+const waMessage = encodeURIComponent(
+  "Halo Netmediatop, saya ingin berkonsultasi mengenai strategi iklan Google Ads untuk mendatangkan pelanggan ke bisnis saya.",
+);
+const waLink = `https://wa.me/6281234567890?text=${waMessage}`;
+---
+
+<BaseLayout {metadata}>
+  <!-- Header / Intro Utama (Pillar Title) -->
+  <Content
+    tagline="Layanan Pilar"
+    title="Jasa Google Ads Presisi Berbasis Funneling Konversi"
+    description={[
+      "Jangkau calon pembeli yang sedang aktif mencari produk Anda di Google. Strategi kampanye terukur untuk maksimalkan anggaran iklan menjadi profit nyata.",
+    ]}
+  />
+
+  <!-- Main Content Body -->
+  <section class="py-8 mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="prose prose-lg dark:prose-invert mx-auto">
+      <!-- Copywriting Problem & Solution -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Menjangkau Pembeli Siap Transaksi Secara Instan
+      </h2>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-8">
+        Iklan Google Ads adalah cara tercepat untuk mendatangkan lalu lintas
+        calon pembeli berprospek tinggi. Kami tidak sekadar memasang iklan,
+        tetapi membangun ekosistem kampanye yang memetakan niat pencari dari
+        tahap edukasi hingga mereka memutuskan untuk membeli produk Anda.
+      </p>
+
+      <h2 class="text-2xl font-bold mb-6 text-foreground">
+        Alur Strategi Iklan Google Ads Netmediatop
+      </h2>
+
+      <!-- GAMBAR 1 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgMarketing}
+          alt="Strategi Target Audiens Google Ads"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Pengaturan riset pencarian kata kunci niat beli.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 1 & 2 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 mb-1.5"
+          >
+            1. Membangun Kesadaran Brand
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Jangkau Audiens Luas
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Menjangkau calon pembeli lewat iklan visual Google Display Network &
+            YouTube Ads agar mereka mulai menyadari keberadaan solusi dan produk
+            bisnis Anda.
+          </p>
+        </div>
+
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 mb-1.5"
+          >
+            2. Menjaring Evaluasi Pembeli
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Target Kata Kunci Kategori
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Menargetkan pencarian kata kunci dari orang-orang yang sedang
+            membandingkan opsi produk di Google Search, lalu mengarahkan mereka
+            untuk memilih bisnis Anda dibanding pesaing.
+          </p>
+        </div>
+      </div>
+
+      <!-- GAMBAR 2 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgDevBalanced}
+          alt="Optimasi Landing Page Konversi"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Integrasi landing page cepat khusus iklan berbayar.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 3 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div
+          class="p-5 border border-border rounded-xl bg-card border-l-4 border-l-green-600"
+        >
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mb-2"
+          >
+            3. Mendorong Closing Instan
+          </span>
+          <h3 class="text-lg font-semibold text-foreground mb-2">
+            Fokus pada Transaksi & Chat WA
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Menargetkan kata kunci pencarian transaksi (misal:
+            "jasa/harga/lokasi") serta iklan penargetan ulang otomatis via
+            Performance Max (PMax) untuk mendesak calon pembeli langsung
+            mengeklik tombol WhatsApp Anda.
+          </p>
+        </div>
+      </div>
+
+      <!-- SILO CLUSTER SECTION (Navigasi Internal Link ke Sub-Topik) -->
+      <div class="my-10 p-6 border-l-4 border-primary bg-muted/30 rounded-r-xl">
+        <h3 class="text-xl font-bold mb-3 text-foreground">
+          Eksplorasi Klaster Layanan & Spesialisasi Google Ads:
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-4">
+          Pilih tipe kampanye iklan yang paling relevan dengan model bisnis dan
+          skala pemasaran Anda:
+        </p>
+
+        <ul class="space-y-3 text-base font-medium">
+          <li>
+            👉 <a
+              href="/services/google-ads/search-intent-ads"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Google Search Ads (Iklan Kata Kunci Niat Beli Tinggi)
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Tampil di peringkat atas pencarian saat calon pembeli butuh
+              solusi cepat)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/google-ads/performance-max"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Kampanye Performance Max (PMax) All-in-One
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Jangkau pencari otomatis di Search, Maps, YouTube, Gmail, &
+              Display)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/google-ads/remarketing-retargeting"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Google Remarketing & Retargeting Strategy
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Panggil kembali pengunjung web yang belum sempat melakukan chat
+              WA)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/google-ads/local-service-ads"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Iklan Google Maps & Bisnis Lokal Kota Target
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Dominasi pencarian layanan terdekat berdasarkan wilayah
+              operasional)</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Fitur & Alur Pengelolaan -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Cakupan Layanan Iklan Google Ads Netmediatop
+      </h2>
+      <ul
+        class="list-disc pl-6 space-y-2 text-muted-foreground mb-8 text-[14px]"
+      >
+        <li>
+          Riset kata kunci presisi dan pemblokiran kata kunci tidak relevan
+          (Negative Keywords).
+        </li>
+        <li>
+          Penyusunan kalimat iklan persuasif dengan skor kualitas tinggi
+          (Quality Score Optimization).
+        </li>
+        <li>
+          Pemasangan pelacakan konversi (Conversion Tracking GA4 / GTM) untuk
+          mengukur total chat WA.
+        </li>
+        <li>
+          Optimasi biaya per klik (CPC) dan pembagian anggaran harian yang
+          sangat efisien.
+        </li>
+        <li>
+          Laporan kinerja kampanye bulanan yang transparan dan mudah dipahami.
+        </li>
+      </ul>
+
+      <!-- Cross-Silo Link ke Service Pilar Lain -->
+      <div
+        class="p-4 border border-border rounded-lg bg-card text-[14px] text-muted-foreground my-8"
+      >
+        💡 <strong>Catatan Strategi:</strong> Iklan Google Ads bekerja paling efektif
+        bila diarahkan ke <a
+          href="/services/web-development"
+          class="text-primary underline font-semibold"
+          >Landing Page Berkecepatan Tinggi</a
+        >, serta diimbangi dengan <a
+          href="/services/seo-optimization"
+          class="text-primary underline font-semibold">Optimasi SEO Organik</a
+        > sebagai investasi jangkauan jangka panjang.
+      </div>
+
+      <!-- CTA Box Ke WhatsApp -->
+      <div
+        class="mt-12 p-8 border border-primary/20 rounded-2xl bg-primary/5 text-center"
+      >
+        <h3 class="text-xl font-bold mb-2 text-foreground">
+          Siap Datangkan Calon Pembeli Instan Lewat Google Ads?
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-6 max-w-lg mx-auto">
+          Konsultasikan anggaran iklan dan potensi kata kunci target usaha Anda
+          bersama Google Ads Strategist kami.
+        </p>
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md transition-colors gap-2"
+        >
+          <span>Konsultasi Google Ads via WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

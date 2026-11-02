@@ -1,0 +1,272 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Content from "@/components/widgets/Content.astro";
+import { Image } from "astro:assets";
+
+// Import gambar dummy dari folder assets
+import imgSeo from "@/assets/images/services/seo.webp";
+import imgConsulting from "@/assets/images/services/consulting.webp";
+
+const metadata = {
+  title: "Jasa Optimasi SEO Organik, AEO & GEO Modern - Netmediatop",
+  description:
+    "Layanan SEO bergaransi strategi modern (SEO, AEO, & GEO). Dominasi peringkat Google & mesin pencari AI untuk datangkan calon pembeli tanpa biaya iklan berulang.",
+};
+
+const waMessage = encodeURIComponent(
+  "Halo Netmediatop, saya ingin berkonsultasi mengenai strategi SEO Organik untuk mendominasi kata kunci produk saya di Google.",
+);
+const waLink = `https://wa.me/6281234567890?text=${waMessage}`;
+---
+
+<BaseLayout {metadata}>
+  <!-- Header / Intro Utama (Pillar Title) -->
+  <Content
+    tagline="Layanan Pilar"
+    title="Jasa SEO Organik, AEO & GEO Berorientasi Konversi"
+    description={[
+      "Hentikan ketergantungan penuh pada biaya iklan berbayar. Amankan posisi teratas Google & AI Search untuk jangkau pembeli yang aktif mencari produk Anda 24/7.",
+    ]}
+  />
+
+  <!-- Main Content Body -->
+  <section class="py-8 mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="prose prose-lg dark:prose-invert mx-auto">
+      <!-- Copywriting Problem & Solution -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Ubah Website Anda Menjadi Mesin Pencetak Lead Organik
+      </h2>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-8">
+        Banyak pemilik bisnis membakar anggaran jutaan rupiah setiap bulan untuk
+        iklan, namun langsung sepi pembeli saat iklan dimatikan. Melalui
+        optimasi **SEO (Search Engine Optimization)**, **AEO (Answer Engine
+        Optimization)**, dan **GEO (Generative Engine Optimization)**, kami
+        membangun fondasi organik yang kokoh agar website Anda terus
+        direkomendasikan Google dan mesin AI saat calon pelanggan siap melakukan
+        transaksi.
+      </p>
+
+      <h2 class="text-2xl font-bold mb-6 text-foreground">
+        Pilar Optimasi & Eksekusi SEO Modern Netmediatop
+      </h2>
+
+      <!-- GAMBAR 1 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgSeo}
+          alt="Strategi SEO Organik & Google Ranking"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Riset kata kunci niat beli & optimasi teknikal on-page.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 1 & 2 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200 mb-1.5"
+          >
+            1. Dominasi Kata Kunci Niat Beli (Commercial Intent)
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Bukan Sekadar Trafik Ramai
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Kami tidak membuang waktu menargetkan kata kunci umum yang sepi
+            konversi. Kami fokus memenangkan kata kunci pencarian transaksi yang
+            langsung bermuara ke pesan WhatsApp Anda.
+          </p>
+        </div>
+
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 mb-1.5"
+          >
+            2. Kesiapan AI Search (AEO & GEO Ready)
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Relevan di Era AI
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Konsumen modern mulai bertanya pada AI. Kami mengoptimasi struktur
+            data agar nama dan solusi bisnis Anda menjadi rujukan utama mesin
+            pencari berbasis kecerdasan buatan.
+          </p>
+        </div>
+      </div>
+
+      <!-- GAMBAR 2 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgConsulting}
+          alt="Konsultasi Performa SEO & Audit Web"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Audit teknikal & laporan pertumbuhan trafik berkala.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 3 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div
+          class="p-5 border border-border rounded-xl bg-card border-l-4 border-l-primary"
+        >
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 mb-2"
+          >
+            3. Asset Jangka Panjang & Bebas Margin Iklan
+          </span>
+          <h3 class="text-lg font-semibold text-foreground mb-2">
+            Investasi Hasil Berkelanjutan
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Peringkat organik yang stabil memberikan aliran pembeli secara
+            gratis dan konsisten bulanan, meningkatkan profit margin bisnis
+            tanpa tergerus kenaikan biaya *Cost Per Click* (CPC) iklan berbayar.
+          </p>
+        </div>
+      </div>
+
+      <!-- SILO CLUSTER SECTION (Navigasi Internal Link ke Sub-Topik SEO) -->
+      <div class="my-10 p-6 border-l-4 border-primary bg-muted/30 rounded-r-xl">
+        <h3 class="text-xl font-bold mb-3 text-foreground">
+          Eksplorasi Klaster Layanan & Spesialisasi SEO Kami:
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-4">
+          Pilih modul optimasi spesifik yang paling dibutuhkan untuk mendongkrak
+          peringkat bisnis Anda:
+        </p>
+
+        <ul class="space-y-3 text-base font-medium">
+          <li>
+            👉 <a
+              href="/services/seo/local-seo-pseo"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Programmatic SEO (pSEO) & SEO Lokal Kota Target
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Kuasai pencarian halaman pertama di ratusan kota target
+              operasional Anda)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/seo/audit-teknikal"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Audit SEO Teknikal & Perbaikan Arsitektur Web
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Bongkar & perbaiki kendala indeksasi, kecepatan, serta struktur
+              kode web)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/seo/konten-edukatif-eeat"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Penyusunan Konten Berbasis E-E-A-T & Buyer Intent
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Artikel berkualitas tinggi yang disukai algoritma Google &
+              dipercaya manusia)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/seo/aeo-geo-optimization"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Optimasi AEO & GEO untuk Pencarian AI Search
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Memastikan brand Anda muncul saat pengguna mencari rekomendasi di
+              AI)</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Fitur & Alur Pengelolaan -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Cakupan Pengerjaan SEO Netmediatop
+      </h2>
+      <ul
+        class="list-disc pl-6 space-y-2 text-muted-foreground mb-8 text-[14px]"
+      >
+        <li>
+          Riset kata kunci komersial mendalam & analisis celah kompetitor.
+        </li>
+        <li>
+          Optimasi On-Page SEO (Meta Tag, Heading, Schema Markup, & Internal
+          Link Silo).
+        </li>
+        <li>
+          Pembersihan error teknikal, perbaikan arsitektur URL, & Core Web
+          Vitals.
+        </li>
+        <li>
+          Optimasi SEO Lokal (Google Business Profile & kata kunci berbasis
+          wilayah).
+        </li>
+        <li>
+          Laporan perkembangan posisi kata kunci & kenaikan trafik organik
+          transparan.
+        </li>
+      </ul>
+
+      <!-- Cross-Silo Link ke Service Pilar Lain -->
+      <div
+        class="p-4 border border-border rounded-lg bg-card text-[14px] text-muted-foreground my-8"
+      >
+        💡 <strong>Catatan Strategi:</strong> Strategi SEO akan membuahkan hasil jauh
+        lebih cepat jika ditopang oleh <a
+          href="/services/web-development"
+          class="text-primary underline font-semibold"
+          >Infrastruktur Web Cepat & Responsif</a
+        >, atau disinergikan dengan kampanye <a
+          href="/services/google-ads"
+          class="text-primary underline font-semibold">Google Ads Presisi</a
+        > untuk hasilkan transaksi instan.
+      </div>
+
+      <!-- CTA Box Ke WhatsApp -->
+      <div
+        class="mt-12 p-8 border border-primary/20 rounded-2xl bg-primary/5 text-center"
+      >
+        <h3 class="text-xl font-bold mb-2 text-foreground">
+          Siap Mendominasi Halaman Pertama Google & AI Search?
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-6 max-w-lg mx-auto">
+          Konsultasikan potensi kata kunci dan analisis persaingan produk Anda
+          bersama tim SEO strategist kami secara gratis.
+        </p>
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md transition-colors gap-2"
+        >
+          <span>Diskusi Strategi SEO via WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

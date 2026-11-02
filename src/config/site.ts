@@ -2,7 +2,7 @@ import ogImage from "@/assets/og-image.png";
 
 export const siteConfig = {
   name: "Netmediatop",
-  description: "Jasa Digital Marketing Profesional - oleh Tri Pudjo",
+  description: "Jasa Digital Marketing  - oleh Tri Pudjo",
   url: "https://netmediatop.com",
   lang: "id",
   locale: "id_ID",
@@ -36,6 +36,6 @@ export const siteConfig = {
     { text: "Services", href: "/services" },
     { text: "Blog", href: "/blog" },
     { text: "Contact", href: "/contact" },
-    { text: "Widgets", href: "/widgets" },
+    { text: "Studi Kasus", href: "/studi-kasus" },
   ],
 };

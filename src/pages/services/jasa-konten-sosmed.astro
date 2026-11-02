@@ -1,0 +1,275 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Content from "@/components/widgets/Content.astro";
+import { Image } from "astro:assets";
+
+// Import gambar dummy dari folder assets (sesuaikan dengan ketersediaan gambar Anda)
+import imgMarketing from "@/assets/images/internet-marketing.jpeg";
+import imgDevBalanced from "@/assets/images/dev_balanced.png";
+
+const metadata = {
+  title: "Jasa Manajemen Konten Sosial Media - Netmediatop",
+  description:
+    "Layanan pengelolaan Instagram, TikTok, dan Facebook. Bangun interaksi aktif, tingkatkan kepercayaan brand, dan ubah followers menjadi pelanggan setia.",
+};
+
+const waMessage = encodeURIComponent(
+  "Halo Netmediatop, saya ingin berkonsultasi mengenai jasa pengelolaan dan pembuatan konten sosial media untuk bisnis saya.",
+);
+const waLink = `https://wa.me/6281234567890?text=${waMessage}`;
+---
+
+<BaseLayout {metadata}>
+  <!-- Header / Intro Utama (Pillar Title) -->
+  <Content
+    tagline="Layanan Pilar"
+    title="Manajemen Sosial Media: Bangun Kepercayaan & Interaksi"
+    description={[
+      "Fokus jalankan bisnis Anda, biarkan kami yang mengurus konten sosial media. Jadikan profil bisnis Anda selalu aktif, menarik, dan profesional setiap hari.",
+    ]}
+  />
+
+  <!-- Main Content Body -->
+  <section class="py-8 mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="prose prose-lg dark:prose-invert mx-auto">
+      <!-- Copywriting Problem & Solution -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Sosial Media yang Sepi Adalah Etalase yang Mati
+      </h2>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-8">
+        Calon pembeli zaman sekarang hampir selalu mengecek profil Instagram
+        atau TikTok sebuah brand sebelum memutuskan untuk mentransfer uang. Jika
+        akun sosial media Anda terakhir diperbarui berbulan-bulan yang lalu atau
+        desainnya berantakan, rasa percaya mereka akan langsung turun. Melalui
+        layanan Manajemen Konten Sosial Media, kami mengambil alih kerumitan
+        memikirkan ide, mendesain, menulis *caption*, hingga menjadwalkan
+        *posting* agar akun Anda terus hidup dan berinteraksi dengan pelanggan.
+      </p>
+
+      <h2 class="text-2xl font-bold mb-6 text-foreground">
+        Alur Pengelolaan Konten Sosial Media Netmediatop
+      </h2>
+
+      <!-- GAMBAR 1 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgMarketing}
+          alt="Perencanaan Kalender Konten Sosial Media"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Penyusunan ide dan jadwal kalender konten bulanan.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 1 & 2 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 mb-1.5"
+          >
+            1. Perencanaan & Strategi Konten
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Riset Ide yang Relevan
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Sebelum membuat desain, kami menyusun Kalender Konten bulanan
+            berdasarkan tren industri Anda. Kami memastikan komposisi konten
+            seimbang antara edukasi, hiburan, dan promosi produk agar
+            *followers* tidak merasa terus-terusan diiklankan.
+          </p>
+        </div>
+
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 mb-1.5"
+          >
+            2. Produksi Visual & Copywriting
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Desain Profesional & Kalimat Persuasif
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Tim kreatif kami akan mengeksekusi ide menjadi desain grafis
+            (*Feed/Carousel*) atau video pendek (*Reels/TikTok*) yang memanjakan
+            mata, lengkap dengan *caption* yang dirancang untuk memancing
+            komentar dan interaksi.
+          </p>
+        </div>
+      </div>
+
+      <!-- GAMBAR 2 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgDevBalanced}
+          alt="Interaksi dan Konversi Sosial Media"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Membangun komunitas dan mengarahkan interaksi ke WhatsApp.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 3 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div
+          class="p-5 border border-border rounded-xl bg-card border-l-4 border-l-green-600"
+        >
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mb-2"
+          >
+            3. Membangun Komunitas & Konversi
+          </span>
+          <h3 class="text-lg font-semibold text-foreground mb-2">
+            Ubah Followers Menjadi Pembeli
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Sosial media bukan sekadar pamer desain bagus, tapi tentang
+            membangun hubungan. Kami membantu mengarahkan *engagement* (seperti
+            *Like*, Komentar, *Share*) menjadi rasa penasaran yang berujung pada
+            klik link bio menuju WhatsApp Anda.
+          </p>
+        </div>
+      </div>
+
+      <!-- SILO CLUSTER SECTION (Navigasi Internal Link) -->
+      <div class="my-10 p-6 border-l-4 border-primary bg-muted/30 rounded-r-xl">
+        <h3 class="text-xl font-bold mb-3 text-foreground">
+          Eksplorasi Klaster Layanan Sosmed Kami:
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-4">
+          Pilih paket pengelolaan yang sesuai dengan fokus platform bisnis Anda:
+        </p>
+
+        <ul class="space-y-3 text-base font-medium">
+          <li>
+            👉 <a
+              href="/services/sosmed/manajemen-instagram"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Jasa Manajemen Instagram (Feed & Reels)
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Rapikan feed Anda agar terlihat seperti akun brand besar &
+              profesional)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/sosmed/tiktok-video-pendek"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Manajemen TikTok & Konten Video Pendek
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Ikuti tren *For Your Page* (FYP) untuk menjangkau jutaan audiens
+              baru)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/sosmed/desain-feed-katalog"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Jasa Desain Grafis & Template Sosmed
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Pembuatan aset visual tanpa kontrak manajemen bulanan)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/sosmed/admin-customer-service"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Layanan Admin Balas Komen & DM (Customer Service)
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Respons cepat untuk menjaga reputasi dan tidak kehilangan calon
+              pembeli)</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Fitur & Alur Pengelolaan -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Keuntungan Kolaborasi Sosmed Netmediatop
+      </h2>
+      <ul
+        class="list-disc pl-6 space-y-2 text-muted-foreground mb-8 text-[14px]"
+      >
+        <li>
+          Bebas pusing memikirkan ide konten setiap hari (diurus 100% oleh tim
+          kami).
+        </li>
+        <li>
+          Tampilan *Feed* dan profil bisnis Anda akan selaras dengan pedoman
+          warna merek (*Brand Identity*).
+        </li>
+        <li>
+          Gaya bahasa (*Tone of Voice*) disesuaikan dengan karakter target
+          market Anda.
+        </li>
+        <li>
+          Jadwal *posting* yang konsisten di jam-jam ramai (*Prime Time*).
+        </li>
+        <li>
+          Laporan kinerja bulanan (peningkatan jangkauan, jumlah pengikut baru,
+          dan interaksi).
+        </li>
+      </ul>
+
+      <!-- Cross-Silo Link -->
+      <div
+        class="p-4 border border-border rounded-lg bg-card text-[14px] text-muted-foreground my-8"
+      >
+        💡 <strong>Catatan Strategi:</strong> Konten sosial media yang bagus sangat
+        cocok dipadukan dengan <a
+          href="/services/meta-ads"
+          class="text-primary underline font-semibold"
+          >Iklan Meta Ads (FB & IG)</a
+        > untuk mempercepat pertumbuhan *followers*. Selain itu, pastikan link di
+        bio sosmed Anda mengarah ke <a
+          href="/services/web-development"
+          class="text-primary underline font-semibold"
+          >Website atau Landing Page</a
+        > yang cepat agar audiens mudah bertransaksi.
+      </div>
+
+      <!-- CTA Box Ke WhatsApp -->
+      <div
+        class="mt-12 p-8 border border-primary/20 rounded-2xl bg-primary/5 text-center"
+      >
+        <h3 class="text-xl font-bold mb-2 text-foreground">
+          Siap Meramaikan Akun Sosial Media Bisnis Anda?
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-6 max-w-lg mx-auto">
+          Konsultasikan platform yang paling cocok untuk bisnis Anda dan
+          diskusikan ide visual bersama tim kreatif kami.
+        </p>
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md transition-colors gap-2"
+        >
+          <span>Diskusi Manajemen Sosmed via WA</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

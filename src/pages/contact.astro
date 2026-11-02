@@ -5,61 +5,82 @@ import Content from "@/components/widgets/Content.astro";
 import Form from "@/components/ui/Form.astro";
 
 const metadata = {
-  title: "Contact",
-  description: "Get in touch with us to discuss your next project.",
+  title: "Kontak & Konsultasi Strategi Digital - Netmediatop",
+  description:
+    "Diskusikan proyek digital marketing, pembuatan website, atau optimasi SEO bisnis Anda bersama tim ahli Netmediatop. Respon cepat via WhatsApp.",
 };
 
-const visionText = ["Get in touch with us to discuss your next project."];
+const visionText = [
+  "Mari diskusikan rencana pertumbuhan bisnis Anda bersama tim Netmediatop. Dapatkan solusi digital marketing yang terarah, transparan, dan berorientasi pada profit nyata.",
+];
 ---
 
 <BaseLayout {metadata}>
-  <Content tagline="Contact" title="Contact" description={visionText} />
+  <Content
+    tagline="Hubungi Kami"
+    title="Wujudkan Pertumbuhan Bisnis Anda Sekarang"
+    description={visionText}
+  />
+
+  <!-- Form Kotak Kontak Utama -->
   <div
     class="reveal mx-auto max-w-xl bg-card border border-border rounded-3xl p-8 shadow-sm mb-12 md:mb-16"
   >
+    <div class="mb-6 text-center">
+      <h3 class="text-xl font-bold text-foreground mb-1">Kirim Pesan Cepat</h3>
+      <p class="text-[14px] text-muted-foreground">
+        Isi formulir di bawah ini dan tim kami akan segera menghubungi Anda.
+      </p>
+    </div>
     <Form />
   </div>
+
+  <!-- Saluran Komunikasi Alternatif -->
   <Features
-    tagline="Contact Means"
-    title="We are here to help you"
-    subtitle="Choose the communication channel you prefer. We respond in less than 24 hours."
+    tagline="Saluran Komunikasi"
+    title="Pilih Cara Tercepat Menghubungi Kami"
+    subtitle="Kami siap merespons kebutuhan konsultasi bisnis Anda dalam waktu kurang dari 24 jam."
     classes={{ container: "pt-0 md:pt-0" }}
     features={[
       {
-        title: "Phone",
-        description: "+123 456 7890",
+        title: "WhatsApp Bisnis",
+        description: "0823 2918 8998 (Respon Paling Cepat)",
         icon: "lucide:phone",
-        iconClass: "bg-green-500/10 text-green-400",
+        iconClass: "bg-green-500/10 text-green-500",
       },
       {
-        title: "Email",
-        description: "contact@company.com",
+        title: "Email Resmi",
+        description: "contact@netmediatop.com",
         icon: "lucide:mail",
-        iconClass: "bg-yellow-500/10 text-yellow-400",
+        iconClass: "bg-yellow-500/10 text-yellow-500",
       },
       {
-        title: "Location",
-        description: "City, Country",
+        title: "Lokasi Kantor",
+        description:
+          "Jl Kramat Kecil 04/03 Barongan Kudus, Jawa Tengah, Indonesia",
         icon: "lucide:map-pin",
-        iconClass: "bg-red-500/10 text-red-400",
+        iconClass: "bg-red-500/10 text-red-500",
       },
       {
-        title: "Personalized Attention",
-        description: "We understand your needs to offer tailored solutions.",
+        title: "Konsultasi Personal",
+        description:
+          "Analisis kebutuhan spesifik yang disesuaikan dengan skala bisnis Anda.",
         icon: "lucide:user-check",
-        iconClass: "bg-blue-500/10 text-blue-400",
+        iconClass: "bg-blue-500/10 text-blue-500",
       },
       {
-        title: "Technical Support",
-        description: "We resolve any doubt or technical incident quickly.",
+        title: "Dukungan Teknis",
+        description:
+          "Bantuan penanganan kendala website & performa iklan secara sigap.",
         icon: "lucide:wrench",
-        iconClass: "bg-purple-500/10 text-purple-400",
+        iconClass: "bg-purple-500/10 text-purple-500",
       },
       {
-        title: "Strategic Consulting",
-        description: "We advise you to ensure the success of your project.",
+        title: "Konsultasi Strategi",
+        description:
+          "Rancang blueprint pemasaran digital bersama digital strategist berpengalaman.",
         icon: "lucide:briefcase",
-        iconClass: "bg-pink-500/10 text-pink-400",
+        iconClass: "bg-pink-500/10 text-pink-500",
       },
     ]}
   />

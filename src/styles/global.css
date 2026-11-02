@@ -19,7 +19,7 @@
   --primary: #0254d8;
   --border: #e5e7eb;
   --muted: #f4f4f5;
-  --muted-foreground: #52525b;
+  --muted-foreground: #2f2f30;
   --card: #ffffff;
 }
 
@@ -64,4 +64,30 @@
 /* Prevent double-bounce conflicts when Astro View Transitions is actively animating */
 :root[data-astro-transition] .reveal {
   transition: none !important;
+}
+/* Base styles using variables */
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /* --- PERUBAHAN DI SINI (Memaksa semua teks deskripsi dan muted agar tebal & jelas) --- */
+  p,
+  span,
+  div,
+  .text-muted-foreground,
+  .prose p,
+  [class*="text-muted"] {
+    font-size: 14px;
+    font-weight: 500 !important;
+    color: var(--foreground) !important;
+    opacity: 0.95 !important;
+  }
+  /* -------------------------------------------------------------------------------- */
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
 }

@@ -1,0 +1,266 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Content from "@/components/widgets/Content.astro";
+import { Image } from "astro:assets";
+
+// Import gambar dummy dari folder assets
+import imgMarketing from "@/assets/images/internet-marketing.jpeg";
+import imgDevBalanced from "@/assets/images/dev_balanced.png";
+
+const metadata = {
+  title: "Jasa Meta Ads (Instagram & Facebook) High-Conversion - Netmediatop",
+  description:
+    "Layanan manajemen iklan Meta Ads tertarget. Hentikan jempol audiens yang sedang scrolling dan ubah mereka menjadi pelanggan setia via WhatsApp.",
+};
+
+const waMessage = encodeURIComponent(
+  "Halo Netmediatop, saya ingin berkonsultasi mengenai strategi iklan Instagram & Facebook (Meta Ads) untuk meningkatkan penjualan produk saya.",
+);
+const waLink = `https://wa.me/6281234567890?text=${waMessage}`;
+---
+
+<BaseLayout {metadata}>
+  <!-- Header / Intro Utama (Pillar Title) -->
+  <Content
+    tagline="Layanan Pilar"
+    title="Jasa Meta Ads: Dominasi Instagram & Facebook"
+    description={[
+      "Ubah pengguna media sosial yang sedang bersantai menjadi pembeli yang antusias. Strategi iklan visual yang tajam, tertarget, dan berorientasi pada Return on Ad Spend (ROAS).",
+    ]}
+  />
+
+  <!-- Main Content Body -->
+  <section class="py-8 mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="prose prose-lg dark:prose-invert mx-auto">
+      <!-- Copywriting Problem & Solution -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Berhenti Membakar Uang untuk Tombol "Boost Post"
+      </h2>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-8">
+        Banyak pebisnis merugi karena sekadar menekan tombol "Promosikan
+        Postingan" tanpa strategi yang jelas. Di Netmediatop, kami mengelola
+        Meta Ads melalui *Ads Manager* profesional. Kami merancang perjalanan
+        audiens (*customer journey*) mulai dari melihat iklan visual Anda untuk
+        pertama kali, hingga mereka tanpa ragu mengeklik tautan menuju WhatsApp
+        atau halaman penawaran Anda.
+      </p>
+
+      <h2 class="text-2xl font-bold mb-6 text-foreground">
+        Alur Strategi Iklan Meta Ads Pembawa Konversi
+      </h2>
+
+      <!-- GAMBAR 1 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgMarketing}
+          alt="Penargetan Audiens Meta Ads"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Pemetaan audiens berdasarkan minat & perilaku.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 1 & 2 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 mb-1.5"
+          >
+            1. Menarik Perhatian Audiens
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Menciptakan Kebutuhan
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Berbeda dengan Google, orang di media sosial tidak sedang mencari
+            barang. Kami menggunakan visual (Video/Carousel) yang memancing rasa
+            penasaran agar audiens menyadari bahwa mereka membutuhkan solusi
+            atau produk Anda.
+          </p>
+        </div>
+
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 mb-1.5"
+          >
+            2. Membangun Rasa Percaya
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Iklan Penargetan Ulang (Retargeting)
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Kami menargetkan ulang orang-orang yang sudah menonton video atau
+            mengunjungi profil IG Anda. Kami akan menyajikan iklan testimoni
+            atau keunggulan produk untuk membangun kepercayaan yang kuat di
+            benak mereka.
+          </p>
+        </div>
+      </div>
+
+      <!-- GAMBAR 2 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgDevBalanced}
+          alt="Optimasi Meta Pixel"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Integrasi Meta Pixel untuk pelacakan konversi yang presisi.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 3 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div
+          class="p-5 border border-border rounded-xl bg-card border-l-4 border-l-green-600"
+        >
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mb-2"
+          >
+            3. Memanen Penjualan & Chat WA
+          </span>
+          <h3 class="text-lg font-semibold text-foreground mb-2">
+            Penawaran yang Tak Tertolak
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Fase akhir di mana kami menyajikan iklan promo terbatas, diskon,
+            atau gratis ongkir khusus kepada audiens yang sudah sangat tertarik.
+            Tujuannya satu: mendesak mereka menekan tombol chat WhatsApp
+            sekarang juga.
+          </p>
+        </div>
+      </div>
+
+      <!-- SILO CLUSTER SECTION (Navigasi Internal Link ke Sub-Topik Meta Ads) -->
+      <div class="my-10 p-6 border-l-4 border-primary bg-muted/30 rounded-r-xl">
+        <h3 class="text-xl font-bold mb-3 text-foreground">
+          Eksplorasi Klaster Layanan Meta Ads Kami:
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-4">
+          Modul spesifik untuk menjangkau audiens di ekosistem Meta:
+        </p>
+
+        <ul class="space-y-3 text-base font-medium">
+          <li>
+            👉 <a
+              href="/services/meta-ads/instagram-conversion"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Instagram Ads Khusus Konversi WA / DM
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Fokus pada Reels & Stories ads dengan tombol interaksi langsung)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/meta-ads/facebook-lead-generation"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Facebook Lead Generation (B2B & Layanan Mahal)
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Kumpulkan data kontak prospek tanpa mereka harus keluar dari FB)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/meta-ads/pixel-tracking-api"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Setup Meta Pixel & Conversions API (CAPI)
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Sistem pelacakan akurat agar performa iklan kebal dari blokir
+              sistem Apple)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/meta-ads/catalog-dynamic-ads"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Iklan Katalog Dinamis (Dynamic Ads)
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Otomatis tampilkan produk yang sempat dilihat pengunjung ke
+              beranda IG mereka)</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Fitur & Alur Pengelolaan -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Cakupan Pengerjaan Meta Ads Netmediatop
+      </h2>
+      <ul
+        class="list-disc pl-6 space-y-2 text-muted-foreground mb-8 text-[14px]"
+      >
+        <li>Riset target audiens mendalam (Minat, Perilaku, & Demografi).</li>
+        <li>
+          Pembuatan Audiens Khusus & Audiens Serupa (Lookalike Audience) dari
+          database Anda.
+        </li>
+        <li>
+          Pengujian (A/B Testing) materi iklan visual dan kalimat promosi
+          (Copywriting).
+        </li>
+        <li>
+          Pemasangan pelacak Meta Pixel untuk memantau metrik biaya per hasil
+          (*Cost Per Result*).
+        </li>
+        <li>
+          Peningkatan anggaran (*Scaling*) yang terukur untuk melipatgandakan
+          profit secara aman.
+        </li>
+      </ul>
+
+      <!-- Cross-Silo Link ke Service Pilar Lain -->
+      <div
+        class="p-4 border border-border rounded-lg bg-card text-[14px] text-muted-foreground my-8"
+      >
+        💡 <strong>Catatan Strategi:</strong> Agar iklan Instagram & Facebook Anda
+        tidak bocor konversi, pastikan audiens yang mengklik tautan diarahkan ke <a
+          href="/services/web-development"
+          class="text-primary underline font-semibold"
+          >Landing Page Berkecepatan Tinggi</a
+        > yang telah dirancang khusus untuk memanen data pembeli.
+      </div>
+
+      <!-- CTA Box Ke WhatsApp -->
+      <div
+        class="mt-12 p-8 border border-primary/20 rounded-2xl bg-primary/5 text-center"
+      >
+        <h3 class="text-xl font-bold mb-2 text-foreground">
+          Siap Ubah Pengikut Menjadi Pembeli Aktif?
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-6 max-w-lg mx-auto">
+          Diskusikan target pasar dan rencana penawaran visual Anda bersama tim
+          Meta Ads Strategist kami.
+        </p>
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md transition-colors gap-2"
+        >
+          <span>Konsultasi Meta Ads via WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

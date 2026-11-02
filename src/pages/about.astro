@@ -3,86 +3,283 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Schema from "@/components/seo/Schema.astro";
 import { getImage } from "astro:assets";
 import Content2 from "@/components/widgets/Content2.astro";
-import Values from "@/components/widgets/Values.astro";
 import aboutImage from "@/assets/images/about-office.webp";
+import profileImage from "@/assets/images/4.png"; // Mengimpor foto profil Anda
 
 const metadata = {
-  title: "Tentang Kami",
+  title: "Tentang Netmediatop - Profil, Keahlian & Filosofi Bisnis Pendiri",
   description:
-    "Learn more about our vision, values, and the team behind Astro Starter Pro.",
+    "Kenali Tri, founder Netmediatop asal Kudus. Ahli web coding, JavaScript, AI Engineer, SEO, AEO, GEO, serta pembelajar aktif dari Coursera, Skillshop, Neil Patel, dan Ahrefs.",
 };
 
-const values = [
-  {
-    title: "Profesional",
-    description:
-      "Curabitur dignissim, felis non sollicitudin molestie, urna mauris pellentesque velit, ut eleifend.",
-  },
-  {
-    title: "Commitment",
-    description:
-      "Aenean condimentum finibus mauris, a fermentum justo pan eget. Sed ultricies, neque quis.",
-  },
-  {
-    title: "Quality",
-    description:
-      "Donec sed orci tincidunt, aliquam nisl a, condimentum nunc. Nulla varius ex nec ante feugiat.",
-  },
-  {
-    title: "Transparency",
-    description:
-      "Phasellus tristique, elit dapibus cursus facilisis, lorem augue fringilla nunc, vitae fermentum.",
-  },
-  {
-    title: "Teamwork",
-    description:
-      "In hac habitasse platea dictumst. Vivamus adipiscing fermentum quam volutpat aliquam. Integer et.",
-  },
-  {
-    title: "Excellence",
-    description:
-      "Fusce at massa nec sapien auctor gravida in in tellus. Vivamus a tristique metus, et molestie.",
-  },
-];
-
-const optimizedImage = await getImage({
+const optimizedAboutImage = await getImage({
   src: aboutImage,
   format: "webp",
 });
+
+const optimizedProfileImage = await getImage({
+  src: profileImage,
+  format: "webp",
+});
+
+const waLink =
+  "https://wa.me/6282329188998?text=Halo%20Netmediatop,%20saya%20membaca%20halaman%20tentang%20kami%20dan%20ingin%20berdiskusi%20tentang%20strategi%20digital.";
 ---
 
 <BaseLayout {metadata}>
-  <Schema type="Person" data={{}} />
-  <link slot="head" rel="preload" href={optimizedImage.src} as="image" />
+  <!-- Schema Org untuk E-E-A-T / Person & Organization Entity -->
+  <Schema
+    type="Organization"
+    data={{
+      url: "https://netmediatop.com/",
+      logo: "https://netmediatop.com/favicon.svg",
+      foundingDate: "2020-01-08",
+      founder: {
+        "@type": "Person",
+        name: "Tri Pudjo",
+        jobTitle: "Founder Netmediatop & Digital Marketing  Strategist",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Kudus",
+          addressRegion: "Jawa Tengah",
+          addressCountry: "ID",
+        },
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Kudus",
+        addressRegion: "Jawa Tengah",
+        addressCountry: "ID",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+62-823-2918-8998",
+        contactType: "customer service",
+      },
+    }}
+  />
+
+  <link slot="head" rel="preload" href={optimizedAboutImage.src} as="image" />
+
+  <!-- Bagian 1: Profil Founder, Foto Asli, Keahlian & Short Story -->
+  <section class="py-12 md:py-16 max-w-5xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12">
+      <span
+        class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full"
+      >
+        Tentang Pendiri & Keahlian
+      </span>
+      <h1 class="text-3xl md:text-5xl font-bold mt-4 text-foreground">
+        Di Balik Layar Netmediatop
+      </h1>
+      <p class="text-muted-foreground mt-3 max-w-2xl mx-auto text-base">
+        Membangun jembatan antara teknologi web modern, efisiensi iklan
+        berbayar, dan pertumbuhan profit nyata bagi bisnis di Indonesia.
+      </p>
+    </div>
+
+    <!-- Kotak Profil & Cerita Pendiri -->
+    <div
+      class="grid md:grid-cols-3 gap-8 items-start bg-card border border-border rounded-3xl p-6 md:p-10 shadow-sm mb-12"
+    >
+      <!-- Kartu Profil dengan Foto Asli -->
+      <div
+        class="md:col-span-1 bg-muted/50 p-6 rounded-2xl border border-border/60 text-center"
+      >
+        <!-- Foto Profil Asli -->
+        <div
+          class="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden border-2 border-primary/30 shadow-md"
+        >
+          <img
+            src={optimizedProfileImage.src}
+            alt="Tri - Founder & Lead Digital Strategist Netmediatop"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <h2 class="text-xl font-bold text-foreground mb-1">Tri</h2>
+        <p
+          class="text-xs font-semibold text-primary mb-4 uppercase tracking-wide"
+        >
+          Founder & Lead Strategist
+        </p>
+
+        <ul class="text-[13px] text-muted-foreground space-y-2.5 text-left">
+          <li><strong>Lokasi:</strong> Kudus, Jawa Tengah</li>
+          <li>
+            <strong>Keahlian Teknis:</strong> Koding Web, HTML, JavaScript, AI Engineer,
+            SEO, AEO, GEO
+          </li>
+          <li>
+            <strong>Sertifikasi / Short Courses:</strong> Google Academy (Skillshop),
+            Coursera
+          </li>
+          <li>
+            <strong>Referensi Riset & Belajar:</strong> NeilPatel.com, Ahrefs.com,
+            HubSpot.com, Backlinko.com
+          </li>
+        </ul>
+
+        <div class="mt-6 pt-4 border-t border-border">
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold text-white bg-green-600 hover:bg-green-700 rounded-xl shadow transition-colors gap-2"
+          >
+            Konsultasi Langsung dengan Tri
+          </a>
+        </div>
+      </div>
+
+      <!-- Narasi Short Story + Internal Link Berbasis Layanan -->
+      <div
+        class="md:col-span-2 space-y-4 text-[15px] text-muted-foreground leading-relaxed"
+      >
+        <h3 class="text-xl font-bold text-foreground">
+          Short Story: Lahir dari Semangat Solusi Nyata (Sejak 2020)
+        </h3>
+        <p>
+          <strong>Netmediatop</strong> resmi didirikan pada tanggal **8 Januari 2020**
+          di Kudus, Jawa Tengah. Berawal dari keprihatinan melihat banyak pelaku UMKM
+          serta penyedia layanan lokal yang mengalami kesulitan memasarkan produknya
+          di era digital akibat minimnya pemahaman teknis performa web dan mahalnya
+          biaya iklan yang salah sasaran.
+        </p>
+        <p>
+          Dipimpin langsung oleh <strong>Tri</strong> sebagai praktisi yang menguasai
+          teknik koding web mendalam dan otomatisasi AI, Netmediatop hadir untuk memastikan
+          setiap rupiah anggaran promosi klien berdampak pada prospek dan konversi
+          nyata. Untuk mencapai hal tersebut, kami merancang portofolio layanan holistik
+          yang mencakup <a
+            href="/services/jasa-pembuatan-website"
+            class="text-primary font-medium underline hover:text-primary/80"
+            >jasa pembuatan website</a
+          > berkecepatan tinggi berbasis Astro, serta strategi <a
+            href="/services/jasa-seo"
+            class="text-primary font-medium underline hover:text-primary/80"
+            >jasa SEO</a
+          >, AEO, dan GEO agar bisnis Anda mendominasi halaman pencarian secara
+          organik.
+        </p>
+        <p>
+          Selain itu, untuk mempercepat perolehan prospek instan, kami juga
+          mengelola <a
+            href="/services/jasa-iklan-google-ads"
+            class="text-primary font-medium underline hover:text-primary/80"
+            >jasa iklan Google Ads</a
+          > dan <a
+            href="/services/jasa-iklan-facebook"
+            class="text-primary font-medium underline hover:text-primary/80"
+            >jasa iklan Facebook</a
+          >. Seluruh ekosistem digital ini didukung penuh oleh <a
+            href="/services/jasa-konten-sosmed"
+            class="text-primary font-medium underline hover:text-primary/80"
+            >jasa konten sosmed</a
+          > serta produksi narasi berkualitas dari <a
+            href="/services/penulis-artikel"
+            class="text-primary font-medium underline hover:text-primary/80"
+            >penulis artikel</a
+          > profesional.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bagian 2: Tujuan & Visi Perusahaan -->
   <Content2
-    title="Our Vision"
+    title="Tujuan Utama Kami"
     description={[
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "Bagaimana mempercepat dan mengoptimalkan kunjungan/trafik web dengan bantuan teknologi, mengonversi pengunjung menjadi prospek nyata via WhatsApp, menghasilkan ROI maksimal, serta menciptakan pertumbuhan bisnis yang berdampak tinggi.",
     ]}
-    tagline="About"
+    tagline="Visi & Misi"
     image={aboutImage}
-    imageAlt="Modern web development office"
+    imageAlt="Kantor dan lingkungan kerja digital Netmediatop"
     actions={[
       {
-        text: "Contact Us",
-        href: "/contact",
+        text: "Diskusikan Proyek Anda",
+        href: waLink,
         variant: "primary",
-        icon: "lucide:mail",
+        icon: "lucide:message-circle",
       },
       {
-        text: "View Details",
-        href: "#",
+        text: "Lihat Studi Kasus",
+        href: "/studi-kasus",
         variant: "secondary",
         icon: "lucide:arrow-right",
       },
     ]}
   />
-  <Values
-    items={values}
-    columns={3}
-    tagline="Our Values"
-    title="What Defines Us"
-    subtitle="Principles that guide our daily work"
-  />
+
+  <!-- Bagian 3: Kutipan Motivasi Bisnis & Persaingan -->
+  <section class="py-12 max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-8">
+      <span
+        class="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full"
+      >
+        Filosofi & Motivasi
+      </span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-3 text-foreground">
+        Menjadikan Persiapan & Kendala Sebagai Bahan Bakar Kemajuan
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Quote 1 -->
+      <div
+        class="bg-card border border-border/80 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col justify-between relative overflow-hidden"
+      >
+        <div class="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
+        <p class="text-foreground italic font-medium text-base mb-4">
+          "Persaingan dan kendala bisnis bukanlah penghalang untuk berhenti,
+          melainkan barometer ketajaman strategi. Semakin ketat kompetisi pasar,
+          semakin tertantang kita untuk mengeksekusi teknologi dan optimasi web
+          yang lebih unggul."
+        </p>
+        <span
+          class="text-xs font-semibold text-primary uppercase tracking-wider"
+          >— Tri, Founder Netmediatop</span
+        >
+      </div>
+
+      <!-- Quote 2 -->
+      <div
+        class="bg-card border border-border/80 rounded-2xl p-6 md:p-8 shadow-sm flex flex-col justify-between relative overflow-hidden"
+      >
+        <div class="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
+        <p class="text-foreground italic font-medium text-base mb-4">
+          "Jangan pernah gentar melihat kompetitor yang besar. Jadikan
+          persaingan sebagai motivasi utama untuk terus belajar, meriset standar
+          industri global, dan melompat lebih cepat melalui inovasi digital."
+        </p>
+        <span
+          class="text-xs font-semibold text-primary uppercase tracking-wider"
+          >— Filosofi Eksekusi Netmediatop</span
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Penutup E-E-A-T / Trust Signal -->
+  <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+    <div class="bg-primary/5 border border-primary/20 rounded-3xl p-8 md:p-12">
+      <h3 class="text-2xl md:text-3xl font-bold mb-3 text-foreground">
+        Ingin Berdiskusi Langsung dengan Tim Strategist Kami?
+      </h3>
+      <p
+        class="text-[14px] font-medium text-foreground/90 mb-6 max-w-xl mx-auto"
+      >
+        Mari bedah potensi pertumbuhan bisnis Anda bersama Tri dan tim
+        Netmediatop. Konsultasikan kendala pemasaran online Anda hari ini.
+      </p>
+      <a
+        href={waLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-green-600 hover:bg-green-700 rounded-xl shadow-lg transition-transform hover:-translate-y-0.5 gap-2"
+      >
+        <span>Hubungi Kami via WhatsApp</span>
+      </a>
+    </div>
+  </section>
 </BaseLayout>

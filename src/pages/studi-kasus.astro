@@ -1,0 +1,78 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import Headline from "@/components/ui/Headline.astro";
+import PostItem from "@/components/blog/PostItem.astro";
+
+// 1. Ambil semua artikel blog
+const allPosts = await getCollection("blog");
+
+// 2. Filter PALING AMAN: Langsung cek nama filenya saja!
+// Jika nama file .md mengandung kata "studi-kasus", maka akan ditampilkan.
+const studiKasusPosts = allPosts.filter((post) => {
+  const namaFile = (post.id || "").toLowerCase();
+  return namaFile.includes("studi-kasus");
+});
+
+const metadata = {
+  title: "Studi Kasus & Hasil Kerja - Netmediatop",
+  description:
+    "Laporan analisis mendalam, strategi optimasi SEO, dan rekam jejak hasil iklan dari Netmediatop.",
+};
+
+const waLink =
+  "https://wa.me/6282329188998?text=Halo%20Netmediatop,%20saya%20tertarik%20dengan%20hasil%20studi%20kasus%20di%20website%20Anda.";
+---
+
+<!-- SISA KODE KE BAWAH TETAP SAMA SEPERTI SEBELUMNYA -->
+<BaseLayout metadata={metadata}>
+  <section class="relative px-4 py-8 sm:px-6 lg:px-8 md:py-12">
+    <div class="absolute inset-0 z-0">
+      <div
+        class="absolute inset-0 bg-linear-to-br from-blue-500/5 via-transparent to-pink-500/5"
+      >
+      </div>
+    </div>
+
+    <div class="relative mx-auto max-w-5xl">
+      <Headline
+        tagline="Studi Kasus"
+        title="Rekam Jejak & Hasil Kerja"
+        subtitle="Eksplorasi analisis mendalam, strategi optimasi kecepatan web, dan laporan hasil nyata kampanye digital dari tim kami."
+        classes={{
+          container: "reveal mb-12 text-center",
+          title:
+            "font-heading mb-4 text-4xl font-bold tracking-tight text-foreground md:text-6xl",
+          subtitle: "mx-auto max-w-3xl text-xl text-muted-foreground",
+        }}
+      />
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {studiKasusPosts.map((post) => <PostItem post={post} />)}
+      </div>
+
+      <div
+        class="mt-16 p-8 border border-primary/20 rounded-2xl bg-primary/5 text-center"
+      >
+        <h3 class="text-xl font-bold mb-2 text-foreground">
+          Studi Kasus ini dapat dipakai sebagai inspirasi pembelajaran untuk
+          Anda
+        </h3>
+        <p
+          class="text-[14px] font-medium text-foreground/90 mb-6 max-w-lg mx-auto"
+        >
+          Diskusikan kendala lalu lintas pengunjung web atau efisiensi anggaran
+          iklan Anda bersama tim strategist Netmediatop.
+        </p>
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-green-600 hover:bg-green-700 rounded-xl shadow-md transition-all hover:-translate-y-0.5 gap-2"
+        >
+          <span>Diskusi Strategi via WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

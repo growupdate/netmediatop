@@ -1,0 +1,274 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Content from "@/components/widgets/Content.astro";
+import { Image } from "astro:assets";
+
+// Import gambar dummy dari folder assets
+import imgSeo from "@/assets/images/services/seo.webp";
+import imgOpenSource from "@/assets/images/open-source.png";
+
+const metadata = {
+  title: "Jasa Penulisan Konten Blog & Copywriting Strategis - Netmediatop",
+  description:
+    "Layanan pembuatan artikel blog teroptimasi SEO dan copywriting persuasif. Tarik ribuan trafik organik dan ubah pembaca menjadi pembeli aktif.",
+};
+
+const waMessage = encodeURIComponent(
+  "Halo Netmediatop, saya ingin berkonsultasi mengenai pembuatan konten blog dan copywriting untuk mendatangkan trafik ke website saya.",
+);
+const waLink = `https://wa.me/6281234567890?text=${waMessage}`;
+---
+
+<BaseLayout {metadata}>
+  <!-- Header / Intro Utama (Pillar Title) -->
+  <Content
+    tagline="Layanan Pilar"
+    title="Konten Strategis & Copywriting: Magnet Trafik Bisnis"
+    description={[
+      "Website tanpa konten ibarat toko megah yang kosong. Tarik ribuan calon pembeli dari Google melalui artikel blog yang mengedukasi sekaligus menjual.",
+    ]}
+  />
+
+  <!-- Main Content Body -->
+  <section class="py-8 mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="prose prose-lg dark:prose-invert mx-auto">
+      <!-- Copywriting Problem & Solution -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Berhenti Menulis Artikel Asal-asalan Tanpa Hasil
+      </h2>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-8">
+        Banyak website bisnis memiliki fitur blog, namun isinya hanya sekadar
+        "update berita perusahaan" yang tidak pernah dicari orang di Google.
+        Akibatnya? Trafik sepi dan tidak ada konversi. Di Netmediatop, kami
+        merancang **Artikel Blog Strategis** berbasis data riset kata kunci dan
+        *Copywriting* yang tajam. Setiap kalimat ditulis untuk menjaring orang
+        yang sedang mencari solusi, mengedukasi mereka, dan menggiringnya
+        langsung ke penawaran Anda.
+      </p>
+
+      <h2 class="text-2xl font-bold mb-6 text-foreground">
+        Alur Strategi Konten Pembawa Konversi
+      </h2>
+
+      <!-- GAMBAR 1 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgSeo}
+          alt="Riset Kata Kunci untuk Blog"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Artikel berbasis riset search intent.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 1 & 2 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 mb-1.5"
+          >
+            1. Menarik Trafik Baru (Fase Edukasi)
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Menjawab Pertanyaan Audiens
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Kami menulis artikel blog (misal: *"Cara Mengatasi..."* atau *"Tips
+            Memilih..."*) untuk menjaring audiens luas yang sedang mencari
+            informasi terkait industri Anda di Google.
+          </p>
+        </div>
+
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 mb-1.5"
+          >
+            2. Membangun Kepercayaan & Otoritas
+          </span>
+          <h3 class="text-base font-semibold text-foreground mb-1">
+            Tampil Sebagai Pakar
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Tulisan disusun dengan standar *Experience, Expertise,
+            Authoritativeness, & Trustworthiness* (E-E-A-T) agar pembaca yakin
+            bahwa bisnis Anda adalah solusi paling kredibel dibanding
+            kompetitor.
+          </p>
+        </div>
+      </div>
+
+      <!-- GAMBAR 2 (Di Tengah) -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image
+          src={imgOpenSource}
+          alt="Copywriting & Konversi Konten"
+          class="w-full h-auto rounded-xl border border-border shadow-sm object-cover"
+        />
+        <figcaption
+          class="text-center text-[12px] text-muted-foreground mt-2 italic"
+        >
+          Integrasi tombol WA di dalam artikel blog.
+        </figcaption>
+      </figure>
+
+      <!-- KONTEN POIN 3 -->
+      <div class="space-y-4 my-8 not-prose">
+        <div
+          class="p-5 border border-border rounded-xl bg-card border-l-4 border-l-green-600"
+        >
+          <span
+            class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 mb-2"
+          >
+            3. Mendorong Klik & Transaksi
+          </span>
+          <h3 class="text-lg font-semibold text-foreground mb-2">
+            Sisipan Promosi yang Natural
+          </h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">
+            Di setiap akhir atau pertengahan artikel blog edukatif, kami
+            menyematkan *copywriting* penawaran yang halus (*soft-selling*)
+            namun mendesak pengunjung untuk segera mengeklik tombol chat
+            WhatsApp Anda.
+          </p>
+        </div>
+      </div>
+
+      <!-- SILO CLUSTER SECTION (Navigasi Internal Link) -->
+      <div class="my-10 p-6 border-l-4 border-primary bg-muted/30 rounded-r-xl">
+        <h3 class="text-xl font-bold mb-3 text-foreground">
+          Eksplorasi Klaster Layanan Konten Kami:
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-4">
+          Pilih jenis produksi konten yang paling sesuai dengan strategi
+          pemasaran web Anda:
+        </p>
+
+        <ul class="space-y-3 text-base font-medium">
+          <li>
+            👉 <a
+              href="/services/konten/artikel-blog-seo"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Pembuatan Artikel Blog Teroptimasi SEO
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Artikel panjang 1000+ kata untuk mendominasi kata kunci
+              informasi)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/konten/copywriting-landing-page"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Copywriting Landing Page & Halaman Penjualan
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Rangkaian kata persuasif khusus untuk mengubah klik iklan menjadi
+              uang)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/konten/konten-programmatic"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Automasi Konten Programmatic SEO (pSEO)
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Produksi ratusan halaman layanan berbasis kota target secara
+              sistematis)</span
+            >
+          </li>
+          <li>
+            👉 <a
+              href="/services/konten/company-profile-script"
+              class="text-primary underline hover:text-primary/80 transition-colors"
+            >
+              Penyusunan Teks Profil Perusahaan & Skrip Video
+            </a>
+            <span
+              class="text-[13px] text-muted-foreground font-normal block md:inline"
+            >
+              (Bangun citra profesional yang memukau calon mitra B2B Anda)</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Fitur & Alur Pengelolaan -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">
+        Standar Kualitas Penulisan Konten Netmediatop
+      </h2>
+      <ul
+        class="list-disc pl-6 space-y-2 text-muted-foreground mb-8 text-[14px]"
+      >
+        <li>
+          Riset struktur *Heading* (H1, H2, H3) yang disukai algoritma Google.
+        </li>
+        <li>
+          Penulisan 100% humanis, bebas dari gaya bahasa kaku AI (*AI-cliche
+          free*).
+        </li>
+        <li>
+          Optimasi *Internal Linking* di dalam artikel untuk memperkuat struktur
+          *Silo* web Anda.
+        </li>
+        <li>
+          Pemilihan *Featured Image* dan penyematan *Alt-Text* gambar yang
+          relevan.
+        </li>
+        <li>
+          Penyisipan *Call-to-Action* (CTA) WhatsApp yang jelas tanpa terkesan
+          memaksa.
+        </li>
+      </ul>
+
+      <!-- Cross-Silo Link -->
+      <div
+        class="p-4 border border-border rounded-lg bg-card text-[14px] text-muted-foreground my-8"
+      >
+        💡 <strong>Catatan Strategi:</strong> Konten blog yang fantastis membutuhkan
+        ruang mesin yang optimal. Gabungkan layanan ini dengan <a
+          href="/services/seo-optimization"
+          class="text-primary underline font-semibold">Optimasi SEO Teknis</a
+        > agar artikel cepat terindeks, dan pastikan website Anda berjalan dengan
+        <a
+          href="/services/web-development"
+          class="text-primary underline font-semibold"
+          >Kecepatan Loading Maksimal</a
+        >.
+      </div>
+
+      <!-- CTA Box Ke WhatsApp -->
+      <div
+        class="mt-12 p-8 border border-primary/20 rounded-2xl bg-primary/5 text-center"
+      >
+        <h3 class="text-xl font-bold mb-2 text-foreground">
+          Siap Ubah Blog Anda Menjadi Magnet Pelanggan?
+        </h3>
+        <p class="text-[14px] text-muted-foreground mb-6 max-w-lg mx-auto">
+          Diskusikan ide topik, kata kunci, dan gaya bahasa yang paling cocok
+          untuk industri Anda bersama tim *Copywriter* kami.
+        </p>
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md transition-colors gap-2"
+        >
+          <span>Diskusi Konten via WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
