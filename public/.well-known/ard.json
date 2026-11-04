@@ -1,15 +1,15 @@
 {
-  "specVersion": "1.0",
-  "host": {
-    "displayName": "NetMediaTop Digital Marketing"
-  },
+  "$schema": "https://ard.spec.org/v1/ard.schema.json",
+  "version": "1.0",
+  "identifier": "netmediatop-agent-catalog",
+  "displayName": "NetMediaTop Digital Marketing Catalog",
   "entries": [
     {
-      "identifier": "urn:air:netmediatop.com:site:homepage",
+      "identifier": "netmediatop-homepage",
       "displayName": "NetMediaTop Homepage",
-      "type": "text/html",
-      "url": "https://netmediatop.com/",
       "description": "Layanan pemasaran digital, SEO, Google Ads, dan pembuatan website profesional.",
+      "url": "https://netmediatop.com/",
+      "mediaType": "text/html",
       "representativeQueries": [
         "jasa seo profesional",
         "jasa pembuatan website bisnis",
@@ -17,11 +17,11 @@
       ]
     },
     {
-      "identifier": "urn:air:netmediatop.com:site:services",
+      "identifier": "netmediatop-services",
       "displayName": "NetMediaTop Services",
-      "type": "text/html",
-      "url": "https://netmediatop.com/services",
       "description": "Daftar layanan digital marketing terpadu untuk mengembangkan bisnis online.",
+      "url": "https://netmediatop.com/services",
+      "mediaType": "text/html",
       "representativeQueries": [
         "layanan jasa iklan google ads",
         "jasa optimasi website dan seo",
