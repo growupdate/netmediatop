@@ -1,24 +1,18 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "name": "Netmediatop",
-  "description": "Layanan Digital Marketing, Jasa Pembuatan Website Astro, SEO, dan Google Ads",
-  "url": "https://netmediatop.com",
-  "version": "1.0.0",
-  "resources": [
+  "$schema": "https://json.schemastore.org/ard.json",
+  "version": "1.0",
+  "name": "NetMediaTop AI Discovery",
+  "description": "Resource discovery manifest for AI agents and automated clients.",
+  "entries": [
     {
-      "name": "Jasa Pembuatan Website",
-      "type": "service",
-      "url": "https://netmediatop.com/services/jasa-pembuatan-website"
+      "url": "https://netmediatop.com/",
+      "type": "website",
+      "description": "Situs resmi NetMediaTop agency pemasaran digital dan SEO."
     },
     {
-      "name": "Jasa SEO",
-      "type": "service",
-      "url": "https://netmediatop.com/services/jasa-seo"
-    },
-    {
-      "name": "Jasa Google Ads",
-      "type": "service",
-      "url": "https://netmediatop.com/services/jasa-iklan-google-ads"
+      "url": "https://netmediatop.com/llms.txt",
+      "type": "text",
+      "description": "Dokumentasi LLM untuk agen AI."
     }
   ]
 }

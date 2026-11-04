@@ -39,6 +39,14 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
+    /* Optimasi rendering teks agar lebih tajam dan instan oleh browser */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    /* Mencegah layout shift dan mempercepat render teks judul */
+    font-weight: 700;
   }
 
   :focus-visible {

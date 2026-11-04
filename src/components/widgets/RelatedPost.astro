@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+
+const allPosts = await getCollection('blog');
+
+const relatedPosts = allPosts
+  .filter((post) => post.slug !== currentSlug)
+  .slice(0, 3);
+---
+
+{relatedPosts.length > 0 && (
+  <section class="mt-12 border-t border-border pt-8">
+    <h3 class="text-2xl font-bold mb-6 text-foreground">Artikel Terkait Lainnya</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {relatedPosts.map((post) => (
+        <article class="bg-card border border-border rounded-lg p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+          <div>
+            <h4 class="font-semibold text-lg mb-2">
+              <a href={`/blog/${post.slug}`} class="text-foreground hover:text-primary transition">
+                {post.data.title}
+              </a>
+            </h4>
+            <p class="text-sm text-muted-foreground line-clamp-2">
+              {post.data.description}
+            </p>
+          </div>
+          <div class="mt-4">
+            <a href={`/blog/${post.slug}`} class="text-sm font-medium text-primary hover:underline">
+              Baca Selengkapnya &rarr;
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
