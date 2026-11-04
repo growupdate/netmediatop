@@ -5,7 +5,7 @@ import Hero from "@/components/widgets/Hero.astro";
 import Features from "@/components/widgets/Features.astro";
 import devImg from "@/assets/images/dev_balanced.png";
 import openSourceImg from "@/assets/images/internet-marketing.jpeg";
-import Content2 from "@/components/widgets/Content2.astro";
+import content from "@/components/widgets/content.astro";
 const metadata = {
   title: `${siteConfig.name} — next step for your project`,
   description: "Bantu Bisnis Online Berkembang Lebih Cepat dan Menguntungkan",
@@ -35,7 +35,7 @@ const metadata = {
     ]}
   />
 
-  <Content2
+  <content
     items={[
       {
         title: "Bisnis Tidak Ditemukan Online ",
@@ -69,7 +69,7 @@ const metadata = {
       Kami kembangkan sistem digital marketing yg solid sebagai praktek terbaik membangun
       pondasi bisnis Anda.
     </Fragment>
-  </Content2>
+  </content>
   <Features
     tagline="netmediatop"
     title=" bantu agar bisnis Anda mudah ditemukan pembeli"
@@ -113,7 +113,7 @@ const metadata = {
     ]}
   />
 
-  <Content2
+  <content
     items={[]}
     image={openSourceImg}
     imageAlt="jasa digital marketing"
@@ -127,5 +127,5 @@ const metadata = {
       dari Netmediatop, kami rancang fondasi website, SEO, dan konten terarah agar
       bisnis tumbuh terukur dan dominan di pasar Anda sekarang juga.
     </Fragment>
-  </Content2>
+  </content>
 </BaseLayout>
