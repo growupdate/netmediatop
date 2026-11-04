@@ -67,11 +67,20 @@
   transition: none !important;
 }
 
+
 /* OVERRIDE GLOBAL DI LUAR LAYER BASE UNTUK MEMAKSA SELURUH TEKS ABU-ABU MENJADI HITAM PEKAT DI LIGHT MODE */
 :root:not([data-theme="dark"]) .text-muted-foreground,
 :root:not([data-theme="dark"]) [class*="text-slate-"],
 :root:not([data-theme="dark"]) [class*="text-gray-"],
 :root:not([data-theme="dark"]) [class*="text-zinc-"] {
   color: #0a0a0a !important;
+  opacity: 1 !important;
+}
+/* OVERRIDE GLOBAL UNTUK MEMAKSA SELURUH TEKS MENJADI PUTIH SOLID DI DARK MODE */
+:root[data-theme="dark"] .text-muted-foreground,
+:root[data-theme="dark"] [class*="text-slate-"],
+:root[data-theme="dark"] [class*="text-gray-"],
+:root[data-theme="dark"] [class*="text-zinc-"] {
+  color: #ffffff !important;
   opacity: 1 !important;
 }
