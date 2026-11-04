@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Netmediatop",
+  "description": "Layanan Digital Marketing, Jasa Pembuatan Website Astro, SEO, dan Google Ads",
+  "url": "https://netmediatop.com",
+  "version": "1.0.0",
+  "resources": [
+    {
+      "name": "Jasa Pembuatan Website",
+      "type": "service",
+      "url": "https://netmediatop.com/services/jasa-pembuatan-website"
+    },
+    {
+      "name": "Jasa SEO",
+      "type": "service",
+      "url": "https://netmediatop.com/services/jasa-seo"
+    },
+    {
+      "name": "Jasa Google Ads",
+      "type": "service",
+      "url": "https://netmediatop.com/services/jasa-iklan-google-ads"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+# Netmediatop - Digital Marketing & Web Development
+
+> Netmediatop adalah agensi digital marketing dan pembuatan website Astro berkecepatan tinggi yang berbasis di Kudus, Jawa Tengah.
+
+## Main Services & Pages
+- [Home Page](https://netmediatop.com/)
+- [Tentang Kami & Founder](https://netmediatop.com/about)
+- [Jasa Pembuatan Website](https://netmediatop.com/services/jasa-pembuatan-website)
+- [Jasa Optimasi SEO](https://netmediatop.com/services/jasa-seo)
+- [Jasa Google Ads](https://netmediatop.com/services/jasa-iklan-google-ads)
+- [Studi Kasus](https://netmediatop.com/studi-kasus)
+- [Artikel & Blog](https://netmediatop.com/blog)
