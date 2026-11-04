@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ard.spec.org/v1/ard.schema.json",
+  "version": "1.0",
+  "entries": [
+    {
+      "identifier": "netmediatop-home",
+      "displayName": "NetMediaTop Homepage",
+      "description": "Layanan digital marketing, SEO, dan pembuatan website profesional.",
+      "url": "https://netmediatop.com/",
+      "mediaType": "text/html",
+      "representativeQueries": [
+        "jasa seo profesional",
+        "jasa pembuatan website bisnis"
+      ]
+    }
+  ]
+}
