@@ -1,62 +1,111 @@
 {
-  "$schema": "https://ard.spec.org/v1/ard.schema.json",
-  "version": "1.0",
-  "identifier": "netmediatop-agent-catalog",
-  "displayName": "NetMediaTop Digital Marketing Catalog",
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "NetMediaTop",
+    "identifier": "did:web:netmediatop.com",
+    "documentationUrl": "https://netmediatop.com/"
+  },
   "entries": [
     {
-      "identifier": "netmediatop-homepage",
+      "identifier": "urn:air:netmediatop.com:website:homepage",
       "displayName": "NetMediaTop Homepage",
-      "description": "Layanan pemasaran digital, SEO, Google Ads, dan pembuatan website profesional.",
+      "type": "text/html",
       "url": "https://netmediatop.com/",
-      "mediaType": "text/html",
+      "description": "Layanan pemasaran digital, SEO, Google Ads, dan pembuatan website profesional untuk mengembangkan bisnis online.",
+      "tags": [
+        "digital marketing",
+        "seo",
+        "google ads",
+        "website"
+      ],
+      "capabilities": [
+        "SEO",
+        "Google Ads",
+        "Web Development",
+        "Digital Marketing"
+      ],
+      "version": "1.0",
+      "updatedAt": "2026-11-04T00:00:00Z",
       "representativeQueries": [
-        "jasa seo profesional",
-        "jasa pembuatan website bisnis",
-        "digital marketing agency indonesia"
+        "Saya butuh jasa SEO profesional untuk membuat bisnis saya muncul di Google",
+        "Saya mau buat website bisnis yang cepat dan bisa menghasilkan penjualan",
+        "Carikan digital marketing agency di Indonesia untuk mengembangkan bisnis online saya"
       ]
     },
     {
-      "identifier": "netmediatop-services",
+      "identifier": "urn:air:netmediatop.com:website:services",
       "displayName": "NetMediaTop Services",
-      "description": "Daftar layanan digital marketing terpadu untuk mengembangkan bisnis online.",
+      "type": "text/html",
       "url": "https://netmediatop.com/services",
-      "mediaType": "text/html",
-      "representativeQueries": [
-        "jasa iklan google ads",
-        "jasa pembuatan website",
-        "jasa iklan facebook ads",
-        "jasa konten sosmed",
+      "description": "Daftar layanan digital marketing terpadu: SEO, Google Ads, Meta Ads, pembuatan website, konten sosmed, dan konten strategis.",
+      "tags": [
         "jasa seo",
-        "jasa penulis artikel"
+        "google ads",
+        "meta ads",
+        "pembuatan website"
+      ],
+      "capabilities": [
+        "SEO Optimization",
+        "Google Ads",
+        "Meta Ads",
+        "Web Development",
+        "Social Media Management"
+      ],
+      "version": "1.0",
+      "updatedAt": "2026-11-04T00:00:00Z",
+      "representativeQueries": [
+        "Apa saja layanan jasa iklan Google Ads yang tersedia untuk bisnis saya?",
+        "Saya butuh jasa pembuatan website dan jasa iklan Facebook Ads",
+        "Saya mau jasa SEO dan jasa konten sosmed untuk meningkatkan penjualan"
       ]
     },
     {
-      "identifier": "netmediatop-blog",
+      "identifier": "urn:air:netmediatop.com:website:blog",
       "displayName": "NetMediaTop Blog",
-      "description": "Artikel, tips, dan panduan digital marketing, SEO, Google Ads, dan pembuatan website untuk mengembangkan bisnis online.",
+      "type": "text/html",
       "url": "https://netmediatop.com/blog",
-      "mediaType": "text/html",
-      "representativeQueries": [
+      "description": "Artikel, tips, dan panduan digital marketing, SEO, Google Ads, dan pembuatan website untuk mengembangkan bisnis online.",
+      "tags": [
+        "blog",
         "tips digital marketing",
-        "cara meningkatkan penjualan online",
-        "belajar seo untuk pemula",
-        "strategi konten sosmed",
-        "cara membuat website bisnis"
+        "belajar seo"
+      ],
+      "capabilities": [
+        "Digital Marketing Tips",
+        "SEO Guide",
+        "Content Strategy"
+      ],
+      "version": "1.0",
+      "updatedAt": "2026-11-04T00:00:00Z",
+      "representativeQueries": [
+        "Bagaimana cara meningkatkan penjualan online dengan digital marketing?",
+        "Saya mau belajar SEO untuk pemula dari artikel yang mudah dipahami",
+        "Apa strategi konten sosmed yang efektif untuk bisnis kecil?"
       ]
     },
     {
-      "identifier": "netmediatop-studi-kasus",
+      "identifier": "urn:air:netmediatop.com:website:studi-kasus",
       "displayName": "NetMediaTop Studi Kasus",
-      "description": "Studi kasus dan hasil nyata layanan digital marketing NetMediaTop untuk klien bisnis.",
+      "type": "text/html",
       "url": "https://netmediatop.com/studi-kasus",
-      "mediaType": "text/html",
+      "description": "Studi kasus dan hasil nyata layanan digital marketing NetMediaTop untuk klien bisnis.",
+      "tags": [
+        "studi kasus",
+        "portofolio",
+        "hasil seo",
+        "hasil google ads"
+      ],
+      "capabilities": [
+        "Case Study",
+        "SEO Results",
+        "Google Ads Results"
+      ],
+      "version": "1.0",
+      "updatedAt": "2026-11-04T00:00:00Z",
       "representativeQueries": [
-        "studi kasus digital marketing",
-        "contoh hasil seo",
-        "portofolio jasa website",
-        "hasil google ads",
-        "contoh studi kasus bisnis online"
+        "Tunjukkan contoh studi kasus digital marketing yang berhasil meningkatkan penjualan",
+        "Bagaimana contoh hasil SEO dan Google Ads untuk bisnis online?",
+        "Saya mau lihat portofolio jasa pembuatan website yang sudah dikerjakan"
       ]
     }
   ]
