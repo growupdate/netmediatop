@@ -8,6 +8,14 @@ interface Item {
   iconClass?: string;
 }
 
+interface Action {
+  text: string;
+  href: string;
+  variant?: string;
+  icon?: string;
+  ariaLabel?: string;
+}
+
 interface Props {
   title?: string;
   subtitle?: string;
@@ -15,6 +23,7 @@ interface Props {
   content?: string;
   description?: string | string[];
   items?: Item[];
+  actions?: Action[];
   image?: ImageMetadata | string;
   imageAlt?: string;
   isReversed?: boolean;
@@ -27,6 +36,7 @@ const {
   content,
   description,
   items = [],
+  actions = [],
   image,
   imageAlt = "Content Image",
   isReversed = false,
@@ -66,7 +76,6 @@ const {
         </p>
       )}
 
-      {/* Render description jika berupa string atau array string */}
       {typeof description === 'string' && (
         <p class="text-muted-foreground text-base">{description}</p>
       )}
@@ -77,6 +86,24 @@ const {
       <slot />
 
       {content && <p class="text-muted-foreground text-base">{content}</p>}
+
+      {/* Render Actions jika ada */}
+      {actions.length > 0 && (
+        <div class="flex flex-wrap gap-4 pt-2">
+          {actions.map((action) => (
+            <a
+              href={action.href}
+              class={`inline-flex items-center justify-center px-5 py-3 rounded-lg font-medium transition-colors ${
+                action.variant === 'secondary'
+                  ? 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                  : 'bg-primary text-primary-foreground hover:bg-primary/90'
+              }`}
+            >
+              {action.text}
+            </a>
+          ))}
+        </div>
+      )}
 
       {items.length > 0 && (
         <div class="space-y-4 pt-2">
