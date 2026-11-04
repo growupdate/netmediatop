@@ -3,9 +3,10 @@ import { siteConfig } from "@/config/site";
 
 const currentYear = new Date().getFullYear();
 
-// ID Channel YouTube Neil Patel (Resmi)
-const YOUTUBE_CHANNEL_ID = "UCuAXFkgsw1L7xaCfnd5JJOw"; 
+// ID Channel YouTube Baru
+const YOUTUBE_CHANNEL_ID = "UCl-Zrl0QhF66lu1aGXaTbfw"; 
 const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
+const YOUTUBE_CHANNEL_URL = `https://youtube.com/channel/${YOUTUBE_CHANNEL_ID}`;
 
 interface VideoItem {
   id: string;
@@ -15,7 +16,7 @@ interface VideoItem {
 
 // Helper function untuk memotong deskripsi menjadi 10-15 kata
 function truncateWords(text: string, count: number = 14): string {
-  if (!text) return "Saksikan panduan SEO dan digital marketing terbukti langsung dari Neil Patel.";
+  if (!text) return "Saksikan video terbaru dari channel YouTube kami.";
   const cleanText = text
     .replace(/<[^>]*>/g, '')
     .replace(/["']/g, '')
@@ -26,7 +27,7 @@ function truncateWords(text: string, count: number = 14): string {
   return words.slice(0, count).join(' ') + '...';
 }
 
-// Data Cadangan Murni Neil Patel (Tanpa ID Rickroll/Sisa Draf)
+// Data Cadangan (Fallback) jika RSS belum terisi atau saat offline
 let latestVideos: VideoItem[] = [
   { 
     id: "A2G1nKk5_R0", 
@@ -50,7 +51,7 @@ let latestVideos: VideoItem[] = [
   },
 ];
 
-// Pengambilan Data Otomatis via RSS Feed YouTube
+// Fetch RSS Feed Resmi Channel YouTube
 try {
   const res = await fetch(RSS_URL);
   if (res.ok) {
@@ -69,7 +70,7 @@ try {
           parsed.push({
             id: idMatch[1].trim(),
             title: titleMatch[1].trim(),
-            excerpt: descMatch ? truncateWords(descMatch[1], 14) : "Saksikan panduan SEO dan digital marketing terbukti langsung dari Neil Patel.",
+            excerpt: descMatch ? truncateWords(descMatch[1], 14) : "Saksikan video terbaru dari channel YouTube kami.",
           });
         }
       }
@@ -79,7 +80,7 @@ try {
     }
   }
 } catch (e) {
-  console.error("Gagal mengambil RSS feed YouTube, beralih ke daftar video Neil Patel:", e);
+  console.error("Gagal mengambil RSS feed YouTube, menggunakan daftar video cadangan:", e);
 }
 
 // Schema.org JSON-LD
@@ -106,7 +107,7 @@ const schemaData = {
   "sameAs": [
     "https://facebook.com/netmediatop",
     "https://instagram.com/netmediatop",
-    "https://youtube.com/neilpatel",
+    YOUTUBE_CHANNEL_URL,
     "https://x.com/netmediatop",
     "https://linkedin.com/company/netmediatop"
   ]
@@ -125,8 +126,8 @@ const socialLinks = [
   },
   {
     name: "YouTube",
-    href: "https://youtube.com/neilpatel",
-    iconPath: "M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 001.94-2 29 29 0 004.6-5.25 29 29 0 00-.46-5.33z M9.75 15.02V8.48l5.75 3.27-5.75 3.27z",
+    href: YOUTUBE_CHANNEL_URL,
+    iconPath: "M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z M9.75 15.02V8.48l5.75 3.27-5.75 3.27z",
   },
   {
     name: "X (Twitter)",
@@ -260,7 +261,7 @@ const socialLinks = [
         </ul>
       </div>
 
-      <!-- Kolom 4: YouTube Carousel Slider Neil Patel -->
+      <!-- Kolom 4: YouTube Carousel Slider -->
       <div class="space-y-3">
         <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-400 flex items-center gap-1.5">
           <svg class="w-4 h-4 fill-red-600 shrink-0" viewBox="0 0 24 24">
@@ -269,7 +270,7 @@ const socialLinks = [
           Video Terbaru
         </h4>
 
-        <!-- Slider Viewport dengan Tombol Panah Kiri-Kanan di Luar Frame -->
+        <!-- Slider Viewport -->
         <div class="flex items-center gap-1.5 w-full">
           <!-- Panah Kiri -->
           <button
@@ -288,7 +289,7 @@ const socialLinks = [
             <div id="yt-carousel-track" class="flex transition-transform duration-300 ease-in-out">
               {latestVideos.map((video) => (
                 <div class="w-full shrink-0" data-title={video.title} data-excerpt={video.excerpt}>
-                  <!-- Thumbnail Facade Neil Patel -->
+                  <!-- Facade Card dengan Ikon Panah Merah Murni -->
                   <div class="yt-facade-card relative w-full aspect-video rounded-lg overflow-hidden border border-slate-300 dark:border-slate-800 bg-black cursor-pointer group/facade" data-video-id={video.id}>
                     <img
                       src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
@@ -296,7 +297,6 @@ const socialLinks = [
                       loading="lazy"
                       class="w-full h-full object-cover transition-transform duration-300 group-hover/facade:scale-105"
                     />
-                    <!-- Overlay Ikon Play Panah Merah Murni -->
                     <div class="absolute inset-0 bg-black/15 group-hover/facade:bg-black/5 transition-colors flex items-center justify-center">
                       <svg class="w-10 h-10 fill-red-600 group-hover/facade:scale-110 transition-transform drop-shadow-md" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
@@ -321,7 +321,7 @@ const socialLinks = [
           </button>
         </div>
 
-        <!-- Judul Video Active, Excerpt Deskripsi & Counter -->
+        <!-- Judul Video Active, Excerpt & Counter -->
         <div class="space-y-1 px-0.5">
           <div class="flex items-start justify-between gap-2">
             <p id="yt-video-title" class="text-[11px] font-bold leading-snug text-slate-900 dark:text-white line-clamp-1">
@@ -339,7 +339,7 @@ const socialLinks = [
         <!-- Tombol Subscribe Kapsul di Tengah -->
         <div class="flex justify-center pt-1">
           <a
-            href="https://youtube.com/neilpatel?sub_confirmation=1"
+            href={`${YOUTUBE_CHANNEL_URL}?sub_confirmation=1`}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-[11px] shadow-xs hover:shadow-md transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
@@ -445,7 +445,6 @@ const socialLinks = [
       updateSlide();
     });
 
-    // Fitur Play Bersih (controls=0) Tanpa Garis Player Bertumpuk di Tengah
     const facadeCards = document.querySelectorAll('.yt-facade-card');
     facadeCards.forEach((card) => {
       card.addEventListener('click', () => {
@@ -453,7 +452,7 @@ const socialLinks = [
         if (videoId) {
           card.innerHTML = `
             <iframe
-              src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0"
+              src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=1&rel=0"
               title="YouTube Video Player"
               class="w-full h-full border-0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
