@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://netmediatop.com/sitemap-index.xml
