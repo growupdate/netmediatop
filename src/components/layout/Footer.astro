@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/site";
 
 const currentYear = new Date().getFullYear();
 
-// ID Channel YouTube Neil Patel
+// ID Channel YouTube Neil Patel (Resmi)
 const YOUTUBE_CHANNEL_ID = "UCuAXFkgsw1L7xaCfnd5JJOw"; 
 const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
 
@@ -26,7 +26,7 @@ function truncateWords(text: string, count: number = 14): string {
   return words.slice(0, count).join(' ') + '...';
 }
 
-// Data Video Resmi Neil Patel (Terjamin 100% Memuat Neil Patel)
+// Data Cadangan Murni Neil Patel (Tanpa ID Rickroll/Sisa Draf)
 let latestVideos: VideoItem[] = [
   { 
     id: "A2G1nKk5_R0", 
@@ -50,7 +50,7 @@ let latestVideos: VideoItem[] = [
   },
 ];
 
-// Pengambilan Data RSS Feed YouTube
+// Pengambilan Data Otomatis via RSS Feed YouTube
 try {
   const res = await fetch(RSS_URL);
   if (res.ok) {
@@ -79,7 +79,7 @@ try {
     }
   }
 } catch (e) {
-  console.error("Gagal mengambil RSS feed YouTube, menggunakan daftar video Neil Patel:", e);
+  console.error("Gagal mengambil RSS feed YouTube, beralih ke daftar video Neil Patel:", e);
 }
 
 // Schema.org JSON-LD
@@ -145,7 +145,7 @@ const socialLinks = [
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 
-  <!-- Strip Running Marquee -->
+  <!-- Running Marquee Banner -->
   <div class="border-b border-slate-200 dark:border-slate-800/80 py-3.5 overflow-hidden bg-slate-200/60 dark:bg-slate-900/60">
     <div class="relative w-full overflow-hidden group">
       <div class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-slate-100 dark:from-[#0B132B] to-transparent z-10 pointer-events-none"></div>
@@ -178,7 +178,7 @@ const socialLinks = [
     </div>
   </div>
 
-  <!-- Main Footer (4 Kolom Utama) -->
+  <!-- Main Footer Grid (4 Kolom Utama) -->
   <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
       
@@ -269,7 +269,7 @@ const socialLinks = [
           Video Terbaru
         </h4>
 
-        <!-- Area Video Slider dengan Panah di Samping Luar Frame -->
+        <!-- Slider Viewport dengan Tombol Panah Kiri-Kanan di Luar Frame -->
         <div class="flex items-center gap-1.5 w-full">
           <!-- Panah Kiri -->
           <button
@@ -283,7 +283,7 @@ const socialLinks = [
             </svg>
           </button>
 
-          <!-- Frame Video Slider Viewport -->
+          <!-- Frame Slider Track -->
           <div class="relative w-full overflow-hidden rounded-lg">
             <div id="yt-carousel-track" class="flex transition-transform duration-300 ease-in-out">
               {latestVideos.map((video) => (
@@ -296,7 +296,8 @@ const socialLinks = [
                       loading="lazy"
                       class="w-full h-full object-cover transition-transform duration-300 group-hover/facade:scale-105"
                     />
-                    <div class="absolute inset-0 bg-black/20 group-hover/facade:bg-black/10 transition-colors flex items-center justify-center">
+                    <!-- Overlay Ikon Play Panah Merah Murni -->
+                    <div class="absolute inset-0 bg-black/15 group-hover/facade:bg-black/5 transition-colors flex items-center justify-center">
                       <svg class="w-10 h-10 fill-red-600 group-hover/facade:scale-110 transition-transform drop-shadow-md" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                       </svg>
@@ -320,7 +321,7 @@ const socialLinks = [
           </button>
         </div>
 
-        <!-- Judul Video Active, Excerpt Deskripsi (10-15 Kata) & Counter -->
+        <!-- Judul Video Active, Excerpt Deskripsi & Counter -->
         <div class="space-y-1 px-0.5">
           <div class="flex items-start justify-between gap-2">
             <p id="yt-video-title" class="text-[11px] font-bold leading-snug text-slate-900 dark:text-white line-clamp-1">
@@ -330,13 +331,12 @@ const socialLinks = [
               1/{latestVideos.length}
             </span>
           </div>
-          <!-- Excerpt Deskripsi Video -->
           <p id="yt-video-excerpt" class="text-[10px] leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-2 min-h-[28px]">
             {latestVideos[0].excerpt}
           </p>
         </div>
 
-        <!-- Tombol Subscribe Kapsul di Tengah (Center Alignment) -->
+        <!-- Tombol Subscribe Kapsul di Tengah -->
         <div class="flex justify-center pt-1">
           <a
             href="https://youtube.com/neilpatel?sub_confirmation=1"
@@ -445,7 +445,7 @@ const socialLinks = [
       updateSlide();
     });
 
-    // Event Listener Klik Play (Memuat iframe secara instan saat thumbnail diklik)
+    // Fitur Play Bersih (controls=0) Tanpa Garis Player Bertumpuk di Tengah
     const facadeCards = document.querySelectorAll('.yt-facade-card');
     facadeCards.forEach((card) => {
       card.addEventListener('click', () => {
@@ -453,7 +453,7 @@ const socialLinks = [
         if (videoId) {
           card.innerHTML = `
             <iframe
-              src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1"
+              src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0"
               title="YouTube Video Player"
               class="w-full h-full border-0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
