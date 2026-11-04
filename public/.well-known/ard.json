@@ -1,111 +1,31 @@
 {
   "specVersion": "1.0",
   "host": {
-    "displayName": "NetMediaTop",
-    "identifier": "did:web:netmediatop.com",
-    "documentationUrl": "https://netmediatop.com/"
+    "displayName": "NetMediaTop Digital Marketing"
   },
   "entries": [
     {
-      "identifier": "urn:air:netmediatop.com:website:homepage",
+      "identifier": "urn:air:netmediatop.com:site:homepage",
       "displayName": "NetMediaTop Homepage",
       "type": "text/html",
       "url": "https://netmediatop.com/",
-      "description": "Layanan pemasaran digital, SEO, Google Ads, dan pembuatan website profesional untuk mengembangkan bisnis online.",
-      "tags": [
-        "digital marketing",
-        "seo",
-        "google ads",
-        "website"
-      ],
-      "capabilities": [
-        "SEO",
-        "Google Ads",
-        "Web Development",
-        "Digital Marketing"
-      ],
-      "version": "1.0",
-      "updatedAt": "2026-11-04T00:00:00Z",
+      "description": "Layanan pemasaran digital, SEO, Google Ads, dan pembuatan website profesional.",
       "representativeQueries": [
-        "Saya butuh jasa SEO profesional untuk membuat bisnis saya muncul di Google",
-        "Saya mau buat website bisnis yang cepat dan bisa menghasilkan penjualan",
-        "Carikan digital marketing agency di Indonesia untuk mengembangkan bisnis online saya"
+        "jasa seo profesional",
+        "jasa pembuatan website bisnis",
+        "digital marketing agency indonesia"
       ]
     },
     {
-      "identifier": "urn:air:netmediatop.com:website:services",
+      "identifier": "urn:air:netmediatop.com:site:services",
       "displayName": "NetMediaTop Services",
       "type": "text/html",
       "url": "https://netmediatop.com/services",
-      "description": "Daftar layanan digital marketing terpadu: SEO, Google Ads, Meta Ads, pembuatan website, konten sosmed, dan konten strategis.",
-      "tags": [
-        "jasa seo",
-        "google ads",
-        "meta ads",
-        "pembuatan website"
-      ],
-      "capabilities": [
-        "SEO Optimization",
-        "Google Ads",
-        "Meta Ads",
-        "Web Development",
-        "Social Media Management"
-      ],
-      "version": "1.0",
-      "updatedAt": "2026-11-04T00:00:00Z",
+      "description": "Daftar layanan digital marketing terpadu untuk mengembangkan bisnis online.",
       "representativeQueries": [
-        "Apa saja layanan jasa iklan Google Ads yang tersedia untuk bisnis saya?",
-        "Saya butuh jasa pembuatan website dan jasa iklan Facebook Ads",
-        "Saya mau jasa SEO dan jasa konten sosmed untuk meningkatkan penjualan"
-      ]
-    },
-    {
-      "identifier": "urn:air:netmediatop.com:website:blog",
-      "displayName": "NetMediaTop Blog",
-      "type": "text/html",
-      "url": "https://netmediatop.com/blog",
-      "description": "Artikel, tips, dan panduan digital marketing, SEO, Google Ads, dan pembuatan website untuk mengembangkan bisnis online.",
-      "tags": [
-        "blog",
-        "tips digital marketing",
-        "belajar seo"
-      ],
-      "capabilities": [
-        "Digital Marketing Tips",
-        "SEO Guide",
-        "Content Strategy"
-      ],
-      "version": "1.0",
-      "updatedAt": "2026-11-04T00:00:00Z",
-      "representativeQueries": [
-        "Bagaimana cara meningkatkan penjualan online dengan digital marketing?",
-        "Saya mau belajar SEO untuk pemula dari artikel yang mudah dipahami",
-        "Apa strategi konten sosmed yang efektif untuk bisnis kecil?"
-      ]
-    },
-    {
-      "identifier": "urn:air:netmediatop.com:website:studi-kasus",
-      "displayName": "NetMediaTop Studi Kasus",
-      "type": "text/html",
-      "url": "https://netmediatop.com/studi-kasus",
-      "description": "Studi kasus dan hasil nyata layanan digital marketing NetMediaTop untuk klien bisnis.",
-      "tags": [
-        "studi kasus",
-        "portofolio",
-        "hasil seo",
-        "hasil google ads"
-      ],
-      "capabilities": [
-        "Case Study",
-        "SEO Results",
-        "Google Ads Results"
-      ],
-      "version": "1.0",
-      "updatedAt": "2026-11-04T00:00:00Z",
-      "representativeQueries": [
-        "Tunjukkan contoh studi kasus digital marketing yang berhasil meningkatkan penjualan",
-        "Bagaimana contoh hasil SEO dan Google Ads untuk bisnis online?",
-        "Saya mau lihat portofolio jasa pembuatan website yang sudah dikerjakan"
+        "layanan jasa iklan google ads",
+        "jasa optimasi website dan seo",
+        "jasa iklan facebook ads"
       ]
     }
   ]
