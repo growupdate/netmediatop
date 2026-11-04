@@ -39,6 +39,10 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
 <!doctype html>
 <html lang={siteConfig.lang || "id"} class="scroll-smooth">
   <head>
+    <!-- AI Agentic Discovery -->
+    <link rel="llms-txt" type="text/markdown" href="/llms.txt" />
+    <link rel="ard" type="application/json" href="/.well-known/ard.json" />
+  </head>
     <Seo
       title={finalTitle}
       description={finalDescription}
