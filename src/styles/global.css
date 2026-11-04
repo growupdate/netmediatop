@@ -19,7 +19,8 @@
   --primary: #0254d8;
   --border: #e5e7eb;
   --muted: #f4f4f5;
-  --muted-foreground: #2f2f30;
+  /* DIBUAT HITAM PEKAT SOLID DI LIGHT MODE */
+  --muted-foreground: #0a0a0a;
   --card: #ffffff;
 }
 
@@ -29,7 +30,7 @@
   --primary: #8bbcff;
   --border: #262626;
   --muted: #171717;
-  --muted-foreground: #a1a1aa;
+  --muted-foreground: #e5e7eb;
   --card: #0a0a0a;
 }
 
@@ -65,29 +66,12 @@
 :root[data-astro-transition] .reveal {
   transition: none !important;
 }
-/* Base styles using variables */
-@layer base {
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-  }
 
-  /* --- PERUBAHAN DI SINI (Memaksa semua teks deskripsi dan muted agar tebal & jelas) --- */
-  p,
-  span,
-  div,
-  .text-muted-foreground,
-  .prose p,
-  [class*="text-muted"] {
-    font-size: 14px;
-    font-weight: 500 !important;
-    color: var(--foreground) !important;
-    opacity: 0.95 !important;
-  }
-  /* -------------------------------------------------------------------------------- */
-
-  :focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
-  }
+/* OVERRIDE GLOBAL DI LUAR LAYER BASE UNTUK MEMAKSA SELURUH TEKS ABU-ABU MENJADI HITAM PEKAT DI LIGHT MODE */
+:root:not([data-theme="dark"]) .text-muted-foreground,
+:root:not([data-theme="dark"]) [class*="text-slate-"],
+:root:not([data-theme="dark"]) [class*="text-gray-"],
+:root:not([data-theme="dark"]) [class*="text-zinc-"] {
+  color: #0a0a0a !important;
+  opacity: 1 !important;
 }

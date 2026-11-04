@@ -9,10 +9,12 @@ interface Props {
     | "FAQ"
     | "Person"
     | "Organization";
-  data: {
+  data?: {
     title?: string;
+    name?: string;
     description?: string;
     image?: string;
+    logo?: string;
     pubDate?: Date;
     modDate?: Date;
     author?: string;
@@ -23,43 +25,54 @@ interface Props {
     tags?: string[];
     breadcrumbs?: { name: string; url: string }[];
     faqs?: { question: string; answer: string }[];
+    foundingDate?: string;
+    founder?: Record<string, unknown> | string;
+    address?: Record<string, unknown> | string;
+    contactPoint?: Record<string, unknown>;
+    telephone?: string;
+    sameAs?: string[];
+    areaServed?: string;
+    knowsAbout?: string[];
+    [key: string]: unknown;
   };
 }
 
-const { type, data } = Astro.props;
+const { type, data = {} } = Astro.props;
 
 let schema: Record<string, unknown> = {};
 
+const baseUrl = siteConfig.url || "https://netmediatop.com";
+
 const authorSchema = {
   "@type": "Person",
-  name: siteConfig.author,
-  url: siteConfig.url + "/about",
-  jobTitle: siteConfig.authorTitle,
-  description: siteConfig.authorBio,
-  knowsAbout: siteConfig.authorExpertise,
+  name: siteConfig.author || "Tri Pudjo",
+  url: baseUrl + "/about",
+  jobTitle: siteConfig.authorTitle || "Founder Netmediatop",
+  description: siteConfig.authorBio || siteConfig.description,
+  knowsAbout: siteConfig.authorExpertise || ["SEO", "Web Development", "Google Ads"],
   sameAs: [
-    siteConfig.socialLinks.twitter,
-    siteConfig.socialLinks.github,
-    siteConfig.socialLinks.linkedin,
-    siteConfig.socialLinks.youtube,
-  ],
+    siteConfig.socialLinks?.twitter,
+    siteConfig.socialLinks?.github,
+    siteConfig.socialLinks?.linkedin,
+    siteConfig.socialLinks?.youtube,
+  ].filter(Boolean),
 };
 
 if (type === "WebSite") {
   schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    description: siteConfig.description,
+    name: data.name || siteConfig.name,
+    url: data.url || baseUrl,
+    description: data.description || siteConfig.description,
     author: authorSchema,
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
-      url: siteConfig.url,
+      url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: new URL("/favicon.svg", siteConfig.url).toString(),
+        url: new URL(data.logo || "/favicon.svg", baseUrl).toString(),
       },
     },
   };
@@ -70,8 +83,8 @@ if (type === "WebSite") {
     headline: data.title,
     description: data.description,
     image: data.image
-      ? new URL(data.image, siteConfig.url).toString()
-      : new URL("/og-image.png", siteConfig.url).toString(),
+      ? new URL(data.image, baseUrl).toString()
+      : new URL("/og-image.png", baseUrl).toString(),
     datePublished: data.pubDate,
     dateModified: data.modDate || data.pubDate,
     author: {
@@ -81,15 +94,15 @@ if (type === "WebSite") {
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
-      url: siteConfig.url,
+      url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: new URL("/favicon.svg", siteConfig.url).toString(),
+        url: new URL("/favicon.svg", baseUrl).toString(),
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": data.url,
+      "@id": data.url || baseUrl,
     },
     wordCount: data.wordCount,
     timeRequired: data.readingTime ? `PT${data.readingTime}M` : undefined,
@@ -105,7 +118,7 @@ if (type === "WebSite") {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: new URL(item.url, siteConfig.url).toString(),
+      item: new URL(item.url, baseUrl).toString(),
     })),
   };
 } else if (type === "FAQ") {
@@ -125,27 +138,37 @@ if (type === "WebSite") {
   schema = {
     "@context": "https://schema.org",
     ...authorSchema,
+    ...(data.name ? { name: data.name } : {}),
   };
 } else if (type === "Organization") {
   schema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    description: siteConfig.description,
-    image: new URL("/og-image.png", siteConfig.url).toString(),
-    founder: authorSchema,
-    areaServed: "Indonesia",
-    knowsAbout: siteConfig.authorExpertise,
-    sameAs: [
-      siteConfig.socialLinks.facebook,
-      siteConfig.socialLinks.instagram,
-      siteConfig.socialLinks.youtube,
-      siteConfig.socialLinks.twitter,
-      siteConfig.socialLinks.linkedin,
-    ],
+    name: data.name || siteConfig.name,
+    url: data.url || baseUrl,
+    description: data.description || siteConfig.description,
+    image: data.image
+      ? new URL(data.image, baseUrl).toString()
+      : new URL("/og-image.png", baseUrl).toString(),
+    logo: data.logo
+      ? new URL(data.logo, baseUrl).toString()
+      : new URL("/favicon.svg", baseUrl).toString(),
+    foundingDate: data.foundingDate || "2020-01-08",
+    founder: data.founder || authorSchema,
+    address: data.address,
+    contactPoint: data.contactPoint,
+    telephone: data.telephone,
+    areaServed: data.areaServed || "Indonesia",
+    knowsAbout: data.knowsAbout || siteConfig.authorExpertise,
+    sameAs: data.sameAs || [
+      siteConfig.socialLinks?.facebook,
+      siteConfig.socialLinks?.instagram,
+      siteConfig.socialLinks?.youtube,
+      siteConfig.socialLinks?.twitter,
+      siteConfig.socialLinks?.linkedin,
+    ].filter(Boolean),
   };
 }
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

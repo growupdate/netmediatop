@@ -37,7 +37,7 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
 ---
 
 <!doctype html>
-<html lang={siteConfig.lang} class="scroll-smooth">
+<html lang={siteConfig.lang || "id"} class="scroll-smooth">
   <head>
     <Seo
       title={finalTitle}
@@ -115,8 +115,6 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
       <Footer />
     </div>
     <script>
-      import { build } from "astro";
-
       // Keep a global reference to prevent duplicate observers during View Transitions
       let scrollObserver: IntersectionObserver | null = null;
 

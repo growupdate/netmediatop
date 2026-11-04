@@ -4,7 +4,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 ---
 
 <nav
-  class="fixed top-0 z-50 w-full border-b border-border bg-background md:bg-background/50 md:backdrop-blur"
+  class="fixed top-0 z-50 w-full border-b border-border bg-background md:bg-background/90 md:backdrop-blur"
 >
   <div
     class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
@@ -12,7 +12,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
     <div class="flex items-center gap-2">
       <a
         href="/"
-        class="text-xl font-bold tracking-tight text-foreground transition-colors hover:text-primary"
+        class="text-xl font-bold tracking-tight text-black dark:text-white transition-colors hover:text-primary"
       >
         {siteConfig.name}
       </a>
@@ -25,7 +25,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
           siteConfig.navLinks.map((link) => (
             <a
               href={link.href}
-              class="text-sm font-medium text-foreground transition-colors hover:text-primary"
+              class="text-sm font-bold text-black dark:text-white transition-colors hover:text-primary"
             >
               {link.text}
             </a>
@@ -43,11 +43,12 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
       <button
         id="mobile-menu-button"
         type="button"
-        class="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-white hover:bg-white/10 focus:outline-none transition-colors"
+        aria-label="Buka menu navigasi utama"
+        class="inline-flex items-center justify-center p-2 rounded-md text-black dark:text-white hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors"
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
-        <span class="sr-only">Open main menu</span>
+        <span class="sr-only">Buka menu navigasi utama</span>
         <!-- Icon when menu is closed -->
         <svg
           id="menu-icon-closed"
@@ -87,13 +88,13 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 
   <div class="hidden md:hidden" id="mobile-menu">
     <div
-      class="space-y-1 border-b border-border bg-background/90 px-2 pb-3 pt-2 sm:px-3"
+      class="space-y-1 border-b border-border bg-background px-2 pb-3 pt-2 sm:px-3"
     >
       {
         siteConfig.navLinks.map((link) => (
           <a
             href={link.href}
-            class="block rounded-md px-3 py-2 text-base font-medium text-foreground transition-colors hover:bg-white/10 hover:text-primary"
+            class="block rounded-md px-3 py-2 text-base font-bold text-black dark:text-white transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary"
           >
             {link.text}
           </a>

@@ -1,0 +1,204 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Content from "@/components/widgets/Content.astro";
+import { Image } from "astro:assets";
+import imgHero from "@/assets/images/services/hero-illustration.webp";
+import imgSiapaKami from "@/assets/images/services/hero-illustration.webp";
+import imgGaleri from "@/assets/images/services/hero-illustration.webp";
+
+const metadata = {
+  title: "Bisnis Sepi + Jalan di Tempat? Bangun Aset Website - Netmediatop",
+  description: "Website bukan sekadar online. Bangun aset digital yang bekerja 24 jam, datangkan trafik dari Google. Bisa dibangun bertahap. Konsultasi gratis.",
+};
+
+const waMessage = encodeURIComponent(
+  "Halo Netmediatop, saya ingin berkonsultasi mengenai pembuatan website aset bisnis untuk meningkatkan konversi bisnis saya."
+);
+const waLink = `https://wa.me/6282329188998?text=${waMessage}`;
+
+const waCekMessage = encodeURIComponent(
+  "Halo Netmediatop, saya sudah punya web tapi sepi, mau cek gratis kenapa tidak ada trafik."
+);
+const waCekLink = `https://wa.me/6282329188998?text=${waCekMessage}`;
+---
+
+<BaseLayout {metadata}>
+  <!-- SEKSI 1 HERO - mengikuti pola Content -->
+  <Content
+    tagline="Untuk Yang Serius Mau Bangun Bisnis"
+    title="Bisnis Sepi + Jalan di Tempat? Mau Bisnis Tumbuh Berkembang?"
+    description={[
+      "Ini untuk 2 orang. Yang pertama, belum punya web. Yang kedua, sudah punya web tapi sepi, tidak ada yang chat, tidak ada yang datang. Dua-duanya sama. Sama-sama tidak punya lapak yang kerja.",
+    ]}
+  />
+
+  <!-- Main Content Body -->
+  <section class="py-8 mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="prose prose-lg dark:prose-invert mx-auto">
+
+      <!-- CEK BISNIS INTERAKTIF -->
+      <div class="p-5 border border-border rounded-xl bg-card not-prose my-6">
+        <h2 class="text-2xl font-bold mb-2 text-foreground">Coba sekarang, lihat hasilnya. Coba ketik bisnis Anda di HP?</h2>
+        <p class="text-[14px] text-muted-foreground leading-relaxed mb-4">
+          Ambil HP Anda sekarang. Ketik seperti pelanggan mengetik. Misal, ketik toko kue di Semarang atau jasa service AC di Jogja sesuai bisnis Anda. Lihat hasilnya.
+        </p>
+        <form id="cek-bisnis" class="flex flex-col gap-2">
+          <input id="keyword" type="text" placeholder="Contoh: toko kue di Semarang" class="w-full px-4 py-3 text-[14px] border border-border rounded-lg bg-background text-foreground" />
+          <button type="submit" class="w-full px-4 py-3 text-[14px] font-bold rounded-full bg-black text-white">Cek di Google Sekarang</button>
+        </form>
+        <p class="text-[12px] text-muted-foreground mt-2">Yang muncul bisnis siapa? Kalau yang muncul bisnis orang lain, itu artinya pelanggan Anda diambil orang lain setiap hari, tanpa Anda sadar.</p>
+      </div>
+
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-4">
+        Orang cari apapun lewat HP, Anda pasti melakukannya. Cari makan, Cari jasa, Cari produk, Cari info, semua sudah lewat HP.
+      </p>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-8">
+        Bayangkan, Bisnis Anda tidak muncul ketika orang ketik cari bisnis serupa? Yang muncul bisnis lainnya. Anda tidak muncul karena tidak punya lapak, atau lapak Anda diam. Tahu akhirnya? Bisnis sepi, tidak ada omset dan bisnis mati perlahan. Betulkan?
+      </p>
+
+      <!-- GAMBAR HERO -->
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image src={imgHero} alt="Coba ketik bisnis Anda di HP, lihat hasilnya - netmediatop.com" class="w-full h-auto rounded-xl border border-border shadow-sm object-cover" />
+        <figcaption class="text-center text-[12px] text-muted-foreground mt-2 italic">
+          Coba ketik bisnis Anda di HP. Yang muncul siapa? - netmediatop.com
+        </figcaption>
+      </figure>
+
+      <h2 class="text-2xl font-bold mb-4 text-foreground">Saatnya bangun aset digital Anda, website sebagai aset digital yang siap bekerja 24 jam untuk Anda. Mau?</h2>
+      <div class="flex flex-col sm:flex-row gap-3 my-6 not-prose">
+        <a href={waLink} class="flex-1 text-center px-4 py-3 text-[14px] font-bold rounded-full bg-black text-white">Bangun Aset Website Saya</a>
+        <a href={waCekLink} class="flex-1 text-center px-4 py-3 text-[14px] font-bold rounded-full border border-border bg-card text-foreground">Saya Sudah Punya Web, Cek Gratis</a>
+      </div>
+      <p class="text-[14px] text-muted-foreground text-center">website = <b class="text-foreground">aset / nyawa bisnis</b> agar terus tumbuh berkembang.</p>
+
+      <!-- SEKSI 2 SIAPA KAMI -->
+      <h2 class="text-2xl font-bold mb-1 mt-12 text-foreground">SIAPA KAMI</h2>
+      <h2 class="text-2xl font-bold mb-4 text-foreground">Kami Bantu Anda Buat Aset Digital Berupa Website Bisnis yang Riil Bisa Membantu Tumbuh Kembang Bisnis. Bukan Tukang Coding. Kami Partner Bangun Aset Bisnis Anda.</h2>
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image src={imgSiapaKami} alt="Tim netmediatop.com diskusi strategi bisnis" class="w-full h-auto rounded-xl border border-border shadow-sm object-cover" />
+        <figcaption class="text-center text-[12px] text-muted-foreground mt-2 italic">Tim netmediatop.com - netmediatop.com</figcaption>
+      </figure>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-4">Dari pengalaman kami, website bukan proyek sekali jadi lalu ditinggal.</p>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-4">Website adalah satu dari sekian banyak kelengkapan aset bisnis Anda, sama pentingnya dengan aset lainnya, SDM, mobil operasional, gudang, stok, dan lainnya. Bedanya, SDM, mobil, gudang adalah aset fisik yang dianggap harus ada, website dianggap hanya pelengkap.</p>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-4">Ubah pola pikir Anda. Saat ini banyak orang punya web saja bisa jualan. Ada yang jadi affiliate. Affiliate itu gampangnya, orang jualan produk orang lain lewat web, dia dapat komisi. Modalnya cuma web. Omsetnya bisa jutaan, puluhan bahkan ratusan juta. Misal, affiliate banyak produk Shopee.</p>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-4">Modal yang sudah Anda keluarkan tentu sudah banyak untuk aset fisik. Selanjutnya Anda bisa rugi atau untung? Tentu ingin aset ini bisa cepat untung, cepat balik modal, dan terus tumbuh. Betulkan?</p>
+      <p class="text-[14px] text-foreground font-semibold">Website adalah 1 langkah aset yang membuat aset fisik Anda ikut bekerja lebih cepat.</p>
+
+      <!-- SEKSI 3 LAYANAN -->
+      <h2 class="text-2xl font-bold mb-1 mt-12 text-foreground">LAYANAN KAMI</h2>
+      <h2 class="text-2xl font-bold mb-6 text-foreground">Tidak Harus Sekaligus. Bisa Dibangun Bertahap, Tapi Fondasinya Harus Benar.</h2>
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-orange-100 text-orange-800 mb-1.5">1. Fondasi Aset Website</span>
+          <h3 class="text-base font-semibold text-foreground mb-1">Fondasi Yang Dipakai Selamanya</h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">Bangun dari awal dengan struktur benar. Cepat, aman, mudah dibaca Google, copywriting menjual.</p>
+        </div>
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-blue-100 text-blue-800 mb-1.5">2. Mesin Trafik, Konten Killer Bertahap</span>
+          <h3 class="text-base font-semibold text-foreground mb-1">Konten Adalah Bahan Bakarnya</h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">Konten killer itu tulisan atau halaman yang menjawab pertanyaan pelanggan, misal berapa harga, di mana lokasi. Karena menjawab pertanyaan itu, Google menampilkan web Anda.</p>
+        </div>
+        <div class="p-4 border border-border rounded-xl bg-card">
+          <span class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-green-100 text-green-800 mb-1.5">3. Sistem Penjualan Otomatis, AI dan Chatbot</span>
+          <h3 class="text-base font-semibold text-foreground mb-1">Penjaga Toko Otomatis 24 Jam</h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">Chatbot itu penjaga toko otomatis. Dia menjawab chat pelanggan saat Anda tidur, mengarahkan ke WhatsApp, dan mengumpulkan nomor pelanggan.</p>
+        </div>
+      </div>
+
+      <!-- SEKSI 4 QUOTE 1 -->
+      <div class="my-10 p-6 border-l-4 border-primary bg-muted/30 rounded-r-xl">
+        <h3 class="text-xl font-bold mb-3 text-foreground">Website murah itu seperti brosur hitam putih. Ada nama, ada alamat, ada profil usaha. Sudah. Lalu disimpan.</h3>
+        <p class="text-[14px] text-muted-foreground">Website aset itu seperti mesin. Ada bahan bakarnya, ada jalannya, ada tujuannya. Dan setiap hari ia bekerja mendatangkan konsumen.</p>
+      </div>
+
+      <!-- SEKSI 5 FITUR -->
+      <h2 class="text-2xl font-bold mb-1 text-foreground">FITUR</h2>
+      <h2 class="text-2xl font-bold mb-6 text-foreground">Kenapa Ada Website Murah dan Ada Website yang Mahal? Ini Bedanya.</h2>
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold text-foreground mb-1">1. Kecepatan - Anti-Lemot, Anti-Mental</h3><p class="text-[14px] text-muted-foreground">Website lambat 3 detik saja sudah ditinggal. Kami bangun website yang ringan dan cepat, pakai Astro Static Site Generator.</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold text-foreground mb-1">2. SEO yang Benar</h3><p class="text-[14px] text-muted-foreground">SEO itu cara supaya web Anda muncul di Google saat orang cari bisnis seperti Anda. Bukan sekadar online, tapi mudah ditemukan.</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold text-foreground mb-1">3. Copywriting yang Menjual</h3><p class="text-[14px] text-muted-foreground">Copywriting itu cara menulisnya. Kami tulis setiap kalimat untuk membuat mereka menghubungi Anda.</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold text-foreground mb-1">4. Konten Killer</h3><p class="text-[14px] text-muted-foreground">Website tanpa konten baru ibarat mobil tanpa bensin. Kami siapkan rencana konten bertahap.</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold text-foreground mb-1">5. AI dan Chatbot</h3><p class="text-[14px] text-muted-foreground">Chatbot menjawab pertanyaan umum, AI mengarahkan ke penawaran tepat, 24 jam.</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold text-foreground mb-1">6. Tampilan 100% Responsif HP</h3><p class="text-[14px] text-muted-foreground">Karena 80% calon pembeli pakai smartphone, kami rancang UI/UX yang proporsional, rapi, dan mudah diklik jempol.</p></div>
+        <div class="p-5 border border-border rounded-xl bg-card border-l-4 border-l-green-600">
+          <span class="inline-block px-2.5 py-0.5 text-[11px] font-bold uppercase rounded-full bg-green-100 text-green-800 mb-2">Alur Konversi Menuju WhatsApp</span>
+          <h3 class="text-lg font-semibold text-foreground mb-2">Satu Klik Menuju Transaksi</h3>
+          <p class="text-[14px] text-muted-foreground leading-relaxed">Penempatan tombol CTA WhatsApp yang strategis, persisten (floating button), dan copywriting penawaran yang mendesak pengunjung agar segera berkonsultasi langsung ke nomor Anda.</p>
+        </div>
+      </div>
+
+      <!-- SEKSI 6 GALERI -->
+      <h2 class="text-2xl font-bold mb-1 text-foreground">GALERI</h2>
+      <h2 class="text-2xl font-bold mb-6 text-foreground">Website yang Sudah Jadi Aset, Bukan Sekadar Online.</h2>
+      <figure class="my-8 max-w-md mx-auto not-prose">
+        <Image src={imgGaleri} alt="Galeri website yang sudah jadi aset - netmediatop.com" class="w-full h-auto rounded-xl border border-border shadow-sm object-cover" />
+        <figcaption class="text-center text-[12px] text-muted-foreground mt-2 italic">Website yang sudah jadi aset - netmediatop.com</figcaption>
+      </figure>
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold">Toko Furniture</h3><p class="text-[14px] text-muted-foreground">Dari sekadar katalog, menjadi mesin order. Diisi konten killer, trafik naik, chat masuk tiap hari.</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold">Klinik Kecantikan</h3><p class="text-[14px] text-muted-foreground">Fondasi dibangun ulang. Ditambah AI chatbot untuk jawab jadwal dan harga. Sekarang tidak ada lagi chat yang tidak terbalas.</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><h3 class="text-base font-semibold">Toko Kue dan Oleh-oleh</h3><p class="text-[14px] text-muted-foreground">Dulu cuma jualan lewat WA. Sekarang orang cari di Google, ketemu webnya, langsung chat dan order.</p></div>
+      </div>
+
+      <!-- SEKSI 7 TESTIMONI -->
+      <h2 class="text-2xl font-bold mb-1 text-foreground">TESTIMONI</h2>
+      <h2 class="text-2xl font-bold mb-6 text-foreground">Mereka Juga Pernah Seperti Anda.</h2>
+      <div class="space-y-4 my-8 not-prose">
+        <div class="p-4 border border-border rounded-xl bg-card"><p class="text-[14px] text-muted-foreground">Dulu saya sudah punya website. Setahun tidak ada yang hubungi. Setelah dibangun ulang dan diisi konten bertahap, sekarang tiap minggu ada leads masuk dari Google.</p><p class="text-[13px] font-bold text-foreground mt-2">Pemilik Toko Furniture, Semarang - Dulu Sudah Punya Web Murah</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><p class="text-[14px] text-muted-foreground">Saya pikir website mahal itu buang uang. Ternyata yang buang uang itu website murah yang tidak menghasilkan. Sekarang website saya seperti karyawan baru yang kerja terus, bahkan saat toko tutup.</p><p class="text-[13px] font-bold text-foreground mt-2">Pemilik Klinik Kecantikan, Yogyakarta - Dulu Belum Punya Web</p></div>
+        <div class="p-4 border border-border rounded-xl bg-card"><p class="text-[14px] text-muted-foreground">Saya gaptek. Saya pikir website itu ribet. Ternyata setelah dijelaskan bertahap, saya paham. Sekarang pelanggan baru datang dari Google, bukan cuma dari tetangga.</p><p class="text-[13px] font-bold text-foreground mt-2">Pemilik Toko Kue, Solo - Dulu Hanya Jualan Lewat WA</p></div>
+      </div>
+
+      <!-- SEKSI 8 QUOTE 2 -->
+      <div class="my-10 p-6 border-l-4 border-primary bg-muted/30 rounded-r-xl">
+        <h3 class="text-xl font-bold mb-3 text-foreground">Kalau Anda memperlakukan website sebagai biaya, Anda akan selalu cari yang paling murah.</h3>
+        <p class="text-[14px] text-muted-foreground">Kalau Anda memperlakukan website sebagai aset, Anda akan membangunnya dengan benar dari awal, karena aset ini akan dipakai selamanya untuk membuat bisnis Anda semakin maju.</p>
+      </div>
+
+      <!-- SEKSI 9 FAQ -->
+      <h2 class="text-2xl font-bold mb-6 text-foreground">Pertanyaan yang Sering Ditanyakan</h2>
+      <div class="space-y-3 my-8 not-prose">
+        <details class="p-4 border border-border rounded-xl bg-card"><summary class="font-bold text-[14px] cursor-pointer">1. Kenapa website Anda lebih mahal dari website murah?</summary><p class="text-[14px] text-muted-foreground mt-2">Karena yang kami bangun bukan sekadar online. Website murah hanya berisi nama, alamat, profil. Kami membangun kecepatan, SEO, copywriting, dan rencana konten.</p></details>
+        <details class="p-4 border border-border rounded-xl bg-card"><summary class="font-bold text-[14px] cursor-pointer">2. Saya sudah punya website murah, apakah harus dibuang?</summary><p class="text-[14px] text-muted-foreground mt-2">Tidak selalu. Kami periksa dulu. Kalau fondasinya masih bisa diperbaiki, kami perbaiki. Makanya kami kasih Cek Gratis dulu.</p></details>
+        <details class="p-4 border border-border rounded-xl bg-card"><summary class="font-bold text-[14px] cursor-pointer">3. Budget terbatas, apakah bisa dibangun bertahap?</summary><p class="text-[14px] text-muted-foreground mt-2">Bisa. Fondasi dibangun dulu dengan benar. Setelah itu konten killer diisi bertahap sesuai prioritas.</p></details>
+        <details class="p-4 border border-border rounded-xl bg-card"><summary class="font-bold text-[14px] cursor-pointer">4. Berapa lama sampai ada trafik?</summary><p class="text-[14px] text-muted-foreground mt-2">Biasanya mulai menunjukkan pergerakan dalam 1 sampai 3 bulan pertama setelah konten killer mulai diisi.</p></details>
+        <details class="p-4 border border-border rounded-xl bg-card"><summary class="font-bold text-[14px] cursor-pointer">5. Apakah saya bisa update konten sendiri? Saya gaptek.</summary><p class="text-[14px] text-muted-foreground mt-2">Bisa. Kami buatkan sistem yang mudah, dan kami ajari tim Anda dengan bahasa sederhana, bukan bahasa IT.</p></details>
+        <details class="p-4 border border-border rounded-xl bg-card"><summary class="font-bold text-[14px] cursor-pointer">6. Setelah website jadi, apakah saya ditinggal?</summary><p class="text-[14px] text-muted-foreground mt-2">Tidak. Kami dampingi setelah launching. Kami pantau kecepatan, SEO, dan performa kontennya.</p></details>
+        <details class="p-4 border border-border rounded-xl bg-card"><summary class="font-bold text-[14px] cursor-pointer">7. Kalau saya klik Konsultasi Gratis, saya dapat apa?</summary><p class="text-[14px] text-muted-foreground mt-2">Anda dapat 3 hal. Pertama, ngobrol 15 sampai 20 menit. Kedua, kami audit web lama Anda atau cek peluang. Ketiga, kami kasih peta bertahap, tahap pertama isinya apa. Tanpa komitmen.</p></details>
+      </div>
+
+      <!-- SEKSI 10 CTA AKHIR -->
+      <h2 class="text-2xl font-bold mb-4 text-foreground">Pilihannya Ada Dua. Tetap Punya Website yang Diam, Atau Punya Aset yang Mendatangkan Konsumen Setiap Hari.</h2>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-4">Saingan Anda tidak menunggu. Setiap hari mereka mengisi konten, menambah trafik, dan mengambil calon pembeli yang seharusnya jadi milik Anda.</p>
+      <p class="text-[14px] text-muted-foreground leading-relaxed mb-6">Coba lagi di HP Anda. Ketik bisnis Anda. Kalau yang muncul masih orang lain, itu bukti Anda harus bergerak sekarang.</p>
+      <div class="flex flex-col sm:flex-row gap-3 my-6 not-prose">
+        <a href={waLink} class="flex-1 text-center px-4 py-3 text-[14px] font-bold rounded-full bg-black text-white">Bangun Aset Website Saya</a>
+        <a href={waCekLink} class="flex-1 text-center px-4 py-3 text-[14px] font-bold rounded-full border border-border bg-card text-foreground">Saya Sudah Punya Web, Cek Gratis</a>
+      </div>
+      <p class="text-[14px] text-muted-foreground text-center">Gratis audit website lama Anda. Kami tunjukkan kenapa tidak ada trafik, dan apa yang harus diperbaiki secara bertahap. Tanpa komitmen.</p>
+      <p class="text-[14px] text-foreground font-bold text-center mt-4">Untuk pebisnis yang serius bangun bisnis jangka panjang. Bukan untuk yang sekadar cari paling murah.</p>
+
+      <!-- SILO CLUSTER SECTION -->
+      <div class="my-10 p-6 border-l-4 border-primary bg-muted/30 rounded-r-xl">
+        <h3 class="text-xl font-bold mb-3 text-foreground">Eksplorasi Klaster Layanan & Tipe Web Kami:</h3>
+        <p class="text-[14px] text-muted-foreground mb-4">Sesuaikan infrastruktur website Anda berdasarkan tujuan utama pemasaran digital Anda:</p>
+        <ul class="space-y-3 text-base font-medium">
+          <li>👉 <a href="/services/web/landing-page" class="text-primary underline hover:text-primary/80 transition-colors">Jasa Pembuatan Landing Page High-Conversion</a><span class="text-[13px] text-muted-foreground font-normal block md:inline"> (Halaman penawaran tajam, dirancang khusus untuk memanen klik dari iklan)</span></li>
+          <li>👉 <a href="/services/web/company-profile" class="text-primary underline hover:text-primary/80 transition-colors">Pembuatan Web Company Profile & Katalog Usaha</a><span class="text-[13px] text-muted-foreground font-normal block md:inline"> (Etalase digital profesional untuk meningkatkan kredibilitas brand & mitra bisnis)</span></li>
+          <li>👉 <a href="/services/web/speed-optimization" class="text-primary underline hover:text-primary/80 transition-colors">Layanan Optimasi Kecepatan Web (Core Web Vitals)</a><span class="text-[13px] text-muted-foreground font-normal block md:inline"> (Untuk web lama yang lambat dan sepi trafik)</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('cek-bisnis');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const kw = document.getElementById('keyword')?.value?.trim() || 'bisnis saya';
+      window.open('https://www.google.com/search?q=' + encodeURIComponent(kw), '_blank');
+    });
+  </script>
+</BaseLayout>

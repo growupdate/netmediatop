@@ -18,7 +18,7 @@ interface Props {
 
 const {
   title,
-  description = siteConfig.description,
+  description = siteConfig.description || "Layanan digital marketing, jasa pembuatan website Astro, SEO, dan Google Ads profesional dari Netmediatop.",
   canonical,
   ogImage = siteConfig.ogImage,
   ignoreTitleTemplate = false,
@@ -30,14 +30,16 @@ const {
   author,
 } = Astro.props;
 
-const ogImageSrc = typeof ogImage === "string" ? ogImage : ogImage.src;
+const ogImageSrc = typeof ogImage === "string" ? ogImage : ogImage?.src || "/favicon.svg";
 
 const fullTitle =
   title && !ignoreTitleTemplate
     ? title + " | " + siteConfig.name
-    : title || siteConfig.name;
+    : title || siteConfig.name || "Netmediatop";
+
+const baseUrl = siteConfig.url || "https://netmediatop.com";
 const canonicalURL =
-  canonical ?? new URL(Astro.url.pathname, siteConfig.url).toString();
+  canonical ?? new URL(Astro.url.pathname, baseUrl).toString();
 ---
 
 <meta charset="utf-8" />
@@ -48,15 +50,19 @@ const canonicalURL =
 <title>{fullTitle}</title>
 <meta name="title" content={fullTitle} />
 <meta name="description" content={description} />
-<meta name="author" content={author || siteConfig.author} />
 
+<!-- WAJIB: Penjaga Indeks Mesin Pencari -->
+<meta name="robots" content="index, follow" />
+<meta name="author" content={author || siteConfig.author || "Tri Pudjo"} />
+
+<!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(ogImageSrc, siteConfig.url)} />
-<meta property="og:locale" content={siteConfig.locale} />
-<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:image" content={new URL(ogImageSrc, baseUrl)} />
+<meta property="og:locale" content={siteConfig.locale || "id_ID"} />
+<meta property="og:site_name" content={siteConfig.name || "Netmediatop"} />
 
 {
   type === "article" && pubDate && (
@@ -84,11 +90,12 @@ const canonicalURL =
     tags.map((tag) => <meta property="article:tag" content={tag} />)
 }
 
+<!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={fullTitle} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(ogImageSrc, siteConfig.url)} />
+<meta property="twitter:image" content={new URL(ogImageSrc, baseUrl)} />
 {
   siteConfig.twitter && (
     <meta property="twitter:creator" content={siteConfig.twitter} />

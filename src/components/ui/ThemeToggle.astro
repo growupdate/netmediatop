@@ -3,87 +3,58 @@
 ---
 
 <button
-  class="theme-toggle-btn relative rounded-full p-2 text-foreground transition-colors hover:bg-foreground/10 focus:outline-none"
-  aria-label="Toggle theme"
+  id="theme-toggle-btn"
+  type="button"
+  aria-label="Ubah tema antara mode terang dan gelap"
+  class="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
 >
-  <!-- Sun icon -->
+  <span class="sr-only">Ubah Tema</span>
+  <!-- Sun Icon (Light Mode) -->
   <svg
-    class="sun-icon hidden h-5 w-5"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
+    id="sun-icon"
+    class="h-5 w-5 hidden dark:block text-yellow-400"
     fill="none"
+    viewBox="0 0 24 24"
     stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    aria-hidden="true"
   >
-    <circle cx="12" cy="12" r="4"></circle>
-    <path d="M12 2v2"></path>
-    <path d="M12 20v2"></path>
-    <path d="m4.93 4.93 1.41 1.41"></path>
-    <path d="m17.66 17.66 1.41 1.41"></path>
-    <path d="M2 12h2"></path>
-    <path d="M20 12h2"></path>
-    <path d="m6.34 17.66-1.41 1.41"></path>
-    <path d="m19.07 4.93-1.41 1.41"></path>
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+    ></path>
   </svg>
-  <!-- Moon icon -->
+  <!-- Moon Icon (Dark Mode) -->
   <svg
-    class="moon-icon hidden h-5 w-5"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
+    id="moon-icon"
+    class="h-5 w-5 block dark:hidden text-slate-800"
     fill="none"
+    viewBox="0 0 24 24"
     stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    aria-hidden="true"
   >
-    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+    ></path>
   </svg>
 </button>
 
-<script is:inline>
-  document.addEventListener("astro:page-load", () => {
-    const updateIcons = () => {
-      const theme =
-        document.documentElement.getAttribute("data-theme") || "light";
-      const btns = document.querySelectorAll(".theme-toggle-btn");
-
-      btns.forEach((btn) => {
-        const sunIcon = btn.querySelector(".sun-icon");
-        const moonIcon = btn.querySelector(".moon-icon");
-
-        if (theme === "dark") {
-          sunIcon?.classList.remove("hidden");
-          moonIcon?.classList.add("hidden");
-        } else {
-          sunIcon?.classList.add("hidden");
-          moonIcon?.classList.remove("hidden");
-        }
-      });
-    };
-
-    // Initialize
-    updateIcons();
-
-    // Re-run on clicks
-    const btns = document.querySelectorAll(".theme-toggle-btn");
-    btns.forEach((btn) => {
-      // Clone to remove old event listeners and avoid multiple triggers
-      const newBtn = btn.cloneNode(true);
-      if (btn.parentNode) {
-        btn.parentNode.replaceChild(newBtn, btn);
-      }
-
-      newBtn.addEventListener("click", () => {
-        const currentTheme =
-          document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-
-        document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        updateIcons();
-      });
+<script>
+  const handleToggle = () => {
+    const btn = document.getElementById("theme-toggle-btn");
+    btn?.addEventListener("click", () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      const newTheme = isDark ? "light" : "dark";
+      
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
     });
-  });
+  };
+
+  handleToggle();
+  document.addEventListener("astro:after-swap", handleToggle);
 </script>
