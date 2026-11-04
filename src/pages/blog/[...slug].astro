@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Schema from "@/components/seo/Schema.astro";
-
+import RelatedPost from '../../components/widgets/RelatedPost.astro';
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -93,6 +93,12 @@ const metadata = {
       >
         <Content />
       </div>
+
+      <!-- ========================================== -->
+      <!-- TAMBAHKAN KODE INI DI BAWAH KONTEN ARTIKEL -->
+      <!-- ========================================== -->
+      <RelatedPost currentSlug={post.id} />
+
     </div>
   </section>
 </BaseLayout>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getImage } from "astro:assets";
-import content from "@/components/widgets/content.astro";
+import Content from "@/components/widgets/Content.astro";
 import aboutImage from "@/assets/images/about-office.webp";
 import profileImage from "@/assets/images/4.png";
 
@@ -188,7 +188,7 @@ const schemaData = JSON.stringify({
   </section>
 
   <!-- Bagian 2: Tujuan & Visi Perusahaan -->
-  <content
+  <Content
     title="Tujuan Utama Kami"
     description={[
       "Bagaimana mempercepat dan mengoptimalkan kunjungan/trafik web dengan bantuan teknologi, mengonversi pengunjung menjadi prospek nyata via WhatsApp, menghasilkan ROI maksimal, serta menciptakan pertumbuhan bisnis yang berdampak tinggi.",

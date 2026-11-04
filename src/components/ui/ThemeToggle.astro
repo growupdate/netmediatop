@@ -1,60 +1,76 @@
 ---
-
 ---
 
 <button
-  id="theme-toggle-btn"
   type="button"
-  aria-label="Ubah tema antara mode terang dan gelap"
-  class="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background text-foreground hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-primary transition-colors"
+  aria-label="Ubah tema"
+  class="theme-toggle-btn relative inline-flex h-10 w-10 items-center justify-center rounded-lg border-2 border-slate-400 dark:border-border bg-background text-foreground hover:bg-muted focus:outline-none transition-colors cursor-pointer select-none shadow-xs"
+  style="touch-action: manipulation;"
 >
   <span class="sr-only">Ubah Tema</span>
-  <!-- Sun Icon (Light Mode) -->
+  <!-- Ikon Matahari (Tampil saat mode terang) - Dibuat lebih tebal (stroke-width="2.5") -->
   <svg
-    id="sun-icon"
-    class="h-5 w-5 hidden dark:block text-yellow-400"
+    class="icon-sun h-5 w-5 text-amber-600 dark:text-yellow-400"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    aria-hidden="true"
+    stroke-width="2.5"
   >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-    ></path>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
   </svg>
-  <!-- Moon Icon (Dark Mode) -->
+
+  <!-- Ikon Bulan (Tampil saat mode gelap) - Dibuat lebih tebal (stroke-width="2.5") -->
   <svg
-    id="moon-icon"
-    class="h-5 w-5 block dark:hidden text-slate-800"
+    class="icon-moon h-5 w-5 text-slate-800 dark:text-slate-200 hidden"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
-    aria-hidden="true"
+    stroke-width="2.5"
   >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-    ></path>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
   </svg>
 </button>
 
 <script>
-  const handleToggle = () => {
-    const btn = document.getElementById("theme-toggle-btn");
-    btn?.addEventListener("click", () => {
-      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-      const newTheme = isDark ? "light" : "dark";
-      
-      document.documentElement.setAttribute("data-theme", newTheme);
-      localStorage.setItem("theme", newTheme);
-    });
-  };
+  function setupAllThemeToggles() {
+    const buttons = document.querySelectorAll(".theme-toggle-btn");
+    if (buttons.length === 0) return;
 
-  handleToggle();
-  document.addEventListener("astro:after-swap", handleToggle);
+    buttons.forEach((btn) => {
+      const iconSun = btn.querySelector(".icon-sun");
+      const iconMoon = btn.querySelector(".icon-moon");
+
+      const updateState = () => {
+        const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+        if (currentTheme === "dark") {
+          iconSun?.classList.add("hidden");
+          iconMoon?.classList.remove("hidden");
+        } else {
+          iconSun?.classList.remove("hidden");
+          iconMoon?.classList.add("hidden");
+        }
+      };
+
+      updateState();
+
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode?.replaceChild(newBtn, btn);
+
+      newBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const htmlEl = document.documentElement;
+        const currentTheme = htmlEl.getAttribute("data-theme");
+        const targetTheme = currentTheme === "dark" ? "light" : "dark";
+
+        htmlEl.setAttribute("data-theme", targetTheme);
+        localStorage.setItem("theme", targetTheme);
+
+        setupAllThemeToggles();
+      });
+    });
+  }
+
+  setupAllThemeToggles();
+  document.addEventListener("astro:page-load", setupAllThemeToggles);
+  document.addEventListener("astro:after-swap", setupAllThemeToggles);
 </script>

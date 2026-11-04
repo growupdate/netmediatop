@@ -9,6 +9,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
   <div
     class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
   >
+    <!-- Logo -->
     <div class="flex items-center gap-2">
       <a
         href="/"
@@ -19,113 +20,188 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
     </div>
 
     <!-- Desktop Menu -->
-    <div class="hidden md:block">
-      <div class="ml-10 flex items-baseline space-x-8">
-        {
-          siteConfig.navLinks.map((link) => (
+    <div class="hidden md:flex items-center space-x-8">
+      {
+        siteConfig.navLinks.map((link) => {
+          const isServices = link.text.toLowerCase() === "services" || link.text.toLowerCase() === "layanan";
+
+          if (isServices) {
+            return (
+              <div class="relative group">
+                <button
+                  type="button"
+                  class="inline-flex items-center gap-1 text-sm font-bold text-black dark:text-white transition-colors hover:text-primary focus:outline-none py-2 cursor-pointer"
+                >
+                  {link.text}
+                  <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                <!-- Dropdown Desktop -->
+                <div class="absolute left-0 mt-0 w-64 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200 ease-in-out bg-background border border-border rounded-lg shadow-xl py-2 z-50">
+                  <a href="/services/jasa-pembuatan-website" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    🚀 Jasa Pembuatan Website
+                  </a>
+                  <a href="/services/jasa-seo" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    📈 Jasa SEO
+                  </a>
+                  <a href="/services/jasa-iklan-google-ads" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    🎯 Jasa Iklan Google Ads
+                  </a>
+                  <a href="/services/jasa-iklan-facebook" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    📱 Jasa Iklan Facebook
+                  </a>
+                  <a href="/services/jasa-konten-sosmed" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    ✍️ Jasa Konten Sosmed
+                  </a>
+                  <a href="/services/penulis-artikel" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    📄 Penulis Artikel
+                  </a>
+                </div>
+              </div>
+            );
+          }
+
+          return (
             <a
               href={link.href}
               class="text-sm font-bold text-black dark:text-white transition-colors hover:text-primary"
             >
               {link.text}
             </a>
-          ))
-        }
-      </div>
+          );
+        })
+      }
     </div>
 
+    <!-- Desktop Theme Toggle -->
     <div class="hidden md:flex items-center gap-4">
       <ThemeToggle />
     </div>
 
-    <!-- Mobile Menu Button -->
-    <div class="md:hidden flex items-center">
+    <!-- Mobile Menu Button & Theme Toggle -->
+    <div class="md:hidden flex items-center gap-2">
+      <ThemeToggle />
+
       <button
         id="mobile-menu-button"
         type="button"
         aria-label="Buka menu navigasi utama"
-        class="inline-flex items-center justify-center p-2 rounded-md text-black dark:text-white hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors"
+        class="inline-flex items-center justify-center p-2 rounded-md text-black dark:text-white hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors cursor-pointer"
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
         <span class="sr-only">Buka menu navigasi utama</span>
-        <!-- Icon when menu is closed -->
-        <svg
-          id="menu-icon-closed"
-          class="block h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
+        <svg id="menu-icon-closed" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
-        <!-- Icon when menu is open -->
-        <svg
-          id="menu-icon-open"
-          class="hidden h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"></path>
+        <svg id="menu-icon-open" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      <div class="ml-2">
-        <ThemeToggle />
-      </div>
     </div>
   </div>
 
+  <!-- Mobile Dropdown & Menu -->
   <div class="hidden md:hidden" id="mobile-menu">
-    <div
-      class="space-y-1 border-b border-border bg-background px-2 pb-3 pt-2 sm:px-3"
-    >
+    <div class="space-y-1 border-b border-border bg-background px-4 pb-4 pt-2">
       {
-        siteConfig.navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="block rounded-md px-3 py-2 text-base font-bold text-black dark:text-white transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary"
-          >
-            {link.text}
-          </a>
-        ))
+        siteConfig.navLinks.map((link) => {
+          const isServices = link.text.toLowerCase() === "services" || link.text.toLowerCase() === "layanan";
+
+          if (isServices) {
+            return (
+              <div class="space-y-1 py-1">
+                <button
+                  type="button"
+                  class="mobile-services-toggle flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-bold text-black dark:text-white hover:bg-muted hover:text-primary transition-colors cursor-pointer"
+                >
+                  {link.text}
+                  <svg class="mobile-services-icon w-4 h-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div class="mobile-services-dropdown hidden pl-4 space-y-1 border-l-2 border-primary/30 ml-3 my-1">
+                  <a href="/services/jasa-pembuatan-website" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    🚀 Jasa Pembuatan Website
+                  </a>
+                  <a href="/services/jasa-seo" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    📈 Jasa SEO
+                  </a>
+                  <a href="/services/jasa-iklan-google-ads" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    🎯 Jasa Iklan Google Ads
+                  </a>
+                  <a href="/services/jasa-iklan-facebook" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    📱 Jasa Iklan Facebook
+                  </a>
+                  <a href="/services/jasa-konten-sosmed" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    ✍️ Jasa Konten Sosmed
+                  </a>
+                  <a href="/services/penulis-artikel" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                    📄 Penulis Artikel
+                  </a>
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <a
+              href={link.href}
+              class="block rounded-md px-3 py-2 text-base font-bold text-black dark:text-white transition-colors hover:bg-muted hover:text-primary"
+            >
+              {link.text}
+            </a>
+          );
+        })
       }
     </div>
   </div>
 </nav>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
+  function setupNavbar() {
     const button = document.getElementById("mobile-menu-button");
     const menu = document.getElementById("mobile-menu");
     const iconClosed = document.getElementById("menu-icon-closed");
     const iconOpen = document.getElementById("menu-icon-open");
 
-    // Remove old event listener if it exists to prevent multiple triggers
-    const newButton = button?.cloneNode(true);
-    if (newButton && button && button.parentNode) {
-      button.parentNode.replaceChild(newButton, button);
+    if (button) {
+      const newButton = button.cloneNode(true);
+      button.parentNode?.replaceChild(newButton, button);
     }
 
     const finalButton = document.getElementById("mobile-menu-button");
-
     finalButton?.addEventListener("click", () => {
       const isExpanded = finalButton.getAttribute("aria-expanded") === "true";
-
       finalButton.setAttribute("aria-expanded", String(!isExpanded));
       menu?.classList.toggle("hidden");
       iconClosed?.classList.toggle("hidden");
       iconOpen?.classList.toggle("hidden");
     });
-  });
+
+    const servicesToggles = document.querySelectorAll(".mobile-services-toggle");
+    servicesToggles.forEach((toggle) => {
+      const newToggle = toggle.cloneNode(true);
+      toggle.parentNode?.replaceChild(newToggle, toggle);
+    });
+
+    const finalToggles = document.querySelectorAll(".mobile-services-toggle");
+    finalToggles.forEach((toggle) => {
+      toggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        const parentContainer = toggle.closest("div");
+        const dropdown = parentContainer?.querySelector(".mobile-services-dropdown");
+        const icon = toggle.querySelector(".mobile-services-icon");
+
+        dropdown?.classList.toggle("hidden");
+        icon?.classList.toggle("rotate-180");
+      });
+    });
+  }
+
+  setupNavbar();
+  document.addEventListener("astro:page-load", setupNavbar);
+  document.addEventListener("astro:after-swap", setupNavbar);
 </script>

@@ -43,6 +43,14 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
     <link rel="llms-txt" type="text/markdown" href="/llms.txt" />
     <link rel="ard" type="application/json" href="/ard.json" />
   
+ 
+  <script is:inline>
+    // Langsung terapkan tema dari localStorage sebelum halaman dirender untuk mencegah kedipan
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+  </script>
+  <!-- ... tag head lainnya ... -->
+
     <Seo
       title={finalTitle}
       description={finalDescription}

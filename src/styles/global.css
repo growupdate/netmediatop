@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Definisikan varian dark berdasarkan atribut data-theme */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
