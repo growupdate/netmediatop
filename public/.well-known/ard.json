@@ -25,10 +25,38 @@
       "representativeQueries": [
         "jasa iklan google ads",
         "jasa pembuatan website",
-        "jasa iklan facebook ads"
-        "jasa konten sosmed"
-        "jasa seo"
+        "jasa iklan facebook ads",
+        "jasa konten sosmed",
+        "jasa seo",
         "jasa penulis artikel"
+      ]
+    },
+    {
+      "identifier": "netmediatop-blog",
+      "displayName": "NetMediaTop Blog",
+      "description": "Artikel, tips, dan panduan digital marketing, SEO, Google Ads, dan pembuatan website untuk mengembangkan bisnis online.",
+      "url": "https://netmediatop.com/blog",
+      "mediaType": "text/html",
+      "representativeQueries": [
+        "tips digital marketing",
+        "cara meningkatkan penjualan online",
+        "belajar seo untuk pemula",
+        "strategi konten sosmed",
+        "cara membuat website bisnis"
+      ]
+    },
+    {
+      "identifier": "netmediatop-studi-kasus",
+      "displayName": "NetMediaTop Studi Kasus",
+      "description": "Studi kasus dan hasil nyata layanan digital marketing NetMediaTop untuk klien bisnis.",
+      "url": "https://netmediatop.com/studi-kasus",
+      "mediaType": "text/html",
+      "representativeQueries": [
+        "studi kasus digital marketing",
+        "contoh hasil seo",
+        "portofolio jasa website",
+        "hasil google ads",
+        "contoh studi kasus bisnis online"
       ]
     }
   ]
