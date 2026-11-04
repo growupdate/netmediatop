@@ -1,6 +1,6 @@
-# Netmediatop - Digital Marketing & Web Development
+# Netmediatop
 
-> Netmediatop adalah agensi digital marketing terpadu yang dirancang untuk membantu bisnis Anda tumbuh dan berkembang lebih baik dan lebih cepat. Kantor pusat  di Kudus, Jawa Tengah.
+Katalog layanan digital marketing dan pembuatan website.
 
 ## Main Services & Pages
 - [Home Page](https://netmediatop.com/)
