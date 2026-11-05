@@ -1,0 +1,37 @@
+---
+// src/components/ui/Chatwoot.astro
+---
+
+<script is:inline>
+  window.chatwootSettings = {
+    position: "right",
+    type: "standard",
+    launcherTitle: "ingin bisnis lebih lancar? "
+  };
+
+  (function(d,t) {
+    var BASE_URL = "https://app.chatwoot.com";
+    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.src = BASE_URL + "/packs/js/sdk.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+    g.onload = function() {
+      if (window.chatwootSDK) {
+        window.chatwootSDK.run({
+          websiteToken: 'e4HKUjs3eNekJ5r4xPbQmqZ9',
+          baseUrl: BASE_URL
+        });
+      }
+    };
+  })(document, "script");
+
+  document.addEventListener('astro:after-swap', function() {
+    if (window.$chatwoot) {
+      try {
+        window.$chatwoot.hide();
+        window.$chatwoot.show();
+      } catch (e) {}
+    }
+  });
+</script>

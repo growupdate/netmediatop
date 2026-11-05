@@ -26,6 +26,8 @@ import Footer from "@/components/layout/Footer.astro";
 import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 import { siteConfig } from "@/config/site";
+import Chatwoot from "@/components/ui/Chatwoot.astro";
+
 
 const { title, description, ogImage, canonical, metadata } = Astro.props;
 
@@ -161,5 +163,6 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
       document.addEventListener("astro:page-load", setupAnimations);
       document.addEventListener("astro:after-swap", setupAnimations);
     </script>
-  </body>
+    <Chatwoot />
+   </body>
 </html>
