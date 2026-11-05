@@ -9,17 +9,17 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
   <div
     class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
   >
-    <!-- Logo -->
+    <!-- 1. Logo Brand -->
     <div class="flex items-center gap-2">
       <a
         href="/"
-        class="text-xl font-bold tracking-tight text-black dark:text-white transition-colors hover:text-primary"
+        class="text-xl font-bold tracking-tight text-foreground transition-colors hover:text-primary"
       >
         {siteConfig.name}
       </a>
     </div>
 
-    <!-- Desktop Menu -->
+    <!-- 2. Navigasi Desktop -->
     <div class="hidden md:flex items-center space-x-8">
       {
         siteConfig.navLinks.map((link) => {
@@ -30,7 +30,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
               <div class="relative group">
                 <button
                   type="button"
-                  class="inline-flex items-center gap-1 text-sm font-bold text-black dark:text-white transition-colors hover:text-primary focus:outline-none py-2 cursor-pointer"
+                  class="inline-flex items-center gap-1 text-sm font-bold text-foreground transition-colors hover:text-primary focus:outline-none py-2 cursor-pointer"
                 >
                   {link.text}
                   <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,24 +38,24 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
                   </svg>
                 </button>
 
-                <!-- Dropdown Desktop -->
+                <!-- Dropdown Services Desktop -->
                 <div class="absolute left-0 mt-0 w-64 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200 ease-in-out bg-background border border-border rounded-lg shadow-xl py-2 z-50">
-                  <a href="/services/jasa-pembuatan-website" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-pembuatan-website" class="block px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     🚀 Jasa Pembuatan Website
                   </a>
-                  <a href="/services/jasa-seo" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-seo" class="block px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     📈 Jasa SEO
                   </a>
-                  <a href="/services/jasa-iklan-google-ads" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-iklan-google-ads" class="block px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     🎯 Jasa Iklan Google Ads
                   </a>
-                  <a href="/services/jasa-iklan-facebook" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-iklan-facebook" class="block px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     📱 Jasa Iklan Facebook
                   </a>
-                  <a href="/services/jasa-konten-sosmed" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-konten-sosmed" class="block px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     ✍️ Jasa Konten Sosmed
                   </a>
-                  <a href="/services/penulis-artikel" class="block px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/penulis-artikel" class="block px-4 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     📄 Penulis Artikel
                   </a>
                 </div>
@@ -66,7 +66,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
           return (
             <a
               href={link.href}
-              class="text-sm font-bold text-black dark:text-white transition-colors hover:text-primary"
+              class="text-sm font-bold text-foreground transition-colors hover:text-primary"
             >
               {link.text}
             </a>
@@ -75,20 +75,24 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
       }
     </div>
 
-    <!-- Desktop Theme Toggle -->
+    <!-- 3. Desktop Theme Toggle -->
     <div class="hidden md:flex items-center gap-4">
       <ThemeToggle />
     </div>
 
-    <!-- Mobile Menu Button & Theme Toggle (Posisi Kunci: ThemeToggle di KIRI, Hamburger di KANAN) -->
-    <div class="md:hidden flex items-center gap-2">
-      <ThemeToggle />
+    <!-- 4. Mobile Menu & Theme Toggle (Dikunci: ThemeToggle di KIRI, Hamburger Button di KANAN) -->
+    <div class="md:hidden flex items-center gap-2 z-[101]">
+      <!-- ThemeToggle (KIRI) -->
+      <div class="flex items-center">
+        <ThemeToggle />
+      </div>
 
+      <!-- Hamburger Button (KANAN) -->
       <button
         id="mobile-menu-button"
         type="button"
         aria-label="Buka menu navigasi utama"
-        class="inline-flex items-center justify-center p-2 rounded-md text-black dark:text-white hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors cursor-pointer select-none"
+        class="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary hover:bg-muted focus:outline-none transition-colors cursor-pointer select-none"
         style="touch-action: manipulation;"
         aria-controls="mobile-menu"
         aria-expanded="false"
@@ -104,7 +108,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
     </div>
   </div>
 
-  <!-- Mobile Dropdown & Menu -->
+  <!-- 5. Mobile Dropdown Menu -->
   <div class="hidden md:hidden" id="mobile-menu">
     <div class="space-y-1 border-b border-border bg-background px-4 pb-4 pt-2">
       {
@@ -116,7 +120,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
               <div class="space-y-1 py-1">
                 <button
                   type="button"
-                  class="mobile-services-toggle flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-bold text-black dark:text-white hover:bg-muted hover:text-primary transition-colors cursor-pointer"
+                  class="mobile-services-toggle flex w-full items-center justify-between rounded-md px-3 py-2 text-base font-bold text-foreground hover:bg-muted hover:text-primary transition-colors cursor-pointer"
                 >
                   {link.text}
                   <svg class="mobile-services-icon w-4 h-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,22 +128,22 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
                   </svg>
                 </button>
                 <div class="mobile-services-dropdown hidden pl-4 space-y-1 border-l-2 border-primary/30 ml-3 my-1">
-                  <a href="/services/jasa-pembuatan-website" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-pembuatan-website" class="block rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     🚀 Jasa Pembuatan Website
                   </a>
-                  <a href="/services/jasa-seo" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-seo" class="block rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     📈 Jasa SEO
                   </a>
-                  <a href="/services/jasa-iklan-google-ads" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-iklan-google-ads" class="block rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     🎯 Jasa Iklan Google Ads
                   </a>
-                  <a href="/services/jasa-iklan-facebook" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-iklan-facebook" class="block rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     📱 Jasa Iklan Facebook
                   </a>
-                  <a href="/services/jasa-konten-sosmed" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/jasa-konten-sosmed" class="block rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     ✍️ Jasa Konten Sosmed
                   </a>
-                  <a href="/services/penulis-artikel" class="block rounded-md px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white hover:bg-muted hover:text-primary transition-colors">
+                  <a href="/services/penulis-artikel" class="block rounded-md px-3 py-2 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors">
                     📄 Penulis Artikel
                   </a>
                 </div>
@@ -150,7 +154,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
           return (
             <a
               href={link.href}
-              class="block rounded-md px-3 py-2 text-base font-bold text-black dark:text-white transition-colors hover:bg-muted hover:text-primary"
+              class="block rounded-md px-3 py-2 text-base font-bold text-foreground transition-colors hover:bg-muted hover:text-primary"
             >
               {link.text}
             </a>
@@ -162,19 +166,20 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 </nav>
 
 <script is:inline>
+  // Script Eksekusi Navigasi & Mobile Menu Kompatibel View Transitions (HP Touch Friendly)
   function initNavbarEvents() {
     const button = document.getElementById("mobile-menu-button");
     const menu = document.getElementById("mobile-menu");
     const iconClosed = document.getElementById("menu-icon-closed");
     const iconOpen = document.getElementById("menu-icon-open");
 
-    if (button) {
+    if (button && menu) {
       button.onclick = (e) => {
         e.preventDefault();
         e.stopPropagation();
         const isExpanded = button.getAttribute("aria-expanded") === "true";
         button.setAttribute("aria-expanded", String(!isExpanded));
-        menu?.classList.toggle("hidden");
+        menu.classList.toggle("hidden");
         iconClosed?.classList.toggle("hidden");
         iconOpen?.classList.toggle("hidden");
       };
@@ -195,6 +200,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
     });
   }
 
+  // Bind saat dokumen pertama dimuat dan setiap perpindahan halaman Astro
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initNavbarEvents);
   } else {
