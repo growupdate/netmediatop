@@ -27,7 +27,7 @@ import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 import { siteConfig } from "@/config/site";
 import Chatwoot from "@/components/ui/Chatwoot.astro";
-
+import WhatsAppWidget from "@/components/ui/WhatsAppWidget.astro";
 
 const { title, description, ogImage, canonical, metadata } = Astro.props;
 
@@ -163,6 +163,10 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
       document.addEventListener("astro:page-load", setupAnimations);
       document.addEventListener("astro:after-swap", setupAnimations);
     </script>
-    <Chatwoot />
+    <!-- Widget Floating WhatsApp & Chatwoot -->
+    <WhatsAppWidget phoneNumber="628329188998" />
+    
+    <!-- Chatwoot dinonaktifkan sementara -->
+    <!-- <Chatwoot /> -->
    </body>
 </html>
