@@ -42,14 +42,32 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
     <!-- AI Agentic Discovery -->
     <link rel="llms-txt" type="text/markdown" href="/llms.txt" />
     <link rel="ard" type="application/json" href="/ard.json" />
-  
- 
-  <script is:inline>
-    // Langsung terapkan tema dari localStorage sebelum halaman dirender untuk mencegah kedipan
-    const theme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', theme);
-  </script>
-  <!-- ... tag head lainnya ... -->
+
+    <!-- SCRIPT PENANGANAN TEMA GLOBAL (Menggunakan Class .dark & data-theme sekaligus) -->
+    <script is:inline>
+      const applyTheme = () => {
+        let theme = "light";
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          theme = localStorage.getItem("theme");
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          theme = "dark";
+        }
+
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      };
+
+      // Jalankan langsung sebelum halaman dirender untuk cegah kedipan (flicker)
+      applyTheme();
+
+      // Sinkronkan setiap kali terjadi perpindahan halaman (Astro View Transitions)
+      document.addEventListener("astro:after-swap", applyTheme);
+    </script>
 
     <Seo
       title={finalTitle}
@@ -68,38 +86,8 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
     <Schema type="Organization" data={{}} />
 
     <slot name="head" />
-    <script is:inline>
-      const getTheme = () => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
-          return localStorage.getItem("theme");
-        }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
-        }
-        return "light";
-      };
-
-      const setTheme = () => {
-        const theme = getTheme();
-        if (theme === "light") {
-          document.documentElement.setAttribute("data-theme", "light");
-        } else {
-          document.documentElement.setAttribute("data-theme", "dark");
-        }
-        window.localStorage.setItem("theme", theme);
-      };
-
-      // Run immediately on first hard load
-      setTheme();
-
-      // Run before the new page renders during View Transitions
-      document.addEventListener("astro:after-swap", setTheme);
-    </script>
   </head>
-  <body class="bg-background text-foreground antialiased">
+  <body class="bg-background text-foreground antialiased transition-colors">
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 rounded-md bg-primary px-4 py-2 text-white shadow-lg ring-2 ring-white"
@@ -126,27 +114,22 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
       </main>
       <Footer />
     </div>
+
     <script>
-      // Keep a global reference to prevent duplicate observers during View Transitions
       let scrollObserver: IntersectionObserver | null = null;
 
       const setupAnimations = () => {
-        // Disconnect previous observer if it exists (prevents ghost triggers)
         if (scrollObserver) {
           scrollObserver.disconnect();
         }
 
-        // Instantly bypass scroll animations for elements already visible in viewport
-        // This solves the Astro View Transitions "double bounce" issue completely
         document.querySelectorAll(".reveal:not(.active)").forEach((el) => {
           if (el.getBoundingClientRect().top < window.innerHeight) {
-            // Temporarily disable transition during initial show
             el.setAttribute(
               "style",
               "transition: none !important; transform: none !important;",
             );
             el.classList.add("active");
-            // Reactivate their explicit styles so CSS takes over next time
             requestAnimationFrame(() => {
               el.removeAttribute("style");
             });
@@ -157,7 +140,6 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
           (entries, observer) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                // Add class synchronously to prevent frame delays
                 entry.target.classList.add("active");
                 observer.unobserve(entry.target);
               }

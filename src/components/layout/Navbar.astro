@@ -4,7 +4,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 ---
 
 <nav
-  class="fixed top-0 z-50 w-full border-b border-border bg-background md:bg-background/90 md:backdrop-blur"
+  class="fixed top-0 z-[100] w-full border-b border-border bg-background md:bg-background/90 md:backdrop-blur pointer-events-auto"
 >
   <div
     class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
@@ -80,7 +80,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
       <ThemeToggle />
     </div>
 
-    <!-- Mobile Menu Button & Theme Toggle -->
+    <!-- Mobile Menu Button & Theme Toggle (Posisi Kunci: ThemeToggle di KIRI, Hamburger di KANAN) -->
     <div class="md:hidden flex items-center gap-2">
       <ThemeToggle />
 
@@ -88,7 +88,8 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
         id="mobile-menu-button"
         type="button"
         aria-label="Buka menu navigasi utama"
-        class="inline-flex items-center justify-center p-2 rounded-md text-black dark:text-white hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors cursor-pointer"
+        class="inline-flex items-center justify-center p-2 rounded-md text-black dark:text-white hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors cursor-pointer select-none"
+        style="touch-action: manipulation;"
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
@@ -160,48 +161,46 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
   </div>
 </nav>
 
-<script>
-  function setupNavbar() {
+<script is:inline>
+  function initNavbarEvents() {
     const button = document.getElementById("mobile-menu-button");
     const menu = document.getElementById("mobile-menu");
     const iconClosed = document.getElementById("menu-icon-closed");
     const iconOpen = document.getElementById("menu-icon-open");
 
     if (button) {
-      const newButton = button.cloneNode(true);
-      button.parentNode?.replaceChild(newButton, button);
+      button.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!isExpanded));
+        menu?.classList.toggle("hidden");
+        iconClosed?.classList.toggle("hidden");
+        iconOpen?.classList.toggle("hidden");
+      };
     }
-
-    const finalButton = document.getElementById("mobile-menu-button");
-    finalButton?.addEventListener("click", () => {
-      const isExpanded = finalButton.getAttribute("aria-expanded") === "true";
-      finalButton.setAttribute("aria-expanded", String(!isExpanded));
-      menu?.classList.toggle("hidden");
-      iconClosed?.classList.toggle("hidden");
-      iconOpen?.classList.toggle("hidden");
-    });
 
     const servicesToggles = document.querySelectorAll(".mobile-services-toggle");
     servicesToggles.forEach((toggle) => {
-      const newToggle = toggle.cloneNode(true);
-      toggle.parentNode?.replaceChild(newToggle, toggle);
-    });
-
-    const finalToggles = document.querySelectorAll(".mobile-services-toggle");
-    finalToggles.forEach((toggle) => {
-      toggle.addEventListener("click", (e) => {
+      toggle.onclick = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const parentContainer = toggle.closest("div");
         const dropdown = parentContainer?.querySelector(".mobile-services-dropdown");
         const icon = toggle.querySelector(".mobile-services-icon");
 
         dropdown?.classList.toggle("hidden");
         icon?.classList.toggle("rotate-180");
-      });
+      };
     });
   }
 
-  setupNavbar();
-  document.addEventListener("astro:page-load", setupNavbar);
-  document.addEventListener("astro:after-swap", setupNavbar);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNavbarEvents);
+  } else {
+    initNavbarEvents();
+  }
+
+  document.addEventListener("astro:page-load", initNavbarEvents);
+  document.addEventListener("astro:after-swap", initNavbarEvents);
 </script>
