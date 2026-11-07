@@ -40,15 +40,29 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
 <!doctype html>
 <html lang={siteConfig.lang || "id"} class="scroll-smooth">
   <head>
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PRLGPBRK"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args) {
+        dataLayer.push(args);
+      }
+      gtag("js", new Date());
+    </script>
+
     <!-- AI Agentic Discovery -->
     <link rel="llms-txt" type="text/markdown" href="/llms.txt" />
     <link rel="ard" type="application/json" href="/.well-known/ard.json" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- SCRIPT PENANGANAN TEMA GLOBAL (Menggunakan Class .dark & data-theme sekaligus) -->
     <script is:inline>
       const applyTheme = () => {
         let theme = "light";
-        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
           theme = localStorage.getItem("theme");
         } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
           theme = "dark";
@@ -164,7 +178,5 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
     </script>
     <!-- Widget Floating WhatsApp  -->
     <WhatsAppWidget phoneNumber="628329188998" />
-    
-    
-   </body>
+  </body>
 </html>
