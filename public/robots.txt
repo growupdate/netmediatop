@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /config/
+Disallow: /drafts/
+
+Sitemap: https://netmediatop.com/sitemap-index.xml

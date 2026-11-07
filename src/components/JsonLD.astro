@@ -1,0 +1,117 @@
+---
+// src/components/JsonLD.astro
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date | string;
+  updatedDate?: Date | string;
+  image?: string;
+  author?: string;
+  canonicalURL: string | URL;
+  keywords?: string[];
+  faqData?: { question: string; answer: string }[];
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  image,
+  author,
+  canonicalURL,
+  keywords = [],
+  faqData = [],
+} = Astro.props as Props;
+
+const siteUrl = "https://netmediatop.com";
+
+const canonical = new URL(canonicalURL, siteUrl).href;
+const advancedKnowledgeGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": `${siteUrl}/#organization`,
+      name: "Netmediatop",
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        "@id": `${siteUrl}/#logo`,
+        url: `${siteUrl}/favicon.svg`,
+        caption: "Netmediatop",
+      },
+      image: `${siteUrl}/favicon.svg`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Kudus",
+        addressRegion: "Jawa Tengah",
+        addressCountry: "ID",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Netmediatop",
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": `${canonical}#article`,
+      isPartOf: {
+        "@id": `${siteUrl}/#website`,
+      },
+      headline: title,
+      description: description,
+      inLanguage: "id-ID",
+      mainEntityOfPage: canonical,
+      datePublished: pubDate,
+      dateModified: updatedDate || pubDate,
+      ...(image ? { image: [new URL(image, siteUrl).href] } : {}),
+      keywords: keywords.join(", "),
+      author: {
+        "@type": "Person",
+        name: author || "Tri Pudjo",
+        url: `${siteUrl}/about`,
+      },
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+    },
+    ...(faqData.length > 0
+      ? [
+          {
+            "@type": "FAQPage",
+            "@id": `${canonical}#faq`,
+            isPartOf: {
+              "@id": `${canonical}#article`,
+            },
+            mainEntity: faqData.map(
+              (item: { question: string; answer: string }) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: item.answer,
+                },
+              }),
+            ),
+          },
+        ]
+      : []),
+  ],
+};
+
+const serializedKnowledgeGraph = JSON.stringify(
+  advancedKnowledgeGraph,
+).replaceAll("<", "\\u003c");
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={serializedKnowledgeGraph}
+/>

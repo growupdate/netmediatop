@@ -1,0 +1,43 @@
+---
+// src/layouts/BlogPostLayout.astro
+import JsonLD from "../components/JsonLD.astro";
+
+const { frontmatter } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{frontmatter.title}</title>
+    <meta name="description" content={frontmatter.description} />
+
+    <meta name="author" content="Tri Pudjo" />
+    <meta name="publisher" content="Netmediatop" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={frontmatter.title} />
+    <meta property="og:description" content={frontmatter.description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={frontmatter.image} />
+    <link rel="ard" type="application/json" href="/.well-known/ard.json" />
+
+    <JsonLD
+      title={frontmatter.title}
+      description={frontmatter.description}
+      pubDate={frontmatter.pubDate}
+      updatedDate={frontmatter.updatedDate}
+      image={frontmatter.image}
+      canonicalURL={canonicalURL}
+      author={frontmatter.author}
+      keywords={frontmatter.keywords || frontmatter.tags || []}
+    />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
