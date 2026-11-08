@@ -40,14 +40,26 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
 <!doctype html>
 <html lang={siteConfig.lang || "id"} class="scroll-smooth">
   <head>
-    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PRLGPBRK"
-    ></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(...args) {
-        dataLayer.push(args);
+    <script>
+      function loadGTM() {
+        if (window.gtmLoaded) return;
+        window.gtmLoaded = true;
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          const f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-PRLGPBRK");
       }
-      gtag("js", new Date());
+
+      ["touchstart", "scroll", "mousemove", "click"].forEach(function (event) {
+        window.addEventListener(event, loadGTM, { once: true, passive: true });
+      });
+      setTimeout(loadGTM, 6000);
     </script>
 
     <!-- AI Agentic Discovery -->
@@ -109,6 +121,14 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
     >
       Skip to content
     </a>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PRLGPBRK"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
 
     <div class="relative flex min-h-screen flex-col overflow-x-hidden">
       <!-- Background Glow -->
