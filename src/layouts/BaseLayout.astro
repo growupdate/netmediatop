@@ -40,26 +40,41 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
 <!doctype html>
 <html lang={siteConfig.lang || "id"} class="scroll-smooth">
   <head>
-    <script>
-      function loadGTM() {
-        if (window.gtmLoaded) return;
-        window.gtmLoaded = true;
-        (function (w, d, s, l, i) {
-          w[l] = w[l] || [];
-          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-          const f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l != "dataLayer" ? "&l=" + l : "";
-          j.async = true;
-          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-          f.parentNode.insertBefore(j, f);
-        })(window, document, "script", "dataLayer", "GTM-PRLGPBRK");
-      }
+    <script is:inline>
+      (() => {
+        let loaded = false;
 
-      ["touchstart", "scroll", "mousemove", "click"].forEach(function (event) {
-        window.addEventListener(event, loadGTM, { once: true, passive: true });
-      });
-      setTimeout(loadGTM, 6000);
+        function loadGTM() {
+          if (loaded) return;
+          loaded = true;
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            "gtm.start": Date.now(),
+            event: "gtm.js",
+          });
+
+          const script = document.createElement("script");
+          script.async = true;
+          script.src =
+            "https://www.googletagmanager.com/gtm.js?id=GTM-PRLGPBRK";
+          document.head.appendChild(script);
+        }
+
+        function scheduleGTM() {
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(loadGTM, { timeout: 5000 });
+          } else {
+            window.setTimeout(loadGTM, 1500);
+          }
+        }
+
+        if (document.readyState === "complete") {
+          scheduleGTM();
+        } else {
+          window.addEventListener("load", scheduleGTM, { once: true });
+        }
+      })();
     </script>
 
     <!-- AI Agentic Discovery -->
@@ -115,21 +130,22 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
     <slot name="head" />
   </head>
   <body class="bg-background text-foreground antialiased transition-colors">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PRLGPBRK"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 rounded-md bg-primary px-4 py-2 text-white shadow-lg ring-2 ring-white"
     >
       Skip to content
     </a>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-PRLGPBRK"
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"></iframe></noscript
-    >
-
     <div class="relative flex min-h-screen flex-col overflow-x-hidden">
       <!-- Background Glow -->
       <div class="pointer-events-none fixed inset-0 z-0 hidden md:block">
