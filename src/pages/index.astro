@@ -1,587 +1,562 @@
----
-// src/pages/index.astro
+﻿---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { siteConfig } from "@/config/site";
-import { getCollection, type CollectionEntry } from "astro:content";
-
-// Widget & Components
-import Hero from "@/components/widgets/Hero.astro";
-import Features from "@/components/widgets/Features.astro";
-import Content from "@/components/widgets/Content.astro";
-
-// Assets
-import devImg from "@/assets/images/dev_balanced.png";
-import openSourceImg from "@/assets/images/internet-marketing.jpeg";
-
-// Ambil artikel asli jika ada
-let realPosts: CollectionEntry<"blog">[] = [];
-try {
-  const rawPosts = await getCollection("blog");
-  if (rawPosts && rawPosts.length > 0) {
-    realPosts = rawPosts
-      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-      .slice(0, 3);
-  }
-} catch {
-  realPosts = [];
-}
-
-// 3 Contoh Blog Post (Dummy Data) jika folder content blog belum ada/kosong
-const dummyPosts = [
-  {
-    id: "panduan-astro-web-performance",
-    title: "Cara membuat website bisnis lebih siap mendatangkan pelanggan",
-    excerpt:
-      "Kenali elemen website yang membantu pengunjung memahami layanan Anda dan mengambil langkah berikutnya.",
-    image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format&fit=crop",
-    date: "2026-03-10",
-    category: "Web Engineering",
-  },
-  {
-    id: "optimasi-aeo-geo-google-gemini",
-    title: "SEO lokal: membantu pelanggan menemukan bisnis Anda di Google",
-    excerpt:
-      "Pelajari bagaimana informasi bisnis yang jelas dan konsisten dapat mendukung visibilitas di pencarian lokal.",
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
-    date: "2026-03-05",
-    category: "AEO / GEO Strategy",
-  },
-  {
-    id: "otomatisasi-lead-n8n-google-ads",
-    title: "Cara membaca hasil kampanye iklan digital",
-    excerpt:
-      "Pahami indikator dasar kampanye agar Anda dapat menilai perkembangan dan menentukan optimasi berikutnya.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop",
-    date: "2026-02-28",
-    category: "Automation",
-  },
-];
-
-// Gunakan realPosts jika ada, jika tidak ada gunakan dummyPosts
-const displayPosts =
-  realPosts.length > 0
-    ? realPosts.map((p) => ({
-        id: p.id,
-        title: p.data.title,
-        excerpt: p.data.description,
-        image:
-          p.data.image ||
-          "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format&fit=crop",
-        date: p.data.pubDate
-          ? p.data.pubDate.toISOString().split("T")[0]
-          : "2026-03-01",
-        category: p.data.category || "Edukasi",
-      }))
-    : dummyPosts;
-
-// Metadata Halaman
+import aboutOffice from "@/assets/images/about-office.webp";
 const metadata = {
   title: "Digital Marketing untuk Bisnis yang Ingin Tumbuh | NetMediaTop",
   description:
-    "Website, SEO, dan pemasaran digital yang membantu bisnis menjangkau calon pelanggan. Mulai dengan konsultasi bersama NetMediaTop.",
+    "Pemasaran digital terarah melalui website, SEO, Google Ads, dan content marketing.",
   ignoreTitleTemplate: true,
 };
-
-// Ontologi Knowledge Graph & Schema (Rich Snippets)
-const schemaData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": `${siteConfig.url}/#website`,
-      url: siteConfig.url,
-      name: "NetMediaTop",
-      description: metadata.description,
-      inLanguage: "id-ID",
-    },
-    {
-      "@type": "ProfessionalService",
-      "@id": `${siteConfig.url}/#organization`,
-      name: "NetMediaTop",
-      url: siteConfig.url,
-      logo: `${siteConfig.url}/default-share.png`,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Kudus",
-        addressRegion: "Jawa Tengah",
-        addressCountry: "ID",
-      },
-      areaServed: "Indonesia",
-      knowsAbout: [
-        "Digital Marketing",
-        "Astro Framework Web Development",
-        "Search Engine Optimization",
-        "Answer Engine Optimization (AEO)",
-        "Generative Engine Optimization (GEO)",
-        "Google Knowledge Graph",
-        "n8n Workflow Automation",
-      ],
-    },
-    {
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Layanan apa yang bisa saya mulai lebih dulu?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Anda bisa memulai dari kebutuhan yang paling mendesak, seperti website, SEO, Google Ads, atau konten. Rekomendasi disesuaikan dengan kondisi dan tujuan bisnis Anda.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Apakah saya harus mengambil semua layanan sekaligus?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Tidak. Anda dapat membahas satu kebutuhan terlebih dahulu, lalu mempertimbangkan layanan lain jika memang mendukung tujuan bisnis.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Berapa lama sampai hasil pemasaran terlihat?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Waktunya bergantung pada kanal, kondisi awal, dan persaingan. Iklan dan SEO memiliki pola perkembangan yang berbeda; indikator dan evaluasinya perlu disepakati sejak awal.",
-          },
-        },
-      ],
-    },
+const wa =
+  "https://wa.me/6282329188998?text=Halo%20NetMediaTop%2C%20saya%20ingin%20konsultasi.";
+const problems = [
+  [
+    "Website Ada, tetapi Pelanggan Tidak Datang",
+    "Website kurang meyakinkan atau pengunjung tidak tahu harus menghubungi ke mana.",
+    "Bangun website profesional yang mudah dipahami dan memudahkan pengunjung menghubungi bisnis.",
+    "/services/jasa-pembuatan-website",
+    "Jelajahi Jasa Pembuatan Website",
   ],
-};
+  [
+    "Bisnis Sulit Ditemukan Calon Pelanggan",
+    "Orang mencari produk atau jasa di Google, tetapi kompetitor lebih mudah ditemukan.",
+    "Tingkatkan visibilitas melalui SEO, konten relevan, dan optimasi Google Business Profile.",
+    "/services/jasa-seo",
+    "Pelajari Layanan SEO",
+  ],
+  [
+    "Iklan Berjalan, tetapi Hasil Belum Maksimal",
+    "Anggaran sudah dikeluarkan, tetapi belum jelas apakah iklan mendatangkan pelanggan tepat.",
+    "Rencanakan Google dan Meta Ads berdasarkan target, penawaran, dan tujuan terukur.",
+    "/services/jasa-iklan-google-ads",
+    "Pelajari Digital Advertising",
+  ],
+  [
+    "Konten Ramai, tetapi Belum Menghasilkan Pelanggan",
+    "Konten rutin dibuat, tetapi belum cukup membantu calon pelanggan memahami dan mempercayai bisnis.",
+    "Bangun content marketing yang menjawab kebutuhan pelanggan.",
+    "/services/jasa-konten-sosmed",
+    "Pelajari Content Marketing",
+  ],
+];
+const packages: [string, string, string, string[], string, string][] = [
+  [
+    "LOCAL START",
+    "Bangun Fondasi Digital Bisnis Anda.",
+    "Untuk bisnis yang ingin mulai hadir online dan ditemukan di Google.",
+    [
+      "Website bisnis",
+      "SEO dasar dan halaman layanan",
+      "Google Business Profile",
+      "Riset kata kunci lokal",
+      "Pengukuran inquiry",
+    ],
+    "Fondasi digital profesional dan peluang ditemukan lewat pencarian lokal.",
+    "/paket-digital-marketing/local-start/",
+  ],
+  [
+    "BUSINESS GROWTH",
+    "Perluas Jangkauan dan Peluang Pelanggan.",
+    "Untuk bisnis yang ingin berkembang melalui Google, website, dan media sosial.",
+    [
+      "Website atau landing page",
+      "SEO dan pengembangan konten",
+      "Google Ads",
+      "Konten media sosial",
+      "Pengukuran kampanye",
+    ],
+    "Jangkauan lebih luas dari beberapa saluran digital.",
+    "/paket-digital-marketing/business-growth/",
+  ],
+  [
+    "INTEGRATED GROWTH",
+    "Satukan Pemasaran Digital dalam Satu Strategi.",
+    "Untuk bisnis yang ingin pemasaran menyeluruh dan terintegrasi.",
+    [
+      "Optimasi website",
+      "SEO dan content marketing",
+      "Google Ads dan Meta Ads",
+      "Konten media sosial",
+      "Retargeting dan evaluasi",
+    ],
+    "Pemasaran terukur yang dapat dikembangkan mengikuti kebutuhan.",
+    "/paket-digital-marketing/integrated-growth/",
+  ],
+];
+const benefits = [
+  [
+    "Lebih Mudah Ditemukan",
+    "Membuka peluang bisnis ditemukan orang yang mencari produk atau jasa Anda.",
+  ],
+  [
+    "Meningkatkan Kepercayaan",
+    "Tampilkan bisnis secara profesional dengan website dan informasi jelas.",
+  ],
+  [
+    "Menjangkau Calon Pelanggan",
+    "Gunakan Google, iklan, dan media sosial untuk menjangkau target pasar.",
+  ],
+  [
+    "Pemasaran Lebih Terarah",
+    "Tetapkan tujuan, anggaran, dan pengukuran untuk aktivitas pemasaran.",
+  ],
+];
+const reasons = [
+  [
+    "Tidak Sekadar Menawarkan Jasa",
+    "Kami memahami masalah bisnis sebelum merekomendasikan layanan.",
+  ],
+  [
+    "Solusi Sesuai Kebutuhan",
+    "Prioritas disesuaikan dengan kondisi bisnis dan anggaran.",
+  ],
+  [
+    "Layanan Saling Mendukung",
+    "Website, SEO, iklan, dan konten dilihat sebagai satu rangkaian.",
+  ],
+  [
+    "Fokus pada Perkembangan",
+    "Perhatikan tujuan pekerjaan dan perkembangan yang dapat diukur.",
+  ],
+];
+const faqs = [
+  [
+    "Bisnis kecil atau UMKM bisa menggunakan layanan?",
+    "Tentu. Solusi disesuaikan dengan kebutuhan, kondisi, dan kemampuan bisnis.",
+  ],
+  [
+    "Belum punya website, bisa dibantu dari awal?",
+    "Bisa, mulai dari perencanaan hingga pembuatan website dan informasi bisnis.",
+  ],
+  [
+    "Harus menggunakan semua layanan sekaligus?",
+    "Tidak. Anda dapat memulai dari satu layanan dan mengembangkan strategi bertahap.",
+  ],
+  [
+    "Berapa biayanya?",
+    "Harga paket di bawah masih placeholder untuk review. Biaya final bergantung kebutuhan dan lingkup pekerjaan.",
+  ],
+  [
+    "Apakah SEO dan iklan langsung menghasilkan pelanggan?",
+    "Tidak ada jaminan instan. Iklan perlu evaluasi, sedangkan SEO memerlukan proses.",
+  ],
+  [
+    "Bagaimana memulai kerja sama?",
+    "Hubungi kami, ceritakan kondisi bisnis dan target. Kita diskusikan langkah yang sesuai.",
+  ],
+];
 ---
 
 <BaseLayout {metadata}>
-  <!-- Schema JSON-LD -->
-  <script
-    type="application/ld+json"
-    is:inline
-    set:html={JSON.stringify(schemaData)}
-  />
-
-  <!-- 1. HERO SECTION -->
-  <Hero
-    title={`Bantu Bisnis Anda <br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Lebih Mudah Ditemukan Online</span>`}
-    tagline="Digital marketing yang lebih terarah untuk bisnis Anda"
-    description="Kami membantu bisnis menjangkau calon pelanggan melalui website, SEO, iklan, dan konten yang disusun sesuai kebutuhan serta tujuan bisnis Anda."
-    actions={[
-      {
-        text: "Konsultasi gratis via WhatsApp",
-        href: "https://wa.me/6282329188998?text=Halo%20Netmediatop%2C%20saya%20ingin%20konsultasi%20strategi%20digital.",
-        variant: "primary",
-      },
-      {
-        text: "Lihat layanan",
-        href: "#layanan",
-        variant: "secondary",
-        ariaLabel: "Lihat layanan NetMediaTop",
-      },
-    ]}
-  />
-
-  <!-- 2. SIAPA KAMI (About Us & Entity Authority) -->
-  <Content
-    items={[
-      {
-        title: "Bisnis Anda sulit ditemukan online",
-        description:
-          "Calon pelanggan mencari produk atau layanan seperti milik Anda, tetapi belum mudah menemukan bisnis Anda di Google.",
-      },
-      {
-        title: "Website belum mendatangkan pelanggan",
-        description:
-          "Pengunjung datang, tetapi belum cukup banyak yang menghubungi, bertanya, atau mengambil langkah berikutnya.",
-      },
-      {
-        title: "Pemasaran digital terasa terpisah-pisah",
-        description:
-          "Website, iklan, dan konten berjalan sendiri-sendiri sehingga sulit melihat mana yang paling membantu bisnis.",
-      },
-    ]}
-    image={devImg}
-    imageAlt="NetMediaTop Web Engineering & SEO Authority"
-  >
-    <Fragment>
-      <span class="text-xs font-semibold tracking-wider text-blue-500 uppercase"
-        >Siapa Kami</span
+  <main class="overflow-hidden">
+    <!-- 01 HERO -->
+    <section class="py-16 sm:py-24">
+      <div
+        class="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2"
       >
-      <h2 class="text-2xl font-bold tracking-tight sm:text-3xl mb-3 mt-1">
-        Pemasaran digital yang dimulai dari kebutuhan bisnis Anda
-      </h2>
-      <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
-        <strong>NetMediaTop</strong> membantu bisnis membangun kehadiran online yang
-        lebih terarah. Kami menyusun website, SEO, iklan, dan konten berdasarkan target
-        bisnis serta kebutuhan calon pelanggan Anda.
-      </p>
-    </Fragment>
-  </Content>
-
-  <!-- 3. LAYANAN KAMI (Core Services Taxonomy) -->
-  <div id="layanan">
-    <Features
-      tagline="Layanan Utama"
-      title="Layanan digital untuk menjangkau calon pelanggan"
-      subtitle="Pilih dukungan yang sesuai dengan kebutuhan bisnis Anda. Setiap layanan diarahkan pada tujuan yang jelas."
-      features={[
-        {
-          title: "Website bisnis yang siap berkembang",
-          description:
-            "Website yang responsif dan menjelaskan produk atau layanan dengan jelas, agar pengunjung lebih mudah mengambil langkah berikutnya.",
-        },
-        {
-          title: "SEO lokal dan visibilitas di Google",
-          description:
-            "Optimasi pencarian lokal membantu calon pelanggan menemukan informasi bisnis Anda saat mencari layanan di area yang relevan.",
-        },
-        {
-          title: "Meta Ads untuk memperkenalkan bisnis Anda",
-          description:
-            "Rencanakan iklan di Facebook dan Instagram untuk memperkenalkan produk atau layanan kepada audiens yang relevan.",
-        },
-        {
-          title: "Konten strategis untuk komunikasi yang konsisten",
-          description:
-            "Susun topik dan pesan konten yang sesuai dengan kebutuhan pelanggan serta tujuan komunikasi bisnis Anda.",
-        },
-        {
-          title: "Manajemen konten media sosial",
-          description:
-            "Rencanakan dan kelola konten media sosial agar kehadiran bisnis Anda lebih teratur dan mudah dikenali.",
-        },
-      ]}
-    />
-  </div>
-
-  <!-- 4. KEAHLIAN KAMI (Tech Stack & Methodology) -->
-  <section
-    class="py-12 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200/60 dark:border-slate-800/60"
-  >
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-3xl mx-auto mb-10">
-        <span
-          class="text-xs font-semibold tracking-wider text-purple-500 uppercase"
-          >Cara Kerja</span
-        >
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl mt-1">
-          Langkah pemasaran yang dimulai dari tujuan bisnis
-        </h2>
-        <p class="text-slate-600 dark:text-slate-400 mt-2">
-          Kita mulai dari kondisi dan target bisnis, lalu memilih prioritas yang
-          realistis untuk dijalankan dan dievaluasi.
+        <div>
+          <p
+            class="mb-4 text-sm font-bold uppercase tracking-widest text-blue-600"
+          >
+            Partner Digital Marketing untuk Bisnis
+          </p><h1
+            class="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl"
+          >
+            Bisnis Sulit Berkembang? Saatnya Perbaiki Cara Anda Mendapatkan
+            Pelanggan.
+          </h1><p
+            class="mt-6 text-lg leading-relaxed text-slate-600 dark:text-slate-300"
+          >
+            Sudah punya produk bagus, tetapi pelanggan belum bertambah? Website
+            belum menghasilkan inquiry, bisnis sulit ditemukan di Google, atau
+            biaya iklan terus berjalan tanpa hasil yang jelas?
+          </p><p class="mt-4 text-slate-600 dark:text-slate-300">
+            NetMediaTop membantu bisnis membangun pemasaran digital terarah
+            melalui website, SEO, Google Ads, dan content marketing agar lebih
+            mudah ditemukan, dipercaya, dan dipilih pelanggan.
+          </p><div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={wa}
+              class="rounded-xl bg-blue-600 px-6 py-3.5 text-center font-bold text-white"
+              >Konsultasikan Bisnis Anda</a
+            ><a
+              href="#solusi"
+              class="rounded-xl border px-6 py-3.5 text-center font-semibold"
+              >Kenali Solusi Kami</a
+            >
+          </div>
+        </div><div class="rounded-3xl border p-3 shadow-xl">
+          <img
+            src={aboutOffice.src}
+            alt="Ruang kerja NetMediaTop sebagai referensi visual hero"
+            class="aspect-[4/3] w-full rounded-2xl object-cover"
+            fetchpriority="high"
+          /><div
+            class="grid grid-cols-3 gap-2 p-3 text-center text-xs font-semibold"
+          >
+            <span>Website</span><span>Google & SEO</span><span
+              >Konten & Ads</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 02 PROBLEM / SOLUTION -->
+    <section id="solusi" class="bg-slate-50 py-16 dark:bg-slate-900/40">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mx-auto mb-10 max-w-3xl text-center">
+          <p class="text-sm font-bold uppercase text-blue-600">
+            Masalah dan Solusi
+          </p><h2 class="mt-3 text-3xl font-bold">
+            Banyak Bisnis Sudah Melakukan Pemasaran Online, Tetapi Belum
+            Mendapatkan Hasil yang Diharapkan.
+          </h2><p class="mt-4 text-slate-600 dark:text-slate-300">
+            Website, iklan, atau media sosial adalah langkah baik. Namun, jika
+            berjalan sendiri-sendiri tanpa arah, pemasaran bisa menghabiskan
+            waktu dan biaya. Kami membantu menghubungkan aktivitas digital untuk
+            tujuan bisnis yang sama.
+          </p>
+        </header><div class="grid gap-5 md:grid-cols-2">
+          {
+            problems.map((p, i) => (
+              <article class="flex flex-col rounded-2xl border bg-white p-6 dark:bg-slate-900">
+                <>
+                  <span class="text-sm font-bold text-blue-600">
+                    0{i + 1} / TANTANGAN
+                  </span>
+                  <h3 class="mt-3 text-xl font-bold">{p[0]}</h3>
+                  <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+                    {p[1]}
+                  </p>
+                  <p class="mt-4 text-sm">
+                    <b>Solusi:</b> {p[2]}
+                  </p>
+                  <a
+                    href={p[3]}
+                    class="mt-auto pt-5 font-semibold text-blue-600"
+                  >
+                    {p[4]} →
+                  </a>
+                </>
+              </article>
+            ))
+          }
+        </div><p class="mx-auto mt-8 max-w-3xl text-center">
+          Masalahnya mungkin bukan bisnis Anda kurang bagus. Calon pelanggan
+          bisa jadi belum menemukan, memahami, atau cukup yakin memilih Anda. <a
+            href="/services"
+            class="font-bold text-blue-600">Lihat semua layanan →</a
+          >
         </p>
       </div>
+    </section>
+    <!-- 03 PACKAGES -->
+    <section id="paket-digital-marketing" class="py-16">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mx-auto mb-10 max-w-3xl text-center">
+          <p class="text-sm font-bold uppercase text-blue-600">
+            Pilihan Paket
+          </p><h2 class="mt-3 text-3xl font-bold">
+            Satu Tujuan, Tiga Pilihan Strategi untuk Mengembangkan Bisnis Anda.
+          </h2><p class="mt-4 text-slate-600 dark:text-slate-300">
+            Setiap bisnis punya cara berbeda mendapat pelanggan. Pilih paket
+            sesuai kondisi dan tujuan bisnis.
+          </p>
+        </header><div class="grid gap-5 lg:grid-cols-3">
+          {
+            packages.map((p) => (
+              <article class="flex flex-col rounded-2xl border bg-white p-6 shadow-sm dark:bg-slate-900">
+                <>
+                  <p class="text-xs font-extrabold tracking-widest text-blue-600">
+                    {p[0]}
+                  </p>
+                  <h3 class="mt-3 text-xl font-bold">{p[1]}</h3>
+                  <p class="mt-3 text-sm text-slate-600 dark:text-slate-300">
+                    {p[2]}
+                  </p>
+                  <div class="my-5 rounded-xl bg-slate-50 p-4 dark:bg-slate-800">
+                    <>
+                      <small>Harga contoh untuk review · belum final</small>
+                      <p class="text-2xl font-extrabold">Rp X.XXX.XXX</p>
+                      <small>/ bulan · placeholder</small>
+                    </>
+                  </div>
+                  <b class="text-sm">Solusi yang termasuk:</b>
+                  <ul class="mt-2 space-y-2 text-sm">
+                    {p[3].map((v) => (
+                      <li>✓ {v}</li>
+                    ))}
+                  </ul>
+                  <p class="mt-4 text-sm">
+                    <b>Hasil yang dituju:</b> {p[4]}
+                  </p>
+                  <a href={p[5]} class="mt-auto pt-6 font-bold text-blue-600">
+                    Pelajari Paket {p[0]} →
+                  </a>
+                </>
+              </article>
+            ))
+          }
+        </div><p
+          class="mt-6 rounded-xl border border-dashed border-amber-400 bg-amber-50 p-4 text-sm dark:bg-amber-950/30"
+        >
+          <b>Catatan review:</b> harga, durasi, kuota pekerjaan, biaya iklan, dan
+          batas revisi perlu ditentukan. Biaya media iklan sebaiknya dipisahkan dari
+          jasa pengelolaan.
+        </p><div class="mt-8 text-center">
+          <b>Belum yakin paket mana yang sesuai?</b><p class="mt-2">
+            Ceritakan kondisi bisnis dan anggaran. Kami bantu menentukan
+            kombinasi layanan yang masuk akal.
+          </p><a
+            href={wa}
+            class="mt-4 inline-flex rounded-xl bg-blue-600 px-5 py-3 font-bold text-white"
+            >Konsultasikan Paket Anda</a
+          ><br /><a href="/services" class="mt-3 inline-flex text-blue-600"
+            >Lihat layanan →</a
+          >
+        </div>
+      </div>
+    </section>
+    <!-- 04 BENEFITS -->
+    <section class="bg-slate-50 py-16 dark:bg-slate-900/40">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mx-auto mb-10 max-w-3xl text-center">
+          <p class="text-sm font-bold uppercase text-blue-600">Manfaat</p><h2
+            class="mt-3 text-3xl font-bold"
+          >
+            Pemasaran Digital yang Tepat Membantu Bisnis Bergerak Lebih Maju.
+          </h2><p class="mt-4">
+            Website, Google, konten, dan iklan yang terencana membuka peluang
+            lebih besar menjangkau pelanggan.
+          </p>
+        </header><div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            benefits.map(([t, d]) => (
+              <article class="rounded-2xl border bg-white p-6 dark:bg-slate-900">
+                <>
+                  <span class="text-2xl text-blue-600">✦</span>
+                  <h3 class="mt-4 font-bold">{t}</h3>
+                  <p class="mt-2 text-sm">{d}</p>
+                </>
+              </article>
+            ))
+          }
+        </div><p class="mt-8 text-center">
+          <a href="#paket-digital-marketing" class="font-bold text-blue-600"
+            >Lihat paket →</a
+          >
+        </p>
+      </div>
+    </section>
+    <!-- 05 TRUST -->
+    <section class="py-16">
       <div
-        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center"
+        class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
       >
-        <div
-          class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-xs border border-slate-200/80 dark:border-slate-700"
-        >
-          <div class="font-bold text-slate-800 dark:text-slate-200">
-            Pahami kebutuhan
-          </div>
-          <div class="text-xs text-slate-500 mt-1">
-            Kenali kondisi dan tantangan bisnis
-          </div>
-        </div>
-        <div
-          class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-xs border border-slate-200/80 dark:border-slate-700"
-        >
-          <div class="font-bold text-slate-800 dark:text-slate-200">
-            Tentukan tujuan
-          </div>
-          <div class="text-xs text-slate-500 mt-1">
-            Sepakati target yang ingin dicapai
-          </div>
-        </div>
-        <div
-          class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-xs border border-slate-200/80 dark:border-slate-700"
-        >
-          <div class="font-bold text-slate-800 dark:text-slate-200">
-            Pilih prioritas
-          </div>
-          <div class="text-xs text-slate-500 mt-1">
-            Fokus pada langkah yang paling relevan
-          </div>
-        </div>
-        <div
-          class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-xs border border-slate-200/80 dark:border-slate-700"
-        >
-          <div class="font-bold text-slate-800 dark:text-slate-200">
-            Susun rencana
-          </div>
-          <div class="text-xs text-slate-500 mt-1">
-            Tentukan kanal, pesan, dan tahapan
-          </div>
-        </div>
-        <div
-          class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-xs border border-slate-200/80 dark:border-slate-700"
-        >
-          <div class="font-bold text-slate-800 dark:text-slate-200">
-            Jalankan bersama
-          </div>
-          <div class="text-xs text-slate-500 mt-1">
-            Kerjakan sesuai lingkup yang disepakati
-          </div>
-        </div>
-        <div
-          class="p-4 rounded-xl bg-white dark:bg-slate-800 shadow-xs border border-slate-200/80 dark:border-slate-700"
-        >
-          <div class="font-bold text-slate-800 dark:text-slate-200">
-            Tinjau hasil
-          </div>
-          <div class="text-xs text-slate-500 mt-1">
-            Evaluasi data dan langkah berikutnya
-          </div>
-        </div>
+        <div>
+          <p class="text-sm font-bold uppercase text-blue-600">
+            Mengapa NetMediaTop
+          </p><h2 class="mt-3 text-3xl font-bold">
+            Partner Digital Marketing yang Memahami Kebutuhan Bisnis Anda.
+          </h2><p class="mt-4">
+            Anda membutuhkan partner yang memahami usaha, menjelaskan pilihan,
+            dan menjalankan strategi sesuai kebutuhan.
+          </p><div class="mt-7 grid gap-5 sm:grid-cols-2">
+            {
+              reasons.map(([t, d]) => (
+                <article>
+                  <>
+                    <h3 class="font-bold">{t}</h3>
+                    <p class="mt-1 text-sm">{d}</p>
+                  </>
+                </article>
+              ))
+            }
+          </div><a
+            href="/about"
+            class="mt-7 inline-flex font-bold text-blue-600"
+            >Kenali NetMediaTop Lebih Dekat →</a
+          >
+        </div><figure>
+          <img
+            src={aboutOffice.src}
+            alt="Ruang kerja NetMediaTop"
+            class="aspect-[4/3] w-full rounded-3xl object-cover"
+            loading="lazy"
+          /><figcaption class="text-xs text-slate-500">
+            Foto kantor · about-office.webp
+          </figcaption>
+        </figure>
       </div>
-    </div>
-  </section>
-
-  <!-- 5. TESTIMONI (Social Proof) -->
-  <section class="py-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <span
-          class="text-xs font-semibold tracking-wider text-emerald-500 uppercase"
-          >Pendekatan Kami</span
-        >
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl mt-1">
-          Pemasaran digital yang bisa dipahami dan dievaluasi
-        </h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div
-          class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 shadow-xs"
-        >
-          <p class="text-slate-600 dark:text-slate-300 mb-4">
-            Anda berhak memahami alasan di balik setiap rekomendasi. Kami
-            membahas kebutuhan, pilihan kanal, prioritas, serta ukuran
-            keberhasilan sebelum pekerjaan dimulai.
+    </section>
+    <!-- 06 PORTFOLIO -->
+    <section class="bg-slate-50 py-16 dark:bg-slate-900/40">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mx-auto mb-10 max-w-3xl text-center">
+          <p class="text-sm font-bold uppercase text-blue-600">
+            Portfolio · Placeholder
+          </p><h2 class="mt-3 text-3xl font-bold">
+            Beberapa Pekerjaan yang Telah Kami Kerjakan.
+          </h2><p class="mt-4">
+            Nama proyek dan gambar di bawah adalah placeholder Lorem Ipsum untuk
+            review, bukan klaim proyek nyata.
           </p>
-          <div class="flex items-center gap-3">
-            <div
-              class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-500 font-bold flex items-center justify-center"
+        </header><div class="grid gap-5 md:grid-cols-3">
+          {
+            [
+              "Website Company Profile",
+              "Landing Page Bisnis Lokal",
+              "SEO & Content Development",
+            ].map((t, i) => (
+              <article class="overflow-hidden rounded-2xl border bg-white dark:bg-slate-900">
+                <>
+                  <div class="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-blue-100 to-purple-100 text-3xl font-extrabold dark:from-blue-950 dark:to-purple-950">
+                    Lorem Ipsum {i + 1}
+                  </div>
+                  <div class="p-5">
+                    <>
+                      <h3 class="font-bold">{t}</h3>
+                      <p class="mt-1 text-xs">
+                        Lorem Ipsum Dolor · Contoh Jenis Usaha
+                      </p>
+                      <p class="mt-3 text-sm">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Contoh layout portfolio.
+                      </p>
+                      <a
+                        href="/studi-kasus"
+                        class="mt-4 inline-flex text-blue-600"
+                      >
+                        Lihat studi kasus →
+                      </a>
+                    </>
+                  </div>
+                </>
+              </article>
+            ))
+          }
+        </div><p class="mt-8 text-center">
+          <a href="/studi-kasus" class="font-bold text-blue-600"
+            >Lihat semua portfolio →</a
+          >
+        </p>
+      </div>
+    </section>
+    <!-- 07 TESTIMONIAL -->
+    <section class="py-16">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header class="mx-auto mb-10 max-w-3xl text-center">
+          <p class="text-sm font-bold uppercase text-blue-600">
+            Pengalaman Pelanggan
+          </p><h2 class="mt-3 text-3xl font-bold">
+            Apa Kata Mereka tentang Pengalaman Bekerja Bersama Kami?
+          </h2><p class="mt-4">
+            Kenali cara kerja dan layanan kami dari pengalaman pelanggan.
+          </p>
+        </header><div class="grid gap-5 md:grid-cols-2">
+          {
+            [1, 2].map((n) => (
+              <blockquote class="rounded-2xl border border-dashed bg-slate-50 p-6 dark:bg-slate-900">
+                <>
+                  <b class="text-xs text-amber-700">
+                    PLACEHOLDER · TESTIMONI ASLI
+                  </b>
+                  <p class="mt-5 text-lg">
+                    “Lorem ipsum dolor sit amet. Masukkan testimoni asli tentang
+                    proses, komunikasi, atau hasil.”
+                  </p>
+                  <footer class="mt-5 text-sm font-semibold">
+                    Nama Pelanggan {n} · Nama Bisnis
+                  </footer>
+                </>
+              </blockquote>
+            ))
+          }
+        </div><p class="mt-4 text-center text-xs">
+          Contoh layout, bukan testimoni sungguhan.
+        </p><p class="mt-6 text-center">
+          <a href="/services" class="font-bold text-blue-600">Lihat layanan →</a
+          >
+        </p>
+      </div>
+    </section>
+    <!-- 08 FAQ -->
+    <section class="bg-slate-50 py-16 dark:bg-slate-900/40">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6">
+        <header class="mb-10 text-center">
+          <p class="text-sm font-bold uppercase text-blue-600">
+            Pertanyaan Umum
+          </p><h2 class="mt-3 text-3xl font-bold">
+            Pertanyaan Sebelum Memulai Kerja Sama dengan NetMediaTop.
+          </h2>
+        </header><div class="space-y-3">
+          {
+            faqs.map(([q, a]) => (
+              <details class="rounded-xl border bg-white p-5 dark:bg-slate-900">
+                <>
+                  <summary class="cursor-pointer font-bold">{q}</summary>
+                  <p class="mt-3 text-sm">{a}</p>
+                </>
+              </details>
+            ))
+          }
+        </div><p class="mt-6 text-center">
+          <a href="/services" class="font-bold text-blue-600"
+            >Lihat layanan NetMediaTop →</a
+          >
+        </p>
+      </div>
+    </section>
+    <!-- 09 FINAL CTA -->
+    <section
+      id="konsultasi"
+      class="bg-gradient-to-br from-blue-700 via-indigo-800 to-purple-900 py-16 text-white"
+    >
+      <div
+        class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.2fr_.8fr]"
+      >
+        <div>
+          <p class="text-sm font-bold uppercase tracking-widest text-blue-200">
+            Jangan Biarkan Bisnis Anda Berjalan di Tempat
+          </p><h2 class="mt-3 text-3xl font-extrabold">
+            Jangan Tunggu Sampai Bisnis Semakin Sulit Mendapatkan Pelanggan.
+          </h2><p class="mt-5 leading-relaxed text-blue-100">
+            Persaingan terus berjalan dan calon pelanggan punya banyak pilihan.
+            Saat penjualan melambat serta pemasaran tidak berkembang, menunda
+            perbaikan bisa membuat bisnis tertinggal. Bisnis yang tidak
+            berkembang membutuhkan langkah baru, bukan sekadar mengulang cara
+            lama.
+          </p><p class="mt-3 text-blue-100">
+            NetMediaTop siap membantu mengevaluasi pemasaran, menemukan peluang,
+            dan menentukan strategi melalui website, SEO, Google Ads, serta
+            content marketing.
+          </p><h3 class="mt-6 text-xl font-bold">
+            Mari Cari Tahu Apa yang Menghambat Pertumbuhan Bisnis Anda.
+          </h3><p class="mt-2 text-blue-100">
+            Ceritakan masalah Anda. Kami bantu diskusikan solusi dan langkah
+            awal yang masuk akal.
+          </p><div class="mt-7 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={wa}
+              class="rounded-xl bg-white px-6 py-3.5 text-center font-bold text-blue-800"
+              >Konsultasikan Bisnis Anda via WhatsApp</a
+            ><a
+              href="/services"
+              class="rounded-xl border border-white/40 px-6 py-3.5 text-center"
+              >Lihat semua layanan</a
             >
-              01
-            </div>
-            <div>
-              <div class="font-semibold text-sm">Prioritas yang jelas</div>
-              <div class="text-xs text-slate-500">
-                Mulai dari kebutuhan bisnis
-              </div>
-            </div>
           </div>
-        </div>
-        <div
-          class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 shadow-xs"
-        >
-          <p class="text-slate-600 dark:text-slate-300 mb-4">
-            Perkembangan pemasaran perlu ditinjau dengan indikator yang sesuai.
-            Dengan evaluasi berkala, keputusan berikutnya dapat didasarkan pada
-            data dan kondisi bisnis.
-          </p>
-          <div class="flex items-center gap-3">
-            <div
-              class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-500 font-bold flex items-center justify-center"
-            >
-              02
-            </div>
-            <div>
-              <div class="font-semibold text-sm">Evaluasi yang terarah</div>
-              <div class="text-xs text-slate-500">
-                Tinjau data, tentukan langkah
-              </div>
-            </div>
-          </div>
-        </div>
+        </div><figure>
+          <img
+            src={aboutOffice.src}
+            alt="Visual konsultasi bisnis placeholder"
+            class="aspect-[4/3] w-full rounded-3xl object-cover"
+            loading="lazy"
+          /><figcaption class="text-xs text-blue-100">
+            Visual konsultasi · placeholder review
+          </figcaption>
+        </figure>
       </div>
-    </div>
-  </section>
-
-  <!-- 6. GALERI & PORTOFOLIO (Showcase) -->
-  <Content
-    items={[]}
-    image={openSourceImg}
-    imageAlt="Ilustrasi strategi pemasaran digital untuk bisnis"
-    isReversed={true}
-  >
-    <Fragment>
-      <span
-        class="text-xs font-semibold tracking-wider text-indigo-500 uppercase"
-        >Penerapan strategi</span
-      >
-      <h2 class="text-2xl font-bold tracking-tight sm:text-3xl mb-3 mt-1">
-        Solusi digital yang disusun sesuai kebutuhan bisnis
-      </h2>
-      <p
-        class="text-slate-600 dark:text-slate-400 text-base leading-relaxed mb-4"
-      >
-        Setiap bisnis memiliki kebutuhan berbeda. Kami membantu menentukan aset
-        digital dan aktivitas pemasaran yang paling relevan dengan target Anda.
-      </p>
-      <a
-        href="/services"
-        class="inline-flex items-center font-medium text-blue-600 dark:text-blue-400 hover:underline"
-      >
-        Jelajahi layanan NetMediaTop &rarr;
-      </a>
-    </Fragment>
-  </Content>
-
-  <!-- 7. FAQ (Frequently Asked Questions - AEO Friendly) -->
-  <section
-    class="py-16 bg-slate-50 dark:bg-slate-900/40 border-t border-slate-200/60 dark:border-slate-800/60"
-  >
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-10">
-        <span
-          class="text-xs font-semibold tracking-wider text-blue-500 uppercase"
-          >Tanya Jawab (FAQ)</span
-        >
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl mt-1">
-          Pertanyaan sebelum memulai pemasaran digital
-        </h2>
-      </div>
-      <div class="space-y-4">
-        <div
-          class="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700"
-        >
-          <h3 class="font-semibold text-lg mb-2">
-            Layanan apa yang bisa saya mulai lebih dulu?
-          </h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Anda bisa memulai dari kebutuhan yang paling mendesak, seperti
-            website, SEO, Google Ads, atau konten. Rekomendasi disesuaikan
-            dengan kondisi dan tujuan bisnis Anda.
-          </p>
-        </div>
-        <div
-          class="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700"
-        >
-          <h3 class="font-semibold text-lg mb-2">
-            Apakah saya harus mengambil semua layanan sekaligus?
-          </h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Tidak. Anda dapat membahas satu kebutuhan terlebih dahulu, lalu
-            mempertimbangkan layanan lain jika memang mendukung tujuan bisnis.
-          </p>
-        </div>
-        <div
-          class="p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700"
-        >
-          <h3 class="font-semibold text-lg mb-2">
-            Berapa lama sampai hasil pemasaran terlihat?
-          </h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Waktunya bergantung pada kanal, kondisi awal, dan persaingan. Iklan
-            dan SEO memiliki pola perkembangan yang berbeda; indikator dan
-            evaluasinya perlu disepakati sejak awal.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. CTA SECTION (Conversion Trigger) -->
-  <section
-    class="py-16 bg-linear-to-br from-blue-600 via-indigo-700 to-purple-800 text-white text-center"
-  >
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <h2 class="text-3xl font-bold sm:text-4xl mb-4 tracking-tight">
-        Ceritakan target bisnis Anda. Mari susun langkah digital berikutnya.
-      </h2>
-      <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-        Dalam konsultasi awal, kita bahas kondisi bisnis, kebutuhan pemasaran,
-        dan prioritas yang paling masuk akal untuk dijalankan.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="https://wa.me/6282329188998?text=Halo%20Netmediatop%2C%20saya%20siap%20diskusi%20proyek%20digital."
-          class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-white text-blue-700 font-bold shadow-lg hover:bg-blue-50 transition-colors"
-        >
-          Mulai konsultasi gratis via WhatsApp
-        </a>
-        <a
-          href="/services"
-          class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl border border-white/30 text-white font-medium hover:bg-white/10 transition-colors"
-        >
-          Lihat layanan NetMediaTop
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9. BLOG (3 Postingan Terbaru dengan Image + Excerpt) -->
-  <section class="py-16 max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
-      <div>
-        <span
-          class="text-xs font-semibold tracking-wider text-blue-500 uppercase"
-          >Blog & Wawasan</span
-        >
-        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl mt-1">
-          Panduan praktis untuk mengembangkan bisnis online
-        </h2>
-      </div>
-      <a
-        href="/blog"
-        class="mt-4 md:mt-0 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline"
-      >
-        Lihat Semua Artikel &rarr;
-      </a>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {
-        displayPosts.map((post) => (
-          <article class="flex flex-col rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:shadow-xl transition-all duration-300 group">
-            {/* Featured Image */}
-            <div class="relative aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-              <img
-                src={post.image}
-                alt={post.title}
-                loading="lazy"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md shadow-xs">
-                {post.category}
-              </span>
-            </div>
-
-            {/* Content Body */}
-            <div class="p-6 flex flex-col flex-1">
-              <div class="text-xs text-slate-500 mb-2 flex items-center gap-2">
-                <span>📅</span>
-                <time datetime={post.date}>
-                  {new Date(post.date).toLocaleDateString("id-ID", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-              </div>
-
-              <h3 class="font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-3 line-clamp-2">
-                <a href={`/blog/${post.id}`}>{post.title}</a>
-              </h3>
-
-              {/* Excerpt */}
-              <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-1">
-                {post.excerpt}
-              </p>
-
-              <a
-                href={`/blog/${post.id}`}
-                class="inline-flex items-center text-xs font-bold text-blue-600 dark:text-blue-400 hover:translate-x-1 transition-transform"
-              >
-                Baca Selengkapnya &rarr;
-              </a>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+    </section>
+  </main>
 </BaseLayout>

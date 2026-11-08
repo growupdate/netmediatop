@@ -3,8 +3,17 @@ import { siteConfig } from "@/config/site";
 
 const currentYear = new Date().getFullYear();
 
+// Ubah, tambah, atau hapus teks ticker di daftar ini saja.
+const marqueeItems = [
+  "🚀 Jasa Pembuatan Website High Performance",
+  "📈 Optimasi SEO Bergaransi & Dominan di Google",
+  "🎯 Google Ads & Meta Ads Target Konversi Tinggi",
+  "✍️ Konten Media Sosial & Penulis Artikel SEO",
+  "🤖 Otomatisasi & AI Agent Marketing",
+];
+
 // ID Channel YouTube Resmi
-const YOUTUBE_CHANNEL_ID = "UCl-Zrl0QhF66lu1aGXaTbfw"; 
+const YOUTUBE_CHANNEL_ID = "UCl-Zrl0QhF66lu1aGXaTbfw";
 const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`;
 const YOUTUBE_CHANNEL_URL = `https://youtube.com/channel/${YOUTUBE_CHANNEL_ID}`;
 
@@ -15,7 +24,8 @@ interface VideoItem {
 }
 
 function truncateWords(text: string, count: number = 14): string {
-  if (!text) return "Saksikan panduan SEO dan digital marketing terbukti langsung dari channel kami.";
+  if (!text)
+    return "Saksikan panduan SEO dan digital marketing terbukti langsung dari channel kami.";
   const cleanText = text
     .replace(/<[^>]*>/g, "")
     .replace(/[\x22\x27]/g, "")
@@ -28,25 +38,29 @@ function truncateWords(text: string, count: number = 14): string {
 
 // Data Cadangan (Fallback) Menggunakan ID Video YouTube Asli & Valid
 let latestVideos: VideoItem[] = [
-  { 
-    id: "snqHKBYfkQw", 
-    title: "Rank #1 on Google Using 7 Free SEO Tools", 
-    excerpt: "Pelajari strategi SEO terbukti untuk mendominasi peringkat pertama Google secara organik dengan cepat." 
+  {
+    id: "snqHKBYfkQw",
+    title: "Rank #1 on Google Using 7 Free SEO Tools",
+    excerpt:
+      "Pelajari strategi SEO terbukti untuk mendominasi peringkat pertama Google secara organik dengan cepat.",
   },
-  { 
-    id: "Eh6nlUyqP4M", 
-    title: "A Step-by-Step SEO Strategy For Beginners", 
-    excerpt: "Panduan praktis riset kata kunci dan optimasi halaman web khusus untuk pemula." 
+  {
+    id: "Eh6nlUyqP4M",
+    title: "A Step-by-Step SEO Strategy For Beginners",
+    excerpt:
+      "Panduan praktis riset kata kunci dan optimasi halaman web khusus untuk pemula.",
   },
-  { 
-    id: "7LAkDz3iyGs", 
-    title: "SEO For Beginners - The Easiest Way to Generate Traffic", 
-    excerpt: "Tips meningkatkan angka konversi penjualan dan pertumbuhan bisnis lokal secara efektif." 
+  {
+    id: "7LAkDz3iyGs",
+    title: "SEO For Beginners - The Easiest Way to Generate Traffic",
+    excerpt:
+      "Tips meningkatkan angka konversi penjualan dan pertumbuhan bisnis lokal secara efektif.",
   },
-  { 
-    id: "-f9-t7q8yKQ", 
-    title: "8 Steps to Rank #1 on Google (2025 Guide)", 
-    excerpt: "Cara merancang kampanye iklan dan SEO berkinerja tinggi dengan efisiensi anggaran maksimal." 
+  {
+    id: "-f9-t7q8yKQ",
+    title: "8 Steps to Rank #1 on Google (2025 Guide)",
+    excerpt:
+      "Cara merancang kampanye iklan dan SEO berkinerja tinggi dengan efisiensi anggaran maksimal.",
   },
 ];
 
@@ -55,21 +69,25 @@ try {
   const res = await fetch(RSS_URL);
   if (res.ok) {
     const xmlText = await res.text();
-    const entries = xmlText.split('<entry>');
-    
+    const entries = xmlText.split("<entry>");
+
     if (entries.length > 1) {
       const parsed: VideoItem[] = [];
       for (let i = 1; i < entries.length && parsed.length < 5; i++) {
         const entry = entries[i];
         const idMatch = entry.match(/<yt:videoId>(.*?)<\/yt:videoId>/);
         const titleMatch = entry.match(/<title>(.*?)<\/title>/);
-        const descMatch = entry.match(/<media:description>([\s\S]*?)<\/media:description>/);
+        const descMatch = entry.match(
+          /<media:description>([\s\S]*?)<\/media:description>/,
+        );
 
         if (idMatch && titleMatch) {
           parsed.push({
             id: idMatch[1].trim(),
             title: titleMatch[1].trim(),
-            excerpt: descMatch ? truncateWords(descMatch[1], 14) : "Saksikan video edukasi digital marketing terbaru dari channel kami.",
+            excerpt: descMatch
+              ? truncateWords(descMatch[1], 14)
+              : "Saksikan video edukasi digital marketing terbaru dari channel kami.",
           });
         }
       }
@@ -79,37 +97,41 @@ try {
     }
   }
 } catch (e) {
-  console.error("Gagal mengambil RSS feed YouTube, menggunakan fallback video valid:", e);
+  console.error(
+    "Gagal mengambil RSS feed YouTube, menggunakan fallback video valid:",
+    e,
+  );
 }
 
 // Schema.org JSON-LD
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "NetMediaTop",
-  "url": "https://netmediatop.com",
-  "logo": "https://netmediatop.com/favicon.svg",
-  "description": "Agensi digital marketing terpadu spesialis Jasa SEO, Pembuatan Website, Google Ads, Meta Ads, dan Konten Digital.",
-  "address": {
+  name: "NetMediaTop",
+  url: "https://netmediatop.com",
+  logo: "https://netmediatop.com/favicon.svg",
+  description:
+    "Agensi digital marketing terpadu spesialis Jasa SEO, Pembuatan Website, Google Ads, Meta Ads, dan Konten Digital.",
+  address: {
     "@type": "PostalAddress",
-    "addressLocality": "Kudus",
-    "addressRegion": "Jawa Tengah",
-    "addressCountry": "ID"
+    addressLocality: "Kudus",
+    addressRegion: "Jawa Tengah",
+    addressCountry: "ID",
   },
-  "geo": {
+  geo: {
     "@type": "GeoCoordinates",
-    "latitude": "-6.8048",
-    "longitude": "110.8405"
+    latitude: "-6.8048",
+    longitude: "110.8405",
   },
-  "telephone": "+6282329188998",
-  "priceRange": "$$",
-  "sameAs": [
+  telephone: "+6282329188998",
+  priceRange: "$$",
+  sameAs: [
     "https://facebook.com/netmediatop",
     "https://instagram.com/netmediatop",
     YOUTUBE_CHANNEL_URL,
     "https://x.com/netmediatop",
-    "https://linkedin.com/company/netmediatop"
-  ]
+    "https://linkedin.com/company/netmediatop",
+  ],
 };
 
 const socialLinks = [
@@ -121,59 +143,63 @@ const socialLinks = [
   {
     name: "Instagram",
     href: "https://instagram.com/netmediatop",
-    iconPath: "M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z M17.5 6.5h.01 M16 2H8C4.686 2 2 4.686 2 8v8c0 3.314 2.686 6 6 6h8c3.314 0 6-2.686 6-6V8c0-3.314-2.686-6-6-6z",
+    iconPath:
+      "M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z M17.5 6.5h.01 M16 2H8C4.686 2 2 4.686 2 8v8c0 3.314 2.686 6 6 6h8c3.314 0 6-2.686 6-6V8c0-3.314-2.686-6-6-6z",
   },
   {
     name: "YouTube",
     href: YOUTUBE_CHANNEL_URL,
-    iconPath: "M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 001.94-2 29 29 0 004.6-5.25 29 29 0 00-.46-5.33z M9.75 15.02V8.48l5.75 3.27-5.75 3.27z",
+    iconPath:
+      "M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 001.94-2 29 29 0 004.6-5.25 29 29 0 00-.46-5.33z M9.75 15.02V8.48l5.75 3.27-5.75 3.27z",
   },
   {
     name: "X (Twitter)",
     href: "https://x.com/netmediatop",
-    iconPath: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
+    iconPath:
+      "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z",
   },
   {
     name: "LinkedIn",
     href: "https://linkedin.com/company/netmediatop",
-    iconPath: "M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z M2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z",
+    iconPath:
+      "M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z M2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z",
   },
 ];
 ---
 
-<footer class="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-100 text-slate-800 dark:bg-[#0B132B] dark:text-slate-200 transition-colors">
+<footer
+  class="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-100 text-slate-800 dark:bg-[#0B132B] dark:text-slate-200 transition-colors"
+>
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 
   <!-- Running Marquee Banner -->
-  <div class="border-b border-slate-200 dark:border-slate-800/80 py-3.5 overflow-hidden bg-slate-200/60 dark:bg-slate-900/60">
+  <div
+    class="border-b border-slate-200 dark:border-slate-800/80 py-3.5 overflow-hidden bg-slate-200/60 dark:bg-slate-900/60"
+  >
     <div class="relative w-full overflow-hidden group">
-      <div class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-slate-100 dark:from-[#0B132B] to-transparent z-10 pointer-events-none"></div>
-      <div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-100 dark:from-[#0B132B] to-transparent z-10 pointer-events-none"></div>
+      <div
+        class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-slate-100 dark:from-[#0B132B] to-transparent z-10 pointer-events-none"
+      >
+      </div>
+      <div
+        class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-100 dark:from-[#0B132B] to-transparent z-10 pointer-events-none"
+      >
+      </div>
 
-      <div class="flex w-max animate-footer-marquee space-x-8 hover:[animation-play-state:paused] cursor-pointer">
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">🚀 Jasa Pembuatan Website High Performance</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">📈 Optimasi SEO Bergaransi & Dominan di Google</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">🎯 Google Ads & Meta Ads Target Konversi Tinggi</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">✍️ Konten Media Sosial & Penulis Artikel SEO</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">🤖 Otomatisasi & AI Agent Marketing</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-
-        <!-- Loop Pengulangan -->
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">🚀 Jasa Pembuatan Website High Performance</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">📈 Optimasi SEO Bergaransi & Dominan di Google</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">🎯 Google Ads & Meta Ads Target Konversi Tinggi</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">✍️ Konten Media Sosial & Penulis Artikel SEO</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
-        <span class="text-sm font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">🤖 Otomatisasi & AI Agent Marketing</span>
-        <span class="text-sm text-slate-400 dark:text-slate-600">•</span>
+      <div
+        class="flex w-max animate-footer-marquee space-x-8 hover:[animation-play-state:paused] cursor-pointer"
+      >
+        {
+          [...marqueeItems, ...marqueeItems].map((item, index) => (
+            <span class="flex items-center gap-8 text-sm font-medium text-slate-700 dark:text-slate-300">
+              {item}
+              {index % marqueeItems.length < marqueeItems.length - 1 && (
+                <span class="text-slate-400 dark:text-slate-600">•</span>
+              )}
+            </span>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -181,45 +207,65 @@ const socialLinks = [
   <!-- Main Footer Grid (4 Kolom Utama) -->
   <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-      
       <!-- Kolom 1: Profil Entitas -->
       <div class="space-y-4">
-        <h3 class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+        <h3
+          class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+        >
           {siteConfig.name || "NetMediaTop"}
         </h3>
         <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-300">
-          NetMediaTop adalah agensi digital marketing terpadu yang membantu bisnis meningkatkan visibilitas online, lalu lintas organik, dan konversi penjualan melalui SEO, iklan berbayar, dan pembuatan website.
+          NetMediaTop adalah agensi digital marketing terpadu yang membantu
+          bisnis meningkatkan visibilitas online, lalu lintas organik, dan
+          konversi penjualan melalui SEO, iklan berbayar, dan pembuatan website.
         </p>
       </div>
 
       <!-- Kolom 2: Layanan Utama -->
       <div class="space-y-4">
-        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-400">
+        <h4
+          class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-400"
+        >
           Layanan Utama
         </h4>
         <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
           <li>
-            <a href="/services/jasa-pembuatan-website" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/services/jasa-pembuatan-website"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               🚀 Pembuatan Website
             </a>
           </li>
           <li>
-            <a href="/services/jasa-seo" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/services/jasa-seo"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               📈 Jasa SEO Bergaransi
             </a>
           </li>
           <li>
-            <a href="/services/jasa-iklan-google-ads" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/services/jasa-iklan-google-ads"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               🎯 Iklan Google Ads
             </a>
           </li>
           <li>
-            <a href="/services/jasa-iklan-facebook" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/services/jasa-iklan-facebook"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               📱 Iklan Meta (FB/IG)
             </a>
           </li>
           <li>
-            <a href="/services/jasa-konten-sosmed" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/services/jasa-konten-sosmed"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               ✍️ Jasa Konten Sosmed
             </a>
           </li>
@@ -228,32 +274,49 @@ const socialLinks = [
 
       <!-- Kolom 3: Perusahaan -->
       <div class="space-y-4">
-        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-400">
+        <h4
+          class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-400"
+        >
           Perusahaan
         </h4>
         <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
           <li>
-            <a href="/about" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/about"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               Tentang Kami
             </a>
           </li>
           <li>
-            <a href="/contact" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/contact"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               Hubungi Kami
             </a>
           </li>
           <li>
-            <a href="/blog" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/blog"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               Wawasan & Blog
             </a>
           </li>
           <li>
-            <a href="/privacy-policy" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/privacy-policy"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               Kebijakan Privasi
             </a>
           </li>
           <li>
-            <a href="/terms" class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400">
+            <a
+              href="/terms"
+              class="transition-colors hover:text-blue-600 dark:hover:text-cyan-400"
+            >
               Syarat & Ketentuan
             </a>
           </li>
@@ -262,9 +325,13 @@ const socialLinks = [
 
       <!-- Kolom 4: YouTube Carousel Slider -->
       <div class="space-y-3">
-        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-400 flex items-center gap-1.5">
+        <h4
+          class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-400 flex items-center gap-1.5"
+        >
           <svg class="w-4 h-4 fill-red-600 shrink-0" viewBox="0 0 24 24">
-            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            <path
+              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+            ></path>
           </svg>
           Video Terbaru
         </h4>
@@ -278,32 +345,55 @@ const socialLinks = [
             aria-label="Video Sebelumnya"
             class="p-1.5 rounded-full bg-slate-200 hover:bg-red-600 hover:text-white dark:bg-slate-800 dark:hover:bg-red-600 text-slate-700 dark:text-slate-300 transition-all shadow-xs border border-slate-300 dark:border-slate-700 shrink-0 cursor-pointer"
           >
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M15 19l-7-7 7-7"></path>
             </svg>
           </button>
 
           <!-- Frame Slider Track -->
           <div class="relative w-full overflow-hidden rounded-lg">
-            <div id="yt-carousel-track" class="flex transition-transform duration-300 ease-in-out">
-              {latestVideos.map((video) => (
-                <div class="w-full shrink-0" data-title={video.title} data-excerpt={video.excerpt}>
-                  <!-- Facade Card dengan Ikon Panah Merah Murni -->
-                  <div class="yt-facade-card relative w-full aspect-video rounded-lg overflow-hidden border border-slate-300 dark:border-slate-800 bg-black cursor-pointer group/facade" data-video-id={video.id}>
-                    <img
-                      src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-                      alt={video.title}
-                      loading="lazy"
-                      class="w-full h-full object-cover transition-transform duration-300 group-hover/facade:scale-105"
-                    />
-                    <div class="absolute inset-0 bg-black/20 group-hover/facade:bg-black/10 transition-colors flex items-center justify-center">
-                      <svg class="w-10 h-10 fill-red-600 group-hover/facade:scale-110 transition-transform drop-shadow-md" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+            <div
+              id="yt-carousel-track"
+              class="flex transition-transform duration-300 ease-in-out"
+            >
+              {
+                latestVideos.map((video) => (
+                  <div
+                    class="w-full shrink-0"
+                    data-title={video.title}
+                    data-excerpt={video.excerpt}
+                  >
+                    <div
+                      class="yt-facade-card relative w-full aspect-video rounded-lg overflow-hidden border border-slate-300 dark:border-slate-800 bg-black cursor-pointer group/facade"
+                      data-video-id={video.id}
+                    >
+                      <img
+                        src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                        alt={video.title}
+                        loading="lazy"
+                        class="w-full h-full object-cover transition-transform duration-300 group-hover/facade:scale-105"
+                      />
+                      <div class="absolute inset-0 bg-black/20 group-hover/facade:bg-black/10 transition-colors flex items-center justify-center">
+                        <svg
+                          class="w-10 h-10 fill-red-600 group-hover/facade:scale-110 transition-transform drop-shadow-md"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              }
             </div>
           </div>
 
@@ -314,8 +404,17 @@ const socialLinks = [
             aria-label="Video Selanjutnya"
             class="p-1.5 rounded-full bg-slate-200 hover:bg-red-600 hover:text-white dark:bg-slate-800 dark:hover:bg-red-600 text-slate-700 dark:text-slate-300 transition-all shadow-xs border border-slate-300 dark:border-slate-700 shrink-0 cursor-pointer"
           >
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M9 5l7 7-7 7"></path>
             </svg>
           </button>
         </div>
@@ -323,14 +422,23 @@ const socialLinks = [
         <!-- Judul Video Active, Excerpt & Counter -->
         <div class="space-y-1 px-0.5">
           <div class="flex items-start justify-between gap-2">
-            <p id="yt-video-title" class="text-[11px] font-bold leading-snug text-slate-900 dark:text-white line-clamp-1">
+            <p
+              id="yt-video-title"
+              class="text-[11px] font-bold leading-snug text-slate-900 dark:text-white line-clamp-1"
+            >
               {latestVideos[0].title}
             </p>
-            <span id="yt-slide-counter" class="text-[10px] font-mono text-slate-500 bg-slate-200/80 dark:bg-slate-800 px-1.5 py-0.5 rounded shrink-0">
+            <span
+              id="yt-slide-counter"
+              class="text-[10px] font-mono text-slate-500 bg-slate-200/80 dark:bg-slate-800 px-1.5 py-0.5 rounded shrink-0"
+            >
               1/{latestVideos.length}
             </span>
           </div>
-          <p id="yt-video-excerpt" class="text-[10px] leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-2 min-h-[28px]">
+          <p
+            id="yt-video-excerpt"
+            class="text-[10px] leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-2 min-h-[28px]"
+          >
             {latestVideos[0].excerpt}
           </p>
         </div>
@@ -344,73 +452,115 @@ const socialLinks = [
             class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-[11px] shadow-xs hover:shadow-md transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
           >
             <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+              ></path>
             </svg>
             <span>Subscribe</span>
           </a>
         </div>
       </div>
-
     </div>
 
     <!-- Bottom Bar -->
-    <div class="mt-12 border-t border-slate-200 dark:border-slate-800/80 pt-8 space-y-6">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-600 dark:text-slate-400">
-        
+    <div
+      class="mt-12 border-t border-slate-200 dark:border-slate-800/80 pt-8 space-y-6"
+    >
+      <div
+        class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-600 dark:text-slate-400"
+      >
         <!-- NAP Details -->
-        <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-center md:text-left">
-          <span class="text-slate-700 dark:text-slate-300">📍 Kudus, Jawa Tengah, Indonesia</span>
-          <span class="hidden sm:inline text-slate-400 dark:text-slate-600">•</span>
-          <span>📞 WA: <a href="https://wa.me/6282329188998" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-cyan-400 text-slate-900 dark:text-slate-200 font-medium underline decoration-dashed">+62 823-2918-8998</a></span>
-          <span class="hidden sm:inline text-slate-400 dark:text-slate-600">•</span>
-          <span class="text-slate-700 dark:text-slate-300">✉️ info@netmediatop.com</span>
+        <div
+          class="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-center md:text-left"
+        >
+          <span class="text-slate-700 dark:text-slate-300"
+            >📍 Kudus, Jawa Tengah, Indonesia</span
+          >
+          <span class="hidden sm:inline text-slate-400 dark:text-slate-600"
+            >•</span
+          >
+          <span
+            >📞 WA: <a
+              href="https://wa.me/6282329188998"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-blue-600 dark:hover:text-cyan-400 text-slate-900 dark:text-slate-200 font-medium underline decoration-dashed"
+              >+62 823-2918-8998</a
+            ></span
+          >
+          <span class="hidden sm:inline text-slate-400 dark:text-slate-600"
+            >•</span
+          >
+          <span class="text-slate-700 dark:text-slate-300"
+            >✉️ info@netmediatop.com</span
+          >
         </div>
 
         <!-- Ikon Media Sosial -->
         <div class="flex items-center gap-3">
-          {socialLinks.map((social) => (
-            <a
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.name}
-              class="p-2.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:text-blue-600 hover:border-blue-400 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300 dark:hover:text-cyan-400 dark:hover:border-cyan-500/50 transition-all duration-200 shadow-xs"
-            >
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d={social.iconPath} />
-              </svg>
-            </a>
-          ))}
+          {
+            socialLinks.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                class="p-2.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:text-blue-600 hover:border-blue-400 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-300 dark:hover:text-cyan-400 dark:hover:border-cyan-500/50 transition-all duration-200 shadow-xs"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d={social.iconPath} />
+                </svg>
+              </a>
+            ))
+          }
         </div>
-
       </div>
 
       <!-- Copyright & AI Link Subtil -->
-      <div class="flex flex-col sm:flex-row justify-between items-center text-[11px] text-slate-500 dark:text-slate-500 pt-2 border-t border-slate-200/60 dark:border-slate-800/40 gap-2">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-center text-[11px] text-slate-500 dark:text-slate-500 pt-2 border-t border-slate-200/60 dark:border-slate-800/40 gap-2"
+      >
         <div>
           &copy; {currentYear} NetMediaTop. All rights reserved.
         </div>
         <div class="flex items-center gap-3">
-          <a href="/sitemap-index.xml" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-blue-600 dark:hover:text-cyan-400">Sitemap</a>
+          <a
+            href="/sitemap-index.xml"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:underline hover:text-blue-600 dark:hover:text-cyan-400"
+            >Sitemap</a
+          >
           <span>|</span>
-          <a href="/llms.txt" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-blue-600 dark:hover:text-cyan-400">LLMs.txt</a>
+          <a
+            href="/llms.txt"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:underline hover:text-blue-600 dark:hover:text-cyan-400"
+            >LLMs.txt</a
+          >
           <span>|</span>
-          <a href="/.well-known/ard.json" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-blue-600 dark:hover:text-cyan-400">ARD Manifest</a>
+          <a
+            href="/.well-known/ard.json"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:underline hover:text-blue-600 dark:hover:text-cyan-400"
+            >ARD Manifest</a
+          >
         </div>
       </div>
     </div>
-
   </div>
 </footer>
 
 <script>
   function initYtCarousel() {
-    const track = document.getElementById('yt-carousel-track');
-    const prevBtn = document.getElementById('yt-slide-prev');
-    const nextBtn = document.getElementById('yt-slide-next');
-    const counter = document.getElementById('yt-slide-counter');
-    const titleEl = document.getElementById('yt-video-title');
-    const excerptEl = document.getElementById('yt-video-excerpt');
+    const track = document.getElementById("yt-carousel-track");
+    const prevBtn = document.getElementById("yt-slide-prev");
+    const nextBtn = document.getElementById("yt-slide-next");
+    const counter = document.getElementById("yt-slide-counter");
+    const titleEl = document.getElementById("yt-video-title");
+    const excerptEl = document.getElementById("yt-video-excerpt");
 
     if (!track || !prevBtn || !nextBtn) return;
 
@@ -418,10 +568,11 @@ const socialLinks = [
     const totalSlides = slides.length;
     let currentIndex = 0;
 
-    const titles = slides.map(s => s.getAttribute('data-title') || '');
-    const excerpts = slides.map(s => s.getAttribute('data-excerpt') || '');
+    const titles = slides.map((s) => s.getAttribute("data-title") || "");
+    const excerpts = slides.map((s) => s.getAttribute("data-excerpt") || "");
 
     function updateSlide() {
+      if (!track) return;
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
       if (counter) {
         counter.textContent = `${currentIndex + 1}/${totalSlides}`;
@@ -434,20 +585,20 @@ const socialLinks = [
       }
     }
 
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener("click", () => {
       currentIndex = currentIndex > 0 ? currentIndex - 1 : totalSlides - 1;
       updateSlide();
     });
 
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener("click", () => {
       currentIndex = currentIndex < totalSlides - 1 ? currentIndex + 1 : 0;
       updateSlide();
     });
 
-    const facadeCards = document.querySelectorAll('.yt-facade-card');
+    const facadeCards = document.querySelectorAll(".yt-facade-card");
     facadeCards.forEach((card) => {
-      card.addEventListener('click', () => {
-        const videoId = card.getAttribute('data-video-id');
+      card.addEventListener("click", () => {
+        const videoId = card.getAttribute("data-video-id");
         if (videoId) {
           card.innerHTML = `
             <iframe
@@ -464,13 +615,17 @@ const socialLinks = [
   }
 
   initYtCarousel();
-  document.addEventListener('astro:page-load', initYtCarousel);
+  document.addEventListener("astro:page-load", initYtCarousel);
 </script>
 
 <style>
   @keyframes footer-marquee {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .animate-footer-marquee {
