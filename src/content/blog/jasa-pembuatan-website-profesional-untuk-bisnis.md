@@ -3,6 +3,7 @@ title: "Jasa Pembuatan Website Profesional untuk Bisnis"
 pubDate: "2026-11-09"
 description: "Butuh website profesional untuk bisnis? NetMediaTop membantu membuat website company profile, landing page, dan website UMKM yang responsif dan informatif."
 author: "NetMediaTop"
+image: "/blog/internet-marketing.jpeg"
 category: "jasa pembuatan website"
 tags: ["jasa pembuatan website", "responsive", "seo", "fast loading"]
 keywords:
@@ -28,7 +29,7 @@ Mulai dari website company profile hingga landing page, kami membantu menyusun k
 
 **[Konsultasikan Website Anda](#konsultasi)**
 
-[Konsultasi kebutuhan website bisnis](../../assets/images/services/consulting.webp)
+![Konsultasi kebutuhan website bisnis](../../assets/images/services/consulting.webp)
 
 ## Website Bukan Sekadar Ada di Internet
 
@@ -157,7 +158,7 @@ Fondasi SEO bukan jaminan website langsung mendapatkan peringkat teratas Google.
 
 Pengunjung perlu menemukan tombol WhatsApp, formulir, atau informasi kontak tanpa harus mencarinya terlalu jauh.
 
-![Elemen penting website bisnis mulai dari struktur informasi hingga fondasi SEO]((../../assets/images/services/consulting.webp)
+![Elemen penting website bisnis mulai dari struktur informasi hingga fondasi SEO](../../assets/images/services/consulting.webp)
 
 ## Bagaimana Proses Pembuatan Website di NetMediaTop?
 

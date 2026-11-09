@@ -1,6 +1,12 @@
 ﻿---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import aboutOffice from "@/assets/images/about-office.webp";
+import { getCollection } from "astro:content";
+
+const latestPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
 const metadata = {
   title: "Digital Marketing untuk Bisnis yang Ingin Tumbuh | NetMediaTop",
   description:
@@ -156,7 +162,7 @@ const faqs = [
       >
         <div>
           <p
-            class="mb-4 text-sm font-bold uppercase tracking-widest text-blue-600"
+            class="mb-4 text-sm font-bold uppercase tracking-widest text-blue-600 dark:text-white"
           >
             Partner Digital Marketing untuk Bisnis
           </p><h1
@@ -205,7 +211,7 @@ const faqs = [
     <section id="solusi" class="bg-slate-50 py-16 dark:bg-slate-900/40">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <header class="mx-auto mb-10 max-w-3xl text-center">
-          <p class="text-sm font-bold uppercase text-blue-600">
+          <p class="text-sm font-bold uppercase text-blue-600 dark:text-white">
             Masalah dan Solusi
           </p><h2 class="mt-3 text-3xl font-bold">
             Banyak Bisnis Sudah Melakukan Pemasaran Online, Tetapi Belum
@@ -221,7 +227,7 @@ const faqs = [
             problems.map((p, i) => (
               <article class="flex flex-col rounded-2xl border bg-white p-6 dark:bg-slate-900">
                 <>
-                  <span class="text-sm font-bold text-blue-600">
+                  <span class="text-sm font-bold text-blue-600 dark:text-white">
                     0{i + 1} / TANTANGAN
                   </span>
                   <h3 class="mt-3 text-xl font-bold">{p[0]}</h3>
@@ -233,7 +239,7 @@ const faqs = [
                   </p>
                   <a
                     href={p[3]}
-                    class="mt-auto pt-5 font-semibold text-blue-600"
+                    class="mt-auto pt-5 font-semibold text-blue-600 dark:text-white"
                   >
                     {p[4]} →
                   </a>
@@ -245,7 +251,8 @@ const faqs = [
           Masalahnya mungkin bukan bisnis Anda kurang bagus. Calon pelanggan
           bisa jadi belum menemukan, memahami, atau cukup yakin memilih Anda. <a
             href="/services"
-            class="font-bold text-blue-600">Lihat semua layanan →</a
+            class="font-bold text-blue-600 dark:text-white"
+            >Lihat semua layanan →</a
           >
         </p>
       </div>
@@ -254,7 +261,7 @@ const faqs = [
     <section id="paket-digital-marketing" class="py-16">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <header class="mx-auto mb-10 max-w-3xl text-center">
-          <p class="text-sm font-bold uppercase text-blue-600">
+          <p class="text-sm font-bold uppercase text-blue-600 dark:text-white">
             Pilihan Paket
           </p><h2 class="mt-3 text-3xl font-bold">
             Satu Tujuan, Tiga Pilihan Strategi untuk Mengembangkan Bisnis Anda.
@@ -267,7 +274,7 @@ const faqs = [
             packages.map((p) => (
               <article class="flex flex-col rounded-2xl border bg-white p-6 shadow-sm dark:bg-slate-900">
                 <>
-                  <p class="text-xs font-extrabold tracking-widest text-blue-600">
+                  <p class="text-xs font-extrabold tracking-widest text-blue-600 dark:text-white">
                     {p[0]}
                   </p>
                   <h3 class="mt-3 text-xl font-bold">{p[1]}</h3>
@@ -290,7 +297,10 @@ const faqs = [
                   <p class="mt-4 text-sm">
                     <b>Hasil yang dituju:</b> {p[4]}
                   </p>
-                  <a href={p[5]} class="mt-auto pt-6 font-bold text-blue-600">
+                  <a
+                    href={p[5]}
+                    class="mt-auto pt-6 font-bold text-blue-600 dark:text-white"
+                  >
                     Pelajari Paket {p[0]} →
                   </a>
                 </>
@@ -311,7 +321,9 @@ const faqs = [
             href={wa}
             class="mt-4 inline-flex rounded-xl bg-blue-600 px-5 py-3 font-bold text-white"
             >Konsultasikan Paket Anda</a
-          ><br /><a href="/services" class="mt-3 inline-flex text-blue-600"
+          ><br /><a
+            href="/services"
+            class="mt-3 inline-flex text-blue-600 dark:text-white"
             >Lihat layanan →</a
           >
         </div>
@@ -321,9 +333,9 @@ const faqs = [
     <section class="bg-slate-50 py-16 dark:bg-slate-900/40">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <header class="mx-auto mb-10 max-w-3xl text-center">
-          <p class="text-sm font-bold uppercase text-blue-600">Manfaat</p><h2
-            class="mt-3 text-3xl font-bold"
-          >
+          <p class="text-sm font-bold uppercase text-blue-600 dark:text-white">
+            Manfaat
+          </p><h2 class="mt-3 text-3xl font-bold">
             Pemasaran Digital yang Tepat Membantu Bisnis Bergerak Lebih Maju.
           </h2><p class="mt-4">
             Website, Google, konten, dan iklan yang terencana membuka peluang
@@ -334,7 +346,7 @@ const faqs = [
             benefits.map(([t, d]) => (
               <article class="rounded-2xl border bg-white p-6 dark:bg-slate-900">
                 <>
-                  <span class="text-2xl text-blue-600">✦</span>
+                  <span class="text-2xl text-blue-600 dark:text-white">✦</span>
                   <h3 class="mt-4 font-bold">{t}</h3>
                   <p class="mt-2 text-sm">{d}</p>
                 </>
@@ -342,8 +354,9 @@ const faqs = [
             ))
           }
         </div><p class="mt-8 text-center">
-          <a href="#paket-digital-marketing" class="font-bold text-blue-600"
-            >Lihat paket →</a
+          <a
+            href="#paket-digital-marketing"
+            class="font-bold text-blue-600 dark:text-white">Lihat paket →</a
           >
         </p>
       </div>
@@ -354,7 +367,7 @@ const faqs = [
         class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2"
       >
         <div>
-          <p class="text-sm font-bold uppercase text-blue-600">
+          <p class="text-sm font-bold uppercase text-blue-600 dark:text-white">
             Mengapa NetMediaTop
           </p><h2 class="mt-3 text-3xl font-bold">
             Partner Digital Marketing yang Memahami Kebutuhan Bisnis Anda.
@@ -374,7 +387,7 @@ const faqs = [
             }
           </div><a
             href="/about"
-            class="mt-7 inline-flex font-bold text-blue-600"
+            class="mt-7 inline-flex font-bold text-blue-600 dark:text-white"
             >Kenali NetMediaTop Lebih Dekat →</a
           >
         </div><figure>
@@ -393,7 +406,7 @@ const faqs = [
     <section class="bg-slate-50 py-16 dark:bg-slate-900/40">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <header class="mx-auto mb-10 max-w-3xl text-center">
-          <p class="text-sm font-bold uppercase text-blue-600">
+          <p class="text-sm font-bold uppercase text-blue-600 dark:text-white">
             Portfolio · Placeholder
           </p><h2 class="mt-3 text-3xl font-bold">
             Beberapa Pekerjaan yang Telah Kami Kerjakan.
@@ -425,7 +438,7 @@ const faqs = [
                       </p>
                       <a
                         href="/studi-kasus"
-                        class="mt-4 inline-flex text-blue-600"
+                        class="mt-4 inline-flex text-blue-600 dark:text-white"
                       >
                         Lihat studi kasus →
                       </a>
@@ -436,7 +449,7 @@ const faqs = [
             ))
           }
         </div><p class="mt-8 text-center">
-          <a href="/studi-kasus" class="font-bold text-blue-600"
+          <a href="/studi-kasus" class="font-bold text-blue-600 dark:text-white"
             >Lihat semua portfolio →</a
           >
         </p>
@@ -446,7 +459,7 @@ const faqs = [
     <section class="py-16">
       <div class="mx-auto max-w-6xl px-4 sm:px-6">
         <header class="mx-auto mb-10 max-w-3xl text-center">
-          <p class="text-sm font-bold uppercase text-blue-600">
+          <p class="text-sm font-bold uppercase text-blue-600 dark:text-white">
             Pengalaman Pelanggan
           </p><h2 class="mt-3 text-3xl font-bold">
             Apa Kata Mereka tentang Pengalaman Bekerja Bersama Kami?
@@ -475,7 +488,8 @@ const faqs = [
         </div><p class="mt-4 text-center text-xs">
           Contoh layout, bukan testimoni sungguhan.
         </p><p class="mt-6 text-center">
-          <a href="/services" class="font-bold text-blue-600">Lihat layanan →</a
+          <a href="/services" class="font-bold text-blue-600 dark:text-white"
+            >Lihat layanan →</a
           >
         </p>
       </div>
@@ -484,7 +498,7 @@ const faqs = [
     <section class="bg-slate-50 py-16 dark:bg-slate-900/40">
       <div class="mx-auto max-w-4xl px-4 sm:px-6">
         <header class="mb-10 text-center">
-          <p class="text-sm font-bold uppercase text-blue-600">
+          <p class="text-sm font-bold uppercase text-blue-600 dark:text-white">
             Pertanyaan Umum
           </p><h2 class="mt-3 text-3xl font-bold">
             Pertanyaan Sebelum Memulai Kerja Sama dengan NetMediaTop.
@@ -501,10 +515,64 @@ const faqs = [
             ))
           }
         </div><p class="mt-6 text-center">
-          <a href="/services" class="font-bold text-blue-600"
+          <a href="/services" class="font-bold text-blue-600 dark:text-white"
             >Lihat layanan NetMediaTop →</a
           >
         </p>
+      </div>
+    </section>
+    <!-- 09 ARTIKEL TERBARU -->
+    <section class="bg-slate-50 py-16 dark:bg-slate-900/40">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <header
+          class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <div>
+            <p class="text-sm font-bold uppercase text-white">Blog & Wawasan</p>
+            <h2 class="mt-3 text-3xl font-bold">
+              Artikel Terbaru untuk Mengembangkan Bisnis
+            </h2>
+          </div>
+          <a href="/blog" class="font-semibold text-white"
+            >Lihat semua artikel →</a
+          >
+        </header>
+        <div class="grid gap-5 md:grid-cols-3">
+          {
+            latestPosts.map((post) => (
+              <article class="flex flex-col overflow-hidden rounded-2xl border bg-white dark:bg-slate-900">
+                {post.data.image && (
+                  <img
+                    src={post.data.image}
+                    alt={post.data.title}
+                    class="aspect-video w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                <div class="flex flex-1 flex-col p-6">
+                  <p class="text-xs font-semibold uppercase tracking-wide text-white">
+                    {post.data.category || "Artikel"}
+                  </p>
+                  <h3 class="mt-3 text-xl font-bold leading-snug">
+                    <a class="hover:text-white" href={`/blog/${post.id}`}>
+                      {post.data.title}
+                    </a>
+                  </h3>
+                  <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                    {post.data.description}
+                  </p>
+                  <a
+                    class="mt-5 font-semibold text-white"
+                    href={`/blog/${post.id}`}
+                  >
+                    Baca artikel →
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
     <!-- 09 FINAL CTA -->
