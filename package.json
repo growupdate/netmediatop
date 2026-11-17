@@ -25,6 +25,7 @@
     "@astrojs/sitemap": "^3.7.4",
     "@iconify-json/lucide": "^1.2.99",
     "@iconify-json/tabler": "^1.2.32",
+    "@n8n/chat": "^1.46.5",
     "@tailwindcss/vite": "^4.2.2",
     "astro": "^7.3.2",
     "astro-icon": "^1.1.5",
