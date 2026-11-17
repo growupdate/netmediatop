@@ -28,6 +28,8 @@ import "@/styles/global.css";
 import { siteConfig } from "@/config/site";
 import WhatsAppWidget from "@/components/ui/WhatsAppWidget.astro";
 
+import N8nChat from "@/components/N8nChat.astro";
+
 const { title, description, ogImage, canonical, metadata } = Astro.props;
 
 const finalTitle = metadata?.title || title;
@@ -214,5 +216,6 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
     </script>
     <!-- Widget Floating WhatsApp  -->
     <WhatsAppWidget phoneNumber="628329188998" />
+    <N8nChat />
   </body>
 </html>

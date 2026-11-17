@@ -1,0 +1,26 @@
+---
+import "@n8n/chat/style.css";
+---
+
+<script>
+  import { createChat } from "@n8n/chat";
+
+  createChat({
+    webhookUrl:
+      "https://ai.netmediatop.com/webhook/0fd4eae5-5551-4cd5-88b3-15bca5d25155/chat",
+    mode: "window",
+    initialMessages: [
+      "Halo! Saya konsultan pertumbuhan NetMediaTop. Apa tujuan pertumbuhan bisnis Anda?",
+    ],
+    defaultLanguage: "id",
+    i18n: {
+      id: {
+        title: "AI Digital Marketing NetMediaTop",
+        subtitle:
+          "Ceritakan bisnis Anda, kami bantu bisnis tumbuh dan berkembang  ",
+        getStarted: "Mulai konsultasi",
+        inputPlaceholder: "Tulis pesan...",
+      },
+    },
+  });
+</script>
