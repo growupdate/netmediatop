@@ -58,8 +58,16 @@ import "@n8n/chat/style.css";
 <script>
   import { createChat } from "@n8n/chat";
 
+  type ServiceInfo = {
+    key: string;
+    label: string;
+    link: string;
+    waText: string;
+    ebook: string;
+  };
+
   // ===== MAPPING 6 LAYANAN ASLI NETMEDIATOP =====
-  const SERVICE_MAP = {
+  const SERVICE_MAP: Record<string, ServiceInfo> = {
     "jasa-pembuatan-website": {
       key: "jasa-pembuatan-website",
       label: "Website",
@@ -118,7 +126,7 @@ import "@n8n/chat/style.css";
     },
   };
 
-  function getServiceFromPath(path) {
+  function getServiceFromPath(path: string): ServiceInfo {
     const p = (path || "").toLowerCase();
     for (const key of Object.keys(SERVICE_MAP)) {
       if (key !== "default" && p.includes(key)) return SERVICE_MAP[key];
@@ -133,8 +141,12 @@ import "@n8n/chat/style.css";
     "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(service.waText);
 
   // ===== TOMBOL WA DINAMIS =====
-  const waBtn = document.getElementById("wa-handoff-btn");
-  const waLabel = document.getElementById("wa-handoff-label");
+  const waBtn = document.getElementById(
+    "wa-handoff-btn",
+  ) as HTMLAnchorElement | null;
+  const waLabel = document.getElementById(
+    "wa-handoff-label",
+  ) as HTMLElement | null;
   if (waBtn && waLabel) {
     waBtn.href = waLink;
     if (service.key === "default") {
@@ -152,7 +164,7 @@ import "@n8n/chat/style.css";
     initialMessages: [
       "Saya Tri, Tim NetMediaTop. Silakan ngobrol santai, bagaimana saya bisa bantu bisnis Anda tumbuh lebih baik?",
     ],
-    defaultLanguage: "id",
+    defaultLanguage: "id" as unknown as "en",
     metadata: {
       sourceUrl: window.location.href,
       sourcePage: window.location.pathname,
