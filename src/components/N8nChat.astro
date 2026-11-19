@@ -2,25 +2,173 @@
 import "@n8n/chat/style.css";
 ---
 
+<!-- Tombol kecil WA di bawah chatbot - selalu ada, teksnya dinamis ikut halaman -->
+<a
+  id="wa-handoff-btn"
+  href="https://wa.me/6282329188998"
+  target="_blank"
+  rel="noopener"
+>
+  <span id="wa-handoff-dot"></span>
+  <span id="wa-handoff-label">Lanjut ke WhatsApp - Dibalas Tri</span>
+</a>
+
+<style>
+  #wa-handoff-btn {
+    position: fixed;
+    bottom: 88px;
+    right: 20px;
+    z-index: 9999;
+    background: #25d366;
+    color: #fff;
+    padding: 8px 13px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    max-width: calc(100vw - 40px);
+    white-space: nowrap;
+  }
+  #wa-handoff-btn:hover {
+    background: #1eb856;
+  }
+  #wa-handoff-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #fff;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  @media (max-width: 480px) {
+    #wa-handoff-btn {
+      bottom: 84px;
+      right: 16px;
+      font-size: 11px;
+      padding: 8px 11px;
+    }
+  }
+</style>
+
 <script>
   import { createChat } from "@n8n/chat";
 
+  // ===== MAPPING 6 LAYANAN ASLI NETMEDIATOP =====
+  const SERVICE_MAP = {
+    "jasa-pembuatan-website": {
+      key: "jasa-pembuatan-website",
+      label: "Website",
+      link: "https://netmediatop.com/services/jasa-pembuatan-website",
+      waText:
+        "Halo Tri, saya dari halaman Jasa Website NetMediaTop, mau lanjut konsultasi soal Website.",
+      ebook: "Website yang Bikin Orang Langsung Chat WA",
+    },
+    "jasa-seo": {
+      key: "jasa-seo",
+      label: "SEO",
+      link: "https://netmediatop.com/services/jasa-seo",
+      waText:
+        "Halo Tri, saya dari halaman Jasa SEO NetMediaTop, mau lanjut konsultasi soal SEO.",
+      ebook: "Cara Muncul di Google dan AI Search Tanpa Iklan Terus",
+    },
+    "jasa-iklan-google-ads": {
+      key: "jasa-iklan-google-ads",
+      label: "Google Ads",
+      link: "https://netmediatop.com/services/jasa-iklan-google-ads",
+      waText:
+        "Halo Tri, saya dari halaman Jasa Google Ads NetMediaTop, mau lanjut konsultasi soal Google Ads.",
+      ebook: "Google Ads yang Tidak Boncos",
+    },
+    "jasa-iklan-facebook": {
+      key: "jasa-iklan-facebook",
+      label: "Meta Ads",
+      link: "https://netmediatop.com/services/jasa-iklan-facebook",
+      waText:
+        "Halo Tri, saya dari halaman Jasa Meta Ads NetMediaTop, mau lanjut konsultasi soal Meta Ads.",
+      ebook: "Berhenti Boost Post, Mulai Meta Ads yang Terukur",
+    },
+    "jasa-konten-sosmed": {
+      key: "jasa-konten-sosmed",
+      label: "Konten Sosmed",
+      link: "https://netmediatop.com/services/jasa-konten-sosmed",
+      waText:
+        "Halo Tri, saya dari halaman Jasa Konten Sosmed NetMediaTop, mau lanjut konsultasi soal Konten Sosmed.",
+      ebook: "Sosmed Rapi Tanpa Ganggu Operasional",
+    },
+    "penulis-artikel": {
+      key: "penulis-artikel",
+      label: "Penulis Artikel",
+      link: "https://netmediatop.com/services/penulis-artikel",
+      waText:
+        "Halo Tri, saya dari halaman Penulis Artikel NetMediaTop, mau lanjut konsultasi soal Artikel Blog.",
+      ebook: "Artikel Blog yang Jadi Magnet Pelanggan",
+    },
+    default: {
+      key: "default",
+      label: "Bisnis",
+      link: "https://netmediatop.com/services/",
+      waText:
+        "Halo Tri, saya dari web NetMediaTop, mau lanjut konsultasi soal bisnis saya.",
+      ebook: "Website yang Bikin Orang Langsung Chat WA",
+    },
+  };
+
+  function getServiceFromPath(path) {
+    const p = (path || "").toLowerCase();
+    for (const key of Object.keys(SERVICE_MAP)) {
+      if (key !== "default" && p.includes(key)) return SERVICE_MAP[key];
+    }
+    return SERVICE_MAP["default"];
+  }
+
+  const currentPath = window.location.pathname;
+  const service = getServiceFromPath(currentPath);
+  const waNumber = "6282329188998";
+  const waLink =
+    "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(service.waText);
+
+  // ===== TOMBOL WA DINAMIS =====
+  const waBtn = document.getElementById("wa-handoff-btn");
+  const waLabel = document.getElementById("wa-handoff-label");
+  if (waBtn && waLabel) {
+    waBtn.href = waLink;
+    if (service.key === "default") {
+      waLabel.textContent = "Lanjut ke WhatsApp - Dibalas Tri";
+    } else {
+      waLabel.textContent = "Lanjut Konsultasi " + service.label + " via WA";
+    }
+  }
+
+  // ===== CHAT TRI =====
   createChat({
     webhookUrl:
       "https://ai.netmediatop.com/webhook/0fd4eae5-5551-4cd5-88b3-15bca5d25155/chat",
     mode: "window",
     initialMessages: [
-      "Halo! Saya konsultan pertumbuhan NetMediaTop. Apa tujuan pertumbuhan bisnis Anda?",
+      "Saya Tri, Tim NetMediaTop. Silakan ngobrol santai, bagaimana saya bisa bantu bisnis Anda tumbuh lebih baik?",
     ],
-    defaultLanguage: "en",
+    defaultLanguage: "id",
+    metadata: {
+      sourceUrl: window.location.href,
+      sourcePage: window.location.pathname,
+      serviceKey: service.key,
+      serviceLink: service.link,
+      serviceLabel: service.label,
+      ebookTitle: service.ebook,
+    },
     i18n: {
-      en: {
-        title: "AI Digital Marketing NetMediaTop",
+      id: {
+        title: "Tri - Tim NetMediaTop",
         subtitle:
-          "Ceritakan bisnis Anda, kami bantu bisnis tumbuh dan berkembang",
+          "Ngobrol santai soal website, SEO, dan cara bikin bisnis makin laris.",
         footer: "",
-        getStarted: "Mulai konsultasi",
-        inputPlaceholder: "Tulis pesan...",
+        getStarted: "Mulai Ngobrol",
+        inputPlaceholder: "Tulis pesan Anda...",
         closeButtonTooltip: "Tutup chat",
       },
     },
