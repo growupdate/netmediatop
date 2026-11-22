@@ -1,68 +1,82 @@
----
-import "@n8n/chat/style.css";
----
-
-<!-- Tombol kecil WA di bawah chatbot - selalu ada, teksnya dinamis ikut halaman -->
-<a
-  id="wa-handoff-btn"
-  href="https://wa.me/6282329188998"
-  target="_blank"
-  rel="noopener"
+<button
+  id="n8n-chat-launcher"
+  type="button"
+  aria-label="Buka chat dengan Tri"
+  title="Buka chat dengan Tri"
+  transition:persist
 >
-  <span id="wa-handoff-dot"></span>
-  <span id="wa-handoff-label">Lanjut ke WhatsApp - Dibalas Tri</span>
-</a>
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"
+    ></path>
+  </svg>
+</button>
+<span id="n8n-chat-status" class="sr-only" role="status" aria-live="polite"
+></span>
+<div id="n8n-chat" transition:persist></div>
 
 <style>
-  #wa-handoff-btn {
+  #n8n-chat-launcher {
     position: fixed;
-    bottom: 88px;
     right: 20px;
-    z-index: 9999;
-    background: #25d366;
-    color: #fff;
-    padding: 8px 13px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-    text-decoration: none;
+    bottom: 20px;
+    z-index: 9998;
     display: flex;
+    width: 44px;
+    height: 44px;
     align-items: center;
-    gap: 7px;
-    max-width: calc(100vw - 40px);
-    white-space: nowrap;
-  }
-  #wa-handoff-btn:hover {
-    background: #1eb856;
-  }
-  #wa-handoff-dot {
-    width: 8px;
-    height: 8px;
+    justify-content: center;
+    border: 0;
     border-radius: 999px;
-    background: #fff;
-    display: inline-block;
-    flex-shrink: 0;
+    background: #2563eb;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  #n8n-chat-launcher:hover {
+    background: #1d4ed8;
+  }
+  #n8n-chat-launcher:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+  }
+  #n8n-chat-launcher svg {
+    width: 20px;
+    height: 20px;
+  }
+  #n8n-chat {
+    --chat--toggle--size: 44px;
+    --chat--toggle--width: 44px;
+    --chat--toggle--height: 44px;
+  }
+  :global(#n8n-chat .chat-window-toggle svg) {
+    width: 20px;
+    height: 20px;
+  }
+  #n8n-chat-launcher[hidden] {
+    display: none;
   }
   @media (max-width: 480px) {
-    #wa-handoff-btn {
-      bottom: 84px;
+    #n8n-chat-launcher {
       right: 16px;
-      font-size: 11px;
-      padding: 8px 11px;
+      bottom: 16px;
     }
   }
 </style>
 
 <script>
-  import { createChat } from "@n8n/chat";
-
   type ServiceInfo = {
     key: string;
     label: string;
     link: string;
-    waText: string;
     ebook: string;
   };
 
@@ -72,56 +86,42 @@ import "@n8n/chat/style.css";
       key: "jasa-pembuatan-website",
       label: "Website",
       link: "https://netmediatop.com/services/jasa-pembuatan-website",
-      waText:
-        "Halo Tri, saya dari halaman Jasa Website NetMediaTop, mau lanjut konsultasi soal Website.",
       ebook: "Website yang Bikin Orang Langsung Chat WA",
     },
     "jasa-seo": {
       key: "jasa-seo",
       label: "SEO",
       link: "https://netmediatop.com/services/jasa-seo",
-      waText:
-        "Halo Tri, saya dari halaman Jasa SEO NetMediaTop, mau lanjut konsultasi soal SEO.",
       ebook: "Cara Muncul di Google dan AI Search Tanpa Iklan Terus",
     },
     "jasa-iklan-google-ads": {
       key: "jasa-iklan-google-ads",
       label: "Google Ads",
       link: "https://netmediatop.com/services/jasa-iklan-google-ads",
-      waText:
-        "Halo Tri, saya dari halaman Jasa Google Ads NetMediaTop, mau lanjut konsultasi soal Google Ads.",
       ebook: "Google Ads yang Tidak Boncos",
     },
     "jasa-iklan-facebook": {
       key: "jasa-iklan-facebook",
       label: "Meta Ads",
       link: "https://netmediatop.com/services/jasa-iklan-facebook",
-      waText:
-        "Halo Tri, saya dari halaman Jasa Meta Ads NetMediaTop, mau lanjut konsultasi soal Meta Ads.",
       ebook: "Berhenti Boost Post, Mulai Meta Ads yang Terukur",
     },
     "jasa-konten-sosmed": {
       key: "jasa-konten-sosmed",
       label: "Konten Sosmed",
       link: "https://netmediatop.com/services/jasa-konten-sosmed",
-      waText:
-        "Halo Tri, saya dari halaman Jasa Konten Sosmed NetMediaTop, mau lanjut konsultasi soal Konten Sosmed.",
       ebook: "Sosmed Rapi Tanpa Ganggu Operasional",
     },
     "penulis-artikel": {
       key: "penulis-artikel",
       label: "Penulis Artikel",
       link: "https://netmediatop.com/services/penulis-artikel",
-      waText:
-        "Halo Tri, saya dari halaman Penulis Artikel NetMediaTop, mau lanjut konsultasi soal Artikel Blog.",
       ebook: "Artikel Blog yang Jadi Magnet Pelanggan",
     },
     default: {
       key: "default",
       label: "Bisnis",
       link: "https://netmediatop.com/services/",
-      waText:
-        "Halo Tri, saya dari web NetMediaTop, mau lanjut konsultasi soal bisnis saya.",
       ebook: "Website yang Bikin Orang Langsung Chat WA",
     },
   };
@@ -134,55 +134,82 @@ import "@n8n/chat/style.css";
     return SERVICE_MAP["default"];
   }
 
-  const currentPath = window.location.pathname;
-  const service = getServiceFromPath(currentPath);
-  const waNumber = "6282329188998";
-  const waLink =
-    "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(service.waText);
+  let chatInitialized = false;
+  let chatLoading = false;
 
-  // ===== TOMBOL WA DINAMIS =====
-  const waBtn = document.getElementById(
-    "wa-handoff-btn",
-  ) as HTMLAnchorElement | null;
-  const waLabel = document.getElementById(
-    "wa-handoff-label",
-  ) as HTMLElement | null;
-  if (waBtn && waLabel) {
-    waBtn.href = waLink;
-    if (service.key === "default") {
-      waLabel.textContent = "Lanjut ke WhatsApp - Dibalas Tri";
-    } else {
-      waLabel.textContent = "Lanjut Konsultasi " + service.label + " via WA";
+  async function loadAndOpenChat(launcher: HTMLButtonElement) {
+    if (chatLoading) return;
+
+    chatLoading = true;
+    launcher.disabled = true;
+    launcher.setAttribute("aria-busy", "true");
+    launcher.title = "Memuat chat...";
+    const status = document.getElementById("n8n-chat-status");
+    if (status) status.textContent = "Memuat chat...";
+
+    try {
+      if (!chatInitialized) {
+        await import("@n8n/chat/style.css");
+        const { createChat } = await import("@n8n/chat");
+        const service = getServiceFromPath(window.location.pathname);
+
+        createChat({
+          target: "#n8n-chat",
+          webhookUrl:
+            "https://ai.netmediatop.com/webhook/0fd4eae5-5551-4cd5-88b3-15bca5d25155/chat",
+          mode: "window",
+          initialMessages: [
+            "Saya Tri, Tim NetMediaTop. Silakan ngobrol santai, bagaimana saya bisa bantu bisnis Anda tumbuh lebih baik?",
+          ],
+          defaultLanguage: "id" as unknown as "en",
+          metadata: {
+            sourceUrl: window.location.href,
+            sourcePage: window.location.pathname,
+            serviceKey: service.key,
+            serviceLink: service.link,
+            serviceLabel: service.label,
+            ebookTitle: service.ebook,
+          },
+          i18n: {
+            id: {
+              title: "Tri - Tim NetMediaTop",
+              subtitle:
+                "Ngobrol santai soal website, SEO, dan cara bikin bisnis makin laris.",
+              footer: "",
+              getStarted: "Mulai Ngobrol",
+              inputPlaceholder: "Tulis pesan Anda...",
+              closeButtonTooltip: "Tutup chat",
+            },
+          },
+        });
+        chatInitialized = true;
+      }
+
+      const chatToggle = document.querySelector<HTMLElement>(
+        "#n8n-chat .chat-window-toggle",
+      );
+      if (!chatToggle) {
+        throw new Error("n8n chat toggle was not mounted");
+      }
+
+      chatToggle.click();
+      launcher.hidden = true;
+      if (status) status.textContent = "";
+    } catch (error) {
+      console.error("Unable to load the n8n chat widget.", error);
+      launcher.title = "Chat gagal dimuat. Klik untuk mencoba lagi.";
+      if (status) status.textContent = launcher.title;
+    } finally {
+      chatLoading = false;
+      launcher.disabled = false;
+      launcher.removeAttribute("aria-busy");
     }
   }
 
-  // ===== CHAT TRI =====
-  createChat({
-    webhookUrl:
-      "https://ai.netmediatop.com/webhook/0fd4eae5-5551-4cd5-88b3-15bca5d25155/chat",
-    mode: "window",
-    initialMessages: [
-      "Saya Tri, Tim NetMediaTop. Silakan ngobrol santai, bagaimana saya bisa bantu bisnis Anda tumbuh lebih baik?",
-    ],
-    defaultLanguage: "id" as unknown as "en",
-    metadata: {
-      sourceUrl: window.location.href,
-      sourcePage: window.location.pathname,
-      serviceKey: service.key,
-      serviceLink: service.link,
-      serviceLabel: service.label,
-      ebookTitle: service.ebook,
-    },
-    i18n: {
-      id: {
-        title: "Tri - Tim NetMediaTop",
-        subtitle:
-          "Ngobrol santai soal website, SEO, dan cara bikin bisnis makin laris.",
-        footer: "",
-        getStarted: "Mulai Ngobrol",
-        inputPlaceholder: "Tulis pesan Anda...",
-        closeButtonTooltip: "Tutup chat",
-      },
-    },
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const launcher =
+      event.target.closest<HTMLButtonElement>("#n8n-chat-launcher");
+    if (launcher) void loadAndOpenChat(launcher);
   });
 </script>
