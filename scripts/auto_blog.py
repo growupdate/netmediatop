@@ -5,7 +5,7 @@ import re
 import sys
 import gspread
 from openai import BadRequestError, OpenAI
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, ValidationError
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
@@ -26,6 +26,8 @@ GOOGLE_CREDS_JSON = os.environ.get("GOOGLE_SHEETS_CREDENTIALS")
 
 
 class GeneratedArticle(BaseModel):
+  model_config = ConfigDict(extra="forbid")
+
   title: str
   slug: str
   description: str
@@ -103,7 +105,10 @@ ATURAN WAJIB STRUKTUR & KUALITAS:
 4. E-E-A-T (Experience): Buat satu bagian H2 khusus studi kasus/pengalaman lapangan, dan olah 'Catatan Pengalaman Penulis' menggunakan sudut pandang orang pertama ("Saya" atau "Tim NetMediaTop").
 5. FAQ (AEO): Buat bagian H2 "Pertanyaan yang Sering Diajukan (FAQ)" yang menjawab seluruh daftar pertanyaan PAA secara ringkas.
 6. INTERNAL LINKING: Sisipkan 2-3 tautan internal dari daftar yang diberikan secara natural di dalam kalimat.
-7. Output HARUS berupa JSON valid sesuai skema yang diminta.
+7. Output HARUS berupa satu objek JSON valid dengan tepat enam field berikut:
+   `title` (string), `slug` (string), `description` (string), `tags` (array of strings),
+   `keywords` (array of strings), dan `markdown_body` (string). Semua field wajib diisi.
+   Jangan membungkus JSON dengan Markdown dan jangan menghilangkan isi `markdown_body`.
 """
 
   user_prompt = f"""
@@ -117,6 +122,9 @@ Buat artikel lengkap berdasarkan data riset berikut:
 - Data Fakta & Angka Valid (GEO): {geo_data}
 - Daftar Internal Link Tersedia:
 {internal_links}
+
+Kembalikan artikel lengkap dalam JSON sesuai enam field wajib: title, slug, description,
+tags, keywords, markdown_body. Isi markdown_body dengan artikel lengkap, bukan ringkasan.
 """
 
   try:
@@ -126,7 +134,14 @@ Buat artikel lengkap berdasarkan data riset berikut:
             {"role": "system", "content": system_instruction},
             {"role": "user", "content": user_prompt},
         ],
-        response_format={"type": "json_object"},
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": "generated_article",
+                "strict": True,
+                "schema": GeneratedArticle.model_json_schema(),
+            },
+        },
     )
   except BadRequestError as exc:
     detail = exc.body if exc.body is not None else str(exc)
@@ -137,8 +152,17 @@ Buat artikel lengkap berdasarkan data riset berikut:
     raise ValueError("Groq tidak mengembalikan konten artikel.")
   try:
     return GeneratedArticle.model_validate(json.loads(content)).model_dump()
-  except (json.JSONDecodeError, ValueError) as exc:
-    raise ValueError("Groq mengembalikan JSON yang tidak sesuai skema artikel.") from exc
+  except json.JSONDecodeError as exc:
+    raise ValueError("Groq mengembalikan JSON artikel yang tidak valid.") from exc
+  except ValidationError as exc:
+    missing = [
+        ".".join(str(part) for part in error["loc"])
+        for error in exc.errors()
+    ]
+    raise ValueError(
+        "JSON artikel dari Groq tidak sesuai skema; field bermasalah: "
+        + ", ".join(missing)
+    ) from exc
 
 
 def validate_article(article_data: dict):
