@@ -259,3 +259,4 @@ keywords: {keywords_json}
 """
   os.makedirs(BLOG_CONTENT_DIR, exist_ok=True)
   with open(md_filepath, "w", encoding="utf-8", newline="\n") as f:
+    f.write(frontmatter + article_data["markdown_body"].strip() + "\n")
