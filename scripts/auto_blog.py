@@ -3,7 +3,10 @@ import json
 import os
 import re
 import sys
-from oauth2client.service_account import ServiceAccountCredentials
+from google import genai
+from google.genai import types
+import gspread
+
 
 # Pastikan folder scripts/ masuk ke sys.path agar bisa import image_generator.py
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
