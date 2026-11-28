@@ -4,7 +4,8 @@ import os
 import re
 import sys
 import gspread
-from openai import OpenAI
+from openai import BadRequestError, OpenAI
+from pydantic import BaseModel
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
@@ -21,6 +22,16 @@ LLMS_TXT_PATH = os.path.join(PROJECT_ROOT, "public", "llms.txt")
 XAI_API_KEY = os.environ.get("XAI_API_KEY")
 SHEET_ID = os.environ.get("SHEET_ID")
 GOOGLE_CREDS_JSON = os.environ.get("GOOGLE_SHEETS_CREDENTIALS")
+
+
+class GeneratedArticle(BaseModel):
+  title: str
+  slug: str
+  description: str
+  tags: list[str]
+  keywords: list[str]
+  markdown_body: str
+
 
 SERVICE_LINKS = {
     "jasa pembuatan website": "/services/jasa-pembuatan-website",
@@ -104,42 +115,23 @@ Buat artikel lengkap berdasarkan data riset berikut:
 {internal_links}
 """
 
-  response_schema = {
-      "type": "object",
-      "properties": {
-          "title": {"type": "string"},
-          "slug": {"type": "string"},
-          "description": {"type": "string"},
-          "tags": {"type": "array", "items": {"type": "string"}},
-          "keywords": {"type": "array", "items": {"type": "string"}},
-          "markdown_body": {"type": "string"},
-      },
-      "required": [
-          "title",
-          "slug",
-          "description",
-          "tags",
-          "keywords",
-          "markdown_body",
-      ],
-  }
+  try:
+    response = client.responses.parse(
+        model="grok-4.7",
+        input=[
+            {"role": "system", "content": system_instruction},
+            {"role": "user", "content": user_prompt},
+        ],
+        text_format=GeneratedArticle,
+        store=False,
+    )
+  except BadRequestError as exc:
+    detail = exc.body if exc.body is not None else str(exc)
+    raise RuntimeError(f"xAI menolak request artikel (HTTP 400): {detail}") from exc
 
-  response = client.responses.create(
-      model="grok-4.7",
-      input=[
-          {"role": "system", "content": system_instruction},
-          {"role": "user", "content": user_prompt},
-      ],
-      text={
-          "format": {
-              "type": "json_schema",
-              "name": "blog_article",
-              "schema": response_schema,
-          }
-      },
-      store=False,
-  )
-  return json.loads(response.output_text)
+  if response.output_parsed is None:
+    raise ValueError("Grok tidak mengembalikan artikel dengan format terstruktur.")
+  return response.output_parsed.model_dump()
 
 
 def validate_article(article_data: dict):
