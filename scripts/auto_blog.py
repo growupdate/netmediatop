@@ -3,10 +3,6 @@ import json
 import os
 import re
 import sys
-
-from google import genai
-from google.genai import types
-import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 # Pastikan folder scripts/ masuk ke sys.path agar bisa import image_generator.py
@@ -52,14 +48,10 @@ def connect_sheets():
     )
 
   creds_dict = json.loads(GOOGLE_CREDS_JSON)
-  scope = [
-      "https://google.com",
-      "https://googleapis.com",
-  ]
-  creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-  client = gspread.authorize(creds)
+  client = gspread.service_account_from_dict(creds_dict)
   sheet = client.open_by_key(SHEET_ID)
   return sheet.worksheet("Master_Topik"), sheet.worksheet("Published_Index")
+
 
 
 # ==========================================
