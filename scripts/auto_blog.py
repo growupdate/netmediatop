@@ -105,14 +105,16 @@ ATURAN WAJIB STRUKTUR & KUALITAS:
 4. E-E-A-T (Experience): Buat satu bagian H2 khusus studi kasus/pengalaman lapangan, dan olah 'Catatan Pengalaman Penulis' menggunakan sudut pandang orang pertama ("Saya" atau "Tim NetMediaTop").
 5. FAQ (AEO): Buat bagian H2 "Pertanyaan yang Sering Diajukan (FAQ)" yang menjawab seluruh daftar pertanyaan PAA secara ringkas.
 6. INTERNAL LINKING: Sisipkan 2-3 tautan internal dari daftar yang diberikan secara natural di dalam kalimat.
-7. Output HARUS berupa satu objek JSON valid dengan tepat enam field berikut:
+7. Panjang `markdown_body` wajib 700–850 kata agar melewati batas validasi minimal 550 kata.
+   Kembangkan pembahasan dengan contoh, rincian simulasi, tabel, dan jawaban FAQ; jangan mengulang kalimat.
+8. Output HARUS berupa satu objek JSON valid dengan tepat enam field berikut:
    `title` (string), `slug` (string), `description` (string), `tags` (array of strings),
    `keywords` (array of strings), dan `markdown_body` (string). Semua field wajib diisi.
    Jangan membungkus JSON dengan Markdown dan jangan menghilangkan isi `markdown_body`.
 """
 
   user_prompt = f"""
-Buat artikel lengkap berdasarkan data riset berikut:
+Buat artikel lengkap sepanjang 700–850 kata pada field markdown_body berdasarkan data riset berikut:
 - Target Keyword: {keyword}
 - Kategori Cluster: {category}
 - LSI Keywords: {lsi}
@@ -127,42 +129,66 @@ Kembalikan artikel lengkap dalam JSON sesuai enam field wajib: title, slug, desc
 tags, keywords, markdown_body. Isi markdown_body dengan artikel lengkap, bukan ringkasan.
 """
 
-  try:
-    response = client.chat.completions.create(
-        model=GROQ_MODEL,
-        messages=[
-            {"role": "system", "content": system_instruction},
-            {"role": "user", "content": user_prompt},
-        ],
-        response_format={
-            "type": "json_schema",
-            "json_schema": {
-                "name": "generated_article",
-                "strict": True,
-                "schema": GeneratedArticle.model_json_schema(),
-            },
-        },
-    )
-  except BadRequestError as exc:
-    detail = exc.body if exc.body is not None else str(exc)
-    raise RuntimeError(f"Groq menolak request artikel (HTTP 400): {detail}") from exc
+  messages = [
+      {"role": "system", "content": system_instruction},
+      {"role": "user", "content": user_prompt},
+  ]
+  for attempt in range(2):
+    try:
+      response = client.chat.completions.create(
+          model=GROQ_MODEL,
+          messages=messages,
+          max_completion_tokens=4096,
+          response_format={
+              "type": "json_schema",
+              "json_schema": {
+                  "name": "generated_article",
+                  "strict": True,
+                  "schema": GeneratedArticle.model_json_schema(),
+              },
+          },
+      )
+    except BadRequestError as exc:
+      detail = exc.body if exc.body is not None else str(exc)
+      raise RuntimeError(f"Groq menolak request artikel (HTTP 400): {detail}") from exc
 
-  content = response.choices[0].message.content
-  if not content:
-    raise ValueError("Groq tidak mengembalikan konten artikel.")
-  try:
-    return GeneratedArticle.model_validate(json.loads(content)).model_dump()
-  except json.JSONDecodeError as exc:
-    raise ValueError("Groq mengembalikan JSON artikel yang tidak valid.") from exc
-  except ValidationError as exc:
-    missing = [
-        ".".join(str(part) for part in error["loc"])
-        for error in exc.errors()
-    ]
-    raise ValueError(
-        "JSON artikel dari Groq tidak sesuai skema; field bermasalah: "
-        + ", ".join(missing)
-    ) from exc
+    content = response.choices[0].message.content
+    if not content:
+      raise ValueError("Groq tidak mengembalikan konten artikel.")
+    try:
+      article = GeneratedArticle.model_validate(json.loads(content)).model_dump()
+    except json.JSONDecodeError as exc:
+      raise ValueError("Groq mengembalikan JSON artikel yang tidak valid.") from exc
+    except ValidationError as exc:
+      fields = [
+          ".".join(str(part) for part in error["loc"])
+          for error in exc.errors()
+      ]
+      raise ValueError(
+          "JSON artikel dari Groq tidak sesuai skema; field bermasalah: "
+          + ", ".join(fields)
+      ) from exc
+
+    word_count = len(article["markdown_body"].split())
+    if word_count >= 550:
+      return article
+    if attempt == 0:
+      messages.extend([
+          {"role": "assistant", "content": content},
+          {
+              "role": "user",
+              "content": (
+                  f"Artikel tadi hanya {word_count} kata. Revisi dan kembangkan "
+                  "markdown_body menjadi 700–850 kata dengan rincian yang berguna, "
+                  "sambil mempertahankan semua fakta dan placeholder. Kembalikan "
+                  "objek JSON lengkap sesuai skema."
+              ),
+          },
+      ])
+  raise ValueError(
+      f"Artikel terlalu pendek setelah 2 percobaan ({word_count} kata). "
+      "Minimal 550 kata."
+  )
 
 
 def validate_article(article_data: dict):
