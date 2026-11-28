@@ -268,3 +268,6 @@ def main():
   internal_links = get_cluster_internal_links(published_sheet, category)
 
   print("[2/4] Menghasilkan artikel via Gemini API...")
+
+    if __name__ == "__main__":
+    main()
