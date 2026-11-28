@@ -268,6 +268,18 @@ def main():
   internal_links = get_cluster_internal_links(published_sheet, category)
 
   print("[2/4] Menghasilkan artikel via Gemini API...")
+  article_data = generate_article_with_gemini(target_data, internal_links)
+  validate_article(article_data)
 
-    if __name__ == "__main__":
-    main()
+  print("[3/4] Menyimpan artikel dan membuat gambar...")
+  slug, _ = build_astro_post_and_images(article_data, category, pub_date)
+  update_llms_txt(
+      article_data["title"],
+      f"/blog/{slug}",
+      article_data["description"],
+  )
+  print(f"[4/4] Artikel '{article_data['title']}' berhasil dibuat.")
+
+
+if __name__ == "__main__":
+  main()
