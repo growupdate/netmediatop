@@ -1,0 +1,66 @@
+name: Autopilot Blog Generator & IndexNow
+
+on:
+  schedule:
+    # Jalan otomatis setiap hari pukul 08:00 WIB (01:00 UTC)
+    - cron: '0 1 * * *'
+  workflow_dispatch: # Memungkinkan kamu menekan tombol "Run workflow" manual dari GitHub
+
+permissions:
+  contents: write # Wajib agar bot bisa melakukan git push
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies & Linux Fonts
+        run: |
+          sudo apt-get update && sudo apt-get install -y fonts-dejavu-core
+          pip install -r scripts/requirements.txt
+
+      - name: Jalankan Auto-Blog & Image Generator
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          GOOGLE_SHEETS_CREDENTIALS: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS }}
+        run: python scripts/auto_blog.py
+
+      - name: Commit & Push Artikel Baru ke GitHub
+        id: git_push
+        run: |
+          git config --local user.email "bot@netmediatop.com"
+          git config --local user.name "NetMediaTop Autopilot"
+          git add src/content/blog/ src/assets/images/blog/ public/blog/ public/llms.txt
+          if git diff --staged --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "Tidak ada artikel baru yang dibuat."
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            git commit -m "auto-post: artikel baru $(date +'%Y-%m-%d')"
+            git push
+          fi
+
+      - name: Tunggu Cloudflare Pages Selesai Deploy (90 Detik)
+        if: steps.git_push.outputs.has_changes == 'true'
+        run: sleep 90
+
+      - name: Setup Node.js untuk IndexNow
+        if: steps.git_push.outputs.has_changes == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Kirim Notifikasi ke IndexNow
+        if: steps.git_push.outputs.has_changes == 'true'
+        run: npm run indexnow

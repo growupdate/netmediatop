@@ -15,8 +15,7 @@
     "test": "vitest",
     "check": "astro check",
     "typecheck": "tsc --noEmit",
-    "build-preview": "npm run build && npm run preview",
-    "prepare": "husky || true"
+    "build-preview": "npm run build && npm run preview"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
@@ -42,20 +41,9 @@
     "eslint-plugin-astro": "^1.6.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "globals": "^17.4.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "typescript-eslint": "^8.57.2",
     "vitest": "^4.1.2"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,astro}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md,mdx,css}": [
-      "prettier --write"
-    ]
   }
 }

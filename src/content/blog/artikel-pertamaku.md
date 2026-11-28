@@ -22,3 +22,18 @@ Pilihlah bahasa yang ramah pemula seperti JavaScript atau Python.
 - Buat proyek-proyek kecil untuk mengasah logika.
 
 <img src="/blog/blog_post_11_1768850597259.webp" alt="gambar seo2" width="300" />
+
+
+![Website sepi pengunjung? - Riset kata kunci dan struktur SEO sejak awal | Konten menjawab intent pencari](../../assets/images/blog/01-website-sepi-pengunjung.webp)
+
+
+![Domain dikunci vendor? - Daftarkan domain dan hosting atas nama akun klien | Akses penuh diserahkan ke pemilik bisnis](../../assets/images/blog/02-domain-dikunci-vendor.webp)
+
+
+![Deskripsi alt text SEO gambar artikel](../../assets/images/blog/04-gambar-artikel.webp)
+
+
+![Deskripsi alt text SEO gambar artikel](../../assets/images/blog/04-gambar-artikel.webp)
+
+
+![Deskripsi alt text SEO gambar artikel](../../assets/images/blog/05-gambar-artikel.webp)

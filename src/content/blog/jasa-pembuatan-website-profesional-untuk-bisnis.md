@@ -3,7 +3,7 @@ title: "Jasa Pembuatan Website Profesional untuk Bisnis"
 pubDate: "2026-11-09"
 description: "Butuh website profesional untuk bisnis? NetMediaTop membantu membuat website company profile, landing page, dan website UMKM yang responsif dan informatif."
 author: "NetMediaTop"
-image: "/blog/internet-marketing.jpeg"
+image: "/blog/blog_post_1_1768848683359.webp"
 category: "jasa pembuatan website"
 tags: ["jasa pembuatan website", "responsive", "seo", "fast loading"]
 keywords:
@@ -29,7 +29,7 @@ Mulai dari website company profile hingga landing page, kami membantu menyusun k
 
 **[Konsultasikan Website Anda](#konsultasi)**
 
-![Konsultasi kebutuhan website bisnis](../../assets/images/services/consulting.webp)
+![Ringkasan manfaat website bisnis yang membantu calon pelanggan menemukan layanan 24 jam.](../../assets/images/blog/website-teroptimasi-manfaat.webp)
 
 ## Website Bukan Sekadar Ada di Internet
 
@@ -39,7 +39,7 @@ Website membantu menyatukan informasi penting tersebut dalam satu tempat yang da
 
 Jika direncanakan dan dikelola dengan baik, website dapat menjadi aset digital yang mendukung identitas, komunikasi, dan pemasaran bisnis dalam jangka panjang.
 
-![Pemilik bisnis mengakses informasi website usaha melalui smartphone](../../assets/images/services/consulting.webp)
+![Solusi mengatasi informasi bisnis yang tersebar dan promosi belum terarah melalui website resmi.](../../assets/images/blog/02-masalah-informasi-bisnis-tersebar.webp)
 
 ## Apakah Calon Pelanggan Mudah Mengenal Bisnis Anda?
 
@@ -61,7 +61,7 @@ Konten atau iklan belum memiliki halaman tujuan yang menjelaskan penawaran secar
 
 Pengunjung perlu bertanya berulang kali hanya untuk mengetahui informasi dasar mengenai produk atau layanan.
 
-![Ilustrasi informasi bisnis yang tersebar dibandingkan dengan informasi yang terpusat di website](../../assets/images/services/consulting.webp)
+![Lima elemen penting pembuatan website bisnis mulai dari struktur informasi, mobile responsive, hingga fondasi SEO.](../../assets/images/blog/03-fondasi-website-bisnis-sehat.webp)
 
 ## Jasa Pembuatan Website untuk Kebutuhan Bisnis
 
@@ -82,7 +82,7 @@ Informasi yang dapat ditampilkan antara lain:
 - Informasi alamat dan kontak.
 - Tombol konsultasi atau permintaan penawaran.
 
-![Contoh desain website company profile untuk memperkenalkan profil dan layanan perusahaan](../../assets/images/services/consulting.webp)
+![Lima tahap proses pembuatan website bisnis dari konsultasi kebutuhan hingga peluncuran.](../../assets/images/blog/04-alur-proses-pembuatan-website.webp)
 
 ### Landing Page Bisnis
 
@@ -267,4 +267,4 @@ Ceritakan jenis bisnis dan tujuan yang ingin Anda capai. Konsultasikan kebutuhan
 
 **[Konsultasi Jasa Pembuatan Website via WhatsApp](https://wa.me/6282329188998?text=Halo%20NetMediaTop%2C%20saya%20ingin%20konsultasi%20jasa%20pembuatan%20website.)**
 
-![Konsultasi kebutuhan website bisnis bersama NetMediaTop](../../assets/images/services/consulting.webp)
+![Ajakan konsultasi pembuatan website bisnis dengan rincian jelas, aman, dan terarah.](../../assets/images/blog/05-cta-konsultasi-website-bisnis.webp)

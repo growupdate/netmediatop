@@ -5,3 +5,8 @@ git push origin main
 git add -- src/pages/index.astro src/layout/BaseLayout.astro
 git commit -m "Update"
 git push origin main
+
+
+git add src/content/blog/
+git commit -m "Tambah artikel"
+git push origin main
