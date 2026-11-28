@@ -3,9 +3,8 @@ import json
 import os
 import re
 import sys
-from google import genai
-from google.genai import types
 import gspread
+from openai import OpenAI
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
@@ -19,7 +18,7 @@ ASTRO_IMG_DIR = os.path.join(PROJECT_ROOT, "src", "assets", "images", "blog")
 PUBLIC_BLOG_DIR = os.path.join(PROJECT_ROOT, "public", "blog")
 LLMS_TXT_PATH = os.path.join(PROJECT_ROOT, "public", "llms.txt")
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+XAI_API_KEY = os.environ.get("XAI_API_KEY")
 SHEET_ID = os.environ.get("SHEET_ID")
 GOOGLE_CREDS_JSON = os.environ.get("GOOGLE_SHEETS_CREDENTIALS")
 
@@ -62,11 +61,11 @@ def get_cluster_internal_links(published_sheet, category: str) -> str:
   return links_text
 
 
-def generate_article_with_gemini(row_data: dict, internal_links: str) -> dict:
-  if not GEMINI_API_KEY:
-    raise ValueError("Environment variable GEMINI_API_KEY belum diatur.")
+def generate_article_with_grok(row_data: dict, internal_links: str) -> dict:
+  if not XAI_API_KEY:
+    raise ValueError("Environment variable XAI_API_KEY belum diatur.")
 
-  client = genai.Client(api_key=GEMINI_API_KEY)
+  client = OpenAI(api_key=XAI_API_KEY, base_url="https://api.x.ai/v1")
   keyword = row_data.get("target_keyword", "").strip()
   category = row_data.get("cluster_kategori", "jasa seo").strip().lower()
   lsi = row_data.get("lsi_keywords", "")
@@ -106,14 +105,14 @@ Buat artikel lengkap berdasarkan data riset berikut:
 """
 
   response_schema = {
-      "type": "OBJECT",
+      "type": "object",
       "properties": {
-          "title": {"type": "STRING"},
-          "slug": {"type": "STRING"},
-          "description": {"type": "STRING"},
-          "tags": {"type": "ARRAY", "items": {"type": "STRING"}},
-          "keywords": {"type": "ARRAY", "items": {"type": "STRING"}},
-          "markdown_body": {"type": "STRING"},
+          "title": {"type": "string"},
+          "slug": {"type": "string"},
+          "description": {"type": "string"},
+          "tags": {"type": "array", "items": {"type": "string"}},
+          "keywords": {"type": "array", "items": {"type": "string"}},
+          "markdown_body": {"type": "string"},
       },
       "required": [
           "title",
@@ -125,17 +124,22 @@ Buat artikel lengkap berdasarkan data riset berikut:
       ],
   }
 
-  response = client.models.generate_content(
-      model="gemini-2.5-flash",
-      contents=user_prompt,
-      config=types.GenerateContentConfig(
-          system_instruction=system_instruction,
-          response_mime_type="application/json",
-          response_schema=response_schema,
-          temperature=0.4,
-      ),
+  response = client.responses.create(
+      model="grok-4.7",
+      input=[
+          {"role": "system", "content": system_instruction},
+          {"role": "user", "content": user_prompt},
+      ],
+      text={
+          "format": {
+              "type": "json_schema",
+              "name": "blog_article",
+              "schema": response_schema,
+          }
+      },
+      store=False,
   )
-  return json.loads(response.text)
+  return json.loads(response.output_text)
 
 
 def validate_article(article_data: dict):
@@ -267,8 +271,8 @@ def main():
   print(f"[1/4] Memproses topik: '{keyword}' (Kategori: {category})")
   internal_links = get_cluster_internal_links(published_sheet, category)
 
-  print("[2/4] Menghasilkan artikel via Gemini API...")
-  article_data = generate_article_with_gemini(target_data, internal_links)
+  print("[2/4] Menghasilkan artikel via Grok API...")
+  article_data = generate_article_with_grok(target_data, internal_links)
   validate_article(article_data)
 
   print("[3/4] Menyimpan artikel dan membuat gambar...")
