@@ -31,7 +31,7 @@ jobs:
 
       - name: Jalankan Auto-Blog & Image Generator
         env:
-          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           SHEET_ID: ${{ secrets.SHEET_ID }}
           GOOGLE_SHEETS_CREDENTIALS: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS }}
         run: python scripts/auto_blog.py

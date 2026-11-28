@@ -19,7 +19,8 @@ ASTRO_IMG_DIR = os.path.join(PROJECT_ROOT, "src", "assets", "images", "blog")
 PUBLIC_BLOG_DIR = os.path.join(PROJECT_ROOT, "public", "blog")
 LLMS_TXT_PATH = os.path.join(PROJECT_ROOT, "public", "llms.txt")
 
-XAI_API_KEY = os.environ.get("XAI_API_KEY")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
 SHEET_ID = os.environ.get("SHEET_ID")
 GOOGLE_CREDS_JSON = os.environ.get("GOOGLE_SHEETS_CREDENTIALS")
 
@@ -72,11 +73,14 @@ def get_cluster_internal_links(published_sheet, category: str) -> str:
   return links_text
 
 
-def generate_article_with_grok(row_data: dict, internal_links: str) -> dict:
-  if not XAI_API_KEY:
-    raise ValueError("Environment variable XAI_API_KEY belum diatur.")
+def generate_article_with_groq(row_data: dict, internal_links: str) -> dict:
+  if not GROQ_API_KEY:
+    raise ValueError("Environment variable GROQ_API_KEY belum diatur.")
 
-  client = OpenAI(api_key=XAI_API_KEY, base_url="https://api.x.ai/v1")
+  client = OpenAI(
+      api_key=GROQ_API_KEY,
+      base_url="https://api.groq.com/openai/v1",
+  )
   keyword = row_data.get("target_keyword", "").strip()
   category = row_data.get("cluster_kategori", "jasa seo").strip().lower()
   lsi = row_data.get("lsi_keywords", "")
@@ -116,22 +120,25 @@ Buat artikel lengkap berdasarkan data riset berikut:
 """
 
   try:
-    response = client.responses.parse(
-        model="grok-4.7",
-        input=[
+    response = client.chat.completions.create(
+        model=GROQ_MODEL,
+        messages=[
             {"role": "system", "content": system_instruction},
             {"role": "user", "content": user_prompt},
         ],
-        text_format=GeneratedArticle,
-        store=False,
+        response_format={"type": "json_object"},
     )
   except BadRequestError as exc:
     detail = exc.body if exc.body is not None else str(exc)
-    raise RuntimeError(f"xAI menolak request artikel (HTTP 400): {detail}") from exc
+    raise RuntimeError(f"Groq menolak request artikel (HTTP 400): {detail}") from exc
 
-  if response.output_parsed is None:
-    raise ValueError("Grok tidak mengembalikan artikel dengan format terstruktur.")
-  return response.output_parsed.model_dump()
+  content = response.choices[0].message.content
+  if not content:
+    raise ValueError("Groq tidak mengembalikan konten artikel.")
+  try:
+    return GeneratedArticle.model_validate(json.loads(content)).model_dump()
+  except (json.JSONDecodeError, ValueError) as exc:
+    raise ValueError("Groq mengembalikan JSON yang tidak sesuai skema artikel.") from exc
 
 
 def validate_article(article_data: dict):
@@ -263,8 +270,8 @@ def main():
   print(f"[1/4] Memproses topik: '{keyword}' (Kategori: {category})")
   internal_links = get_cluster_internal_links(published_sheet, category)
 
-  print("[2/4] Menghasilkan artikel via Grok API...")
-  article_data = generate_article_with_grok(target_data, internal_links)
+  print("[2/4] Menghasilkan artikel via Groq API...")
+  article_data = generate_article_with_groq(target_data, internal_links)
   validate_article(article_data)
 
   print("[3/4] Menyimpan artikel dan membuat gambar...")
